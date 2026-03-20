@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHANYRAQ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <!-- Верхняя информационная панель -->
+        <div class="header-top">
+            <div class="container header-top-content">
+                <!-- Контактные данные на верхней панели шапки сайта -->
+                <div class="phone">
+                    <img src="icons/phone.svg" alt="phone">
+                    <span>+ 7(702) 615-49-06</span>
+                </div>
+                <!-- Поиск на шапке сайта -->
+                 <div class="search-wrapper">
+                    <input type="text" class="search-input" placeholder="Поиск...">
+                    <img src="icons/poisk.svg" class="search-icon" alt="search">
+                </div>
+                    <!-- Правая вверхняя шапка сайта -->
+                    <div class="top-right">
+                        <div class="language-selector">
+                            <img src="icons/language.svg" alt="" class="lang-icon">
+                            <span id="current-lang">RUS</span>
+                            <img src="icons/arrow.svg" alt="arrow" class="arrow-icon">
+                            <ul class="lang-dropdown">
+                                <li data-lang="kz">KAZ</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="location">
+                            <img src="icons/loc.svg" alt="">
+                            <span id="current-city">Алматы</span>
+                            <button id="change-city-btn" title="Изменить город">✎</button>
+                            <ul class="city-dropdown" id="cityDropdown"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Нижняя панель -->
+            <div class="header-bottom">
+                <div class="container nav-content">
+                    <!-- Логотип -->
+                    <div class="logo">
+                        <a href="index.html">
+                            <img src="images/Лого и бренд.svg" alt="Логотип">
+                        </a>
+                    </div>
+                    <!-- Меню -->
+                    <ul class="nav-menu">
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link">
+                                <img src="images/орнамент.png" alt="">
+                                <span>КАТАЛОГ</span>
+                            </a>
+                            <!-- Выпадающее меню -->
+                            <ul class="dropdown-menu">
+                                <li class="submenu-item">
+                                    <a href="#"><img src="icons/icons header/гостиная.svg"> Гостиная</a>
+                                    <ul class="submenu">
+                                        <li><a href="#"><img src="icons/icons header/диваны.svg" alt="">Диваны</a></li>
+                                        <li><a href="#"><img src="icons/icons header/кресло.svg" alt="">Кресла</a></li>
+                                        <li><a href="#"><img src="icons/icons header/комоды.svg" alt="">Комоды</a></li>
+                                        <li><a href="#"><img src="icons/icons header/стеллаж.svg" alt="">Стеллажи</a></li>
+                                        <li><a href="#"><img src="icons/icons header/ж-стол.svg" alt="">Журнальные столики</a></li>
+                                    </ul>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="#"><img src="icons/icons header/спальня.svg"> Спальня</a>
+                                    <ul class="submenu">
+                                        <li><a href="#"><img src="icons/icons header/кровать.svg" alt="">Кровати</a></li>
+                                        <li><a href="#"><img src="icons/icons header/Шкаф.svg" alt="">Шкафы</a></li>
+                                        <li><a href="#"><img src="icons/icons header/тумба.svg" alt="">Прикроватные тумбы</a></li>
+                                        <li><a href="#"><img src="icons/icons header/т-столик.svg" alt="">Туалетные столики</a></li>
+                                    </ul>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="#"><img src="icons/icons header/столовая.svg"> Столовая</a>
+                                    <ul class="submenu">
+                                        <li><a href="#"><img src="icons/icons header/о-столы.svg" alt="">Обеденные столы</a></li>
+                                        <li><a href="#"><img src="icons/icons header/стул.svg" alt="">Стулья</a></li>
+                                        <li><a href="#"><img src="icons/icons header/буфет.svg" alt="">Буфеты</a></li>
+                                        <li><a href="#"><img src="icons/icons header/б-стойка.svg" alt="">Барные столы</a></li>
+                                        <li><a href="#"><img src="icons/icons header/б-стулья.svg" alt="">Барные стулья</a></li>
+                                    </ul>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="#"><img src="icons/icons header/кабинет.svg"> Кабинет</a>
+                                    <ul class="submenu">
+                                        <li><a href="#"><img src="icons/icons header/р-стол.svg" alt="">Рабочие столы</a></li>
+                                        <li><a href="#"><img src="icons/icons header/р-кресла.svg" alt="">Рабочее кресла</a></li>
+                                        <li><a href="#"><img src="icons/icons header/к-шкафы.svg" alt="">Книжные шкафы</a></li>
+                                        <li><a href="#"><img src="icons/icons header/тумба2.svg" alt="">Тумбы</a></li>
+                                    </ul>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="#"><img src="icons/icons header/аксесс.svg"> Аксессуары</a>
+                                    <ul class="submenu">
+                                        <li><a href="#"><img src="icons/icons header/картина.svg" alt="">Картины</a></li>
+                                        <li><a href="#"><img src="icons/icons header/зеркало.svg" alt="">Зеркала</a></li>
+                                        <li><a href="#"><img src="icons/icons header/ковры.svg" alt="">Ковры</a></li>
+                                        <li><a href="#"><img src="icons/icons header/ваза.svg" alt="">Вазы</a></li>
+                                        <li><a href="#"><img src="icons/icons header/лампы.svg" alt="">Лампы</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item"><a href="#" class="nav-link">АКЦИИ</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">О НАС</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">КОНТАКТЫ</a></li>
+                    </ul>
+                    <!-- Иконки пользователя -->
+                    <div class="nav-actions">
+                        <button class="icon-btn favorites">
+                            <img src="icons/heart.svg" alt="">
+                            <span class="label">Избранное</span>
+                        </button>
+                        <button class="icon-btn cart">
+                            <img src="icons/shop.svg" alt="">
+                            <span class="label">Корзина</span>
+                        </button>
+                            <button class="icon-btn profile">
+                                <img src="icons/voiti.svg" alt="">
+                                <span class="label">Войти</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main>
+                <div class="slider">
+                    <div class="slides">
+                        <div class="slide active">
+                            <img src="images/мебель/slider1.jpg" alt="Баннер 1">
+                            <div class="slide-content">
+                                <h2 class="title-slider">Скидки до 30%</h2>
+                                <p>На мебель для гостиной</p>
+                                <a href="#" class="btn">Смотреть каталог</a>
+                            </div>
+                        </div>
+
+        <div class="slide">
+            <img src="images/banner2.jpg" alt="Баннер 2">
+            <div class="slide-content">
+                <h2 class="title-slider">Новая коллекция</h2>
+                <p>Современные решения для дома</p>
+                <a href="#" class="btn">Подробнее</a>
+            </div>
+        </div>
+
+        <div class="slide">
+            <img src="images/banner3.jpg" alt="Баннер 3">
+            <div class="slide-content">
+                <h2 class="title-slider">Уют начинается здесь</h2>
+                <p>Выберите свою мебель</p>
+                <a href="#" class="btn">Перейти</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Кнопки навигации -->
+    <button class="prev"><img src="icons/arrow1.svg" alt=""></button>
+    <button class="next"><img src="icons/arrow2.svg" alt=""></button>
+
+    <!-- Индикаторы -->
+    <div class="indicators">
+        <span class="dot active" data-slide="0"></span>
+        <span class="dot" data-slide="1"></span>
+        <span class="dot" data-slide="2"></span>
+    </div>
+</div>
+            </main>
+
+
+
+
+
+
+
+</body>
+<script src="script.js"></script>
+</html>
