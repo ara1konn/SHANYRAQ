@@ -33,7 +33,7 @@
                         </div>
                         
                         <div class="location">
-                            <img src="icons/loc.svg" alt="">
+                            <img src="icons/location.svg" alt="">
                             <span id="current-city">Алматы</span>
                             <button id="change-city-btn" title="Изменить город">✎</button>
                             <ul class="city-dropdown" id="cityDropdown"></ul>
@@ -144,38 +144,151 @@
                                 <a href="#" class="btn">Смотреть каталог</a>
                             </div>
                         </div>
+                        
+                        <div class="slide">
+                            <img src="images/banner2.jpg" alt="Баннер 2">
+                            <div class="slide-content">
+                                <h2 class="title-slider">Новая коллекция</h2>
+                                <p>Современные решения для дома</p>
+                                <a href="#" class="btn">Подробнее</a>
+                            </div>
+                        </div>
+                        
+                        <div class="slide">
+                            <img src="images/banner3.jpg" alt="Баннер 3">
+                            <div class="slide-content">
+                                <h2 class="title-slider">Уют начинается здесь</h2>
+                                <p>Выберите свою мебель</p>
+                                <a href="#" class="btn">Перейти</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Кнопки навигации -->
+                    <button class="prev"><img src="icons/arrow1.svg" alt=""></button>
+                    <button class="next"><img src="icons/arrow2.svg" alt=""></button>
+                    
+                    <!-- Индикаторы -->
+                    <div class="indicators">
+                        <span class="dot active" data-slide="0"></span>
+                        <span class="dot" data-slide="1"></span>
+                        <span class="dot" data-slide="2"></span>
+                    </div>
+                </div>
+                
+                <!-- Бегущая строка снизу карусели -->
+                <div class="promo-marquee">
+                    <div class="marquee-inner">
+                        
+                        <div class="marquee-item">
+                            <img src="icons/box-sale.svg" alt="">
+                            <div class="text">
+                            <span>Скидки до 50%</span>
+                            <p>Каждую неделю новые продажи</p>
+                            </div>
+                        </div>
+                        
+                        <div class="marquee-item">
+                            <img src="icons/delivery.svg" alt="">
+                            <div class="text">
+                            <span>Бесплатная доставка</span>
+                            <p>Бесплатная доставка на первый заказ</p>
+                            </div>
+                        </div>
+                        
+                        <div class="marquee-item">
+                            <img src="icons/24hour.svg" alt="">
+                            <div class="text">
+                            <span>Служба поддержка 24/7</span>
+                            <p>Нам важен ваш опыт</p>
+                            </div>
+                        </div>
 
-        <div class="slide">
-            <img src="images/banner2.jpg" alt="Баннер 2">
-            <div class="slide-content">
-                <h2 class="title-slider">Новая коллекция</h2>
-                <p>Современные решения для дома</p>
-                <a href="#" class="btn">Подробнее</a>
-            </div>
-        </div>
+                        <!-- Дублирование для бесконечного покрутки карусели -->
+                        <div class="marquee-item">
+                            <img src="icons/box-sale.svg" alt="">
+                            <div class="text">
+                            <span>Скидки до 50%</span>
+                            <p>Каждую неделю новые продажи</p>
+                            </div>
+                        </div>
+                        
+                        <div class="marquee-item">
+                            <img src="icons/delivery.svg" alt="">
+                            <div class="text">
+                            <span>Бесплатная доставка</span>
+                            <p>Бесплатная доставка на первый заказ</p>
+                            </div>
+                        </div>
+                        
+                        <div class="marquee-item">
+                            <img src="icons/24hour.svg" alt="">
+                            <div class="text">
+                            <span>Служба поддержка 24/7</span>
+                            <p>Нам важен ваш опыт</p>
+                            </div>
+                        </div>
 
-        <div class="slide">
-            <img src="images/banner3.jpg" alt="Баннер 3">
-            <div class="slide-content">
-                <h2 class="title-slider">Уют начинается здесь</h2>
-                <p>Выберите свою мебель</p>
-                <a href="#" class="btn">Перейти</a>
-            </div>
-        </div>
+                        <div class="marquee-item">
+                            <img src="icons/box-sale.svg" alt="">
+                            <div class="text">
+                            <span>Скидки до 50%</span>
+                            <p>Каждую неделю новые продажи</p>
+                            </div>
+                        </div>
+                        
+                        <div class="marquee-item">
+                            <img src="icons/delivery.svg" alt="">
+                            <div class="text">
+                            <span>Бесплатная доставка</span>
+                            <p>Бесплатная доставка на первый заказ</p>
+                            </div>
+                        </div>
+                        
+                        <div class="marquee-item">
+                            <img src="icons/24hour.svg" alt="">
+                            <div class="text">
+                            <span>Служба поддержка 24/7</span>
+                            <p>Нам важен ваш опыт</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    </div>
-
-    <!-- Кнопки навигации -->
-    <button class="prev"><img src="icons/arrow1.svg" alt=""></button>
-    <button class="next"><img src="icons/arrow2.svg" alt=""></button>
-
-    <!-- Индикаторы -->
-    <div class="indicators">
-        <span class="dot active" data-slide="0"></span>
-        <span class="dot" data-slide="1"></span>
-        <span class="dot" data-slide="2"></span>
-    </div>
-</div>
+                <!-- Популярные категории -->
+                <section class="popular-categories">
+                    <div class="title">
+                    <img src="images/pop-cat.png" alt="">
+                    <h2>ПОПУЛЯРНЫЕ КАТЕГОРИИ</h2>
+                    <img src="images/pop-cat.png" alt="">
+                    </div>
+                    <div class="categories-grid">
+                        <a href="/catalog/sofas" class="category-item item1">
+                            <img src="images/мебель/slider1.jpg" alt="Диваны">
+                            <span>ДИВАНЫ</span>
+                        </a>
+                        <a href="/catalog/beds" class="category-item item2">
+                            <img src="images/мебель/slider1.jpg" alt="Кровати">
+                            <span>КРОВАТИ</span>
+                        </a>
+                        <a href="/catalog/chairs" class="category-item item3">
+                            <img src="images/мебель/slider1.jpg" alt="Кресла">
+                            <span>КРЕСЛА</span>
+                        </a>
+                        <a href="/catalog/tables" class="category-item item4">
+                            <img src="images/мебель/slider1.jpg" alt="Столы">
+                            <span>СТОЛЫ</span>
+                        </a>
+                        <a href="/catalog/stools" class="category-item item5">
+                            <img src="images/мебель/slider1.jpg" alt="Стулья">
+                            <span>СТУЛЬЯ</span>
+                        </a>
+                        <a href="/catalog/decor" class="category-item item6">
+                            <img src="images/мебель/slider1.jpg" alt="Аксессуары">
+                            <span>АКСЕССУАРЫ</span>
+                        </a>
+                    </div>
+                </section>
             </main>
 
 
