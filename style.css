@@ -109,9 +109,7 @@ header {
     transition: border-color 0.3s;
 }
 
-.search-input:focus {
-    border-color: #604B42;
-}
+.search-input:focus {border-color: #604B42;}
 
 .search-wrapper img {
     position: absolute;
@@ -119,7 +117,6 @@ header {
     top: 50%;
     transform: translateY(-50%);
 }
-
 /* Вверхный правый панель */
 .top-right {
     display: flex;
@@ -127,7 +124,6 @@ header {
 
     gap: 20px;
 }
-
 /* Язык и город */
 .language-selector,
 .location {
@@ -150,10 +146,7 @@ header {
 }
 
 .language-selector:hover,
-.location:hover {
-    border-color: #604B42;
-    color: #604B42;
-}
+.location:hover {border-color: #604B42; color: #604B42;}
 
 /* иконки внутри блока */
 .lang-icon {
@@ -165,7 +158,6 @@ header {
     width: 12px;
     height: 12px;
 }
-
 /* Выпадающее меню для языка */
 .language-selector {
     position: relative;
@@ -194,9 +186,7 @@ header {
     cursor: pointer;
 }
 
-.lang-dropdown li:hover {
-    background: #f6f6f6;
-}
+.lang-dropdown li:hover {background: #f6f6f6;}
 
 .location img {
     width: 18px; 
@@ -204,7 +194,6 @@ header {
     font-size: 14px;
     color: #604B42;
 }
-
 /* Выпадающее меню для города */
 .location {
     position: relative; 
@@ -235,9 +224,7 @@ header {
     cursor: pointer;
 }
 
-.city-dropdown li:hover {
-    background: #f0f0f0;
-}
+.city-dropdown li:hover {background: #f0f0f0;}
 
 /* Кнопка ✎ рядом с городом */
 #change-city-btn {
@@ -252,9 +239,7 @@ header {
     background: #ffffff;
 }
 
-#change-city-btn:hover { 
-    background: #f1f1f1;
-}
+#change-city-btn:hover {background: #f1f1f1;}
 
 /*Нижняя часть шапки*/
 .header-bottom {
@@ -313,9 +298,7 @@ header {
     padding: 8px 0;
 }
 
-.nav-link:hover {
-    color: #604B42;
-}
+.nav-link:hover {color: #604B42;}
 
 .nav-link img {
     width: 26px;
@@ -323,9 +306,7 @@ header {
     transition: transform 0.3s ease;
 }
 
-.nav-link:hover img {
-    transform: rotate(20deg);
-}
+.nav-link:hover img {transform: rotate(20deg);}
 
 /* Выпадающее меню */
 .dropdown-menu{
@@ -378,17 +359,13 @@ header {
 
 .dropdown-menu li a:hover {
     font-weight: 550;
-    
     color: #604B42;
     border-radius: 2px;
     border-bottom: 1px solid #604B42;
     width: fit-content;
 }
 
-.nav-item.dropdown:hover .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-}
+.nav-item.dropdown:hover .dropdown-menu {opacity: 1; visibility: visible;}
 
 /* Подменю */
 .submenu-item {
@@ -430,9 +407,7 @@ header {
     height: 30px;
 }
 
-.submenu li a:hover{
-    color:#604B42;
-}
+.submenu li a:hover{color:#604B42;}
 
 
 /* Навигация слева (избранное и т.д*/
@@ -467,9 +442,7 @@ header {
 }
 
 .icon-btn:hover,
-.icon-btn:hover img {
-    color: #604B42;
-}
+.icon-btn:hover img {color: #604B42;}
 
 .label {
     font-size: 12px;
@@ -477,9 +450,7 @@ header {
     font-weight: 500;
     white-space: nowrap;
 }
-
 /*Слайдер*/
-
 .slider {
     position: relative;
     width: 100%;
@@ -505,7 +476,6 @@ header {
     opacity: 1;
     z-index: 1;
 }
-
 /* Картинка */
 .slide img {
     width: 100%;
@@ -513,7 +483,6 @@ header {
     object-fit: cover;
     display: block;
 }
-
 /* Текст поверх картинки */
 .slide-content {
     position: absolute;
@@ -528,7 +497,6 @@ header {
     font-family: 'Jost';
     font-size: 40px;
 }
-
 /* Затемнение */
 .slide::after {
     content: "";
@@ -537,7 +505,6 @@ header {
     background: rgba(0,0,0,0.3);
     z-index: 1;
 }
-
 /* Кнопка */
 .btn {
     display: inline-block;
@@ -547,7 +514,6 @@ header {
     text-decoration: none;
     border-radius: 10px;
 }
-
 /* Стрелки */
 .prev, .next {
     position: absolute;
@@ -602,9 +568,7 @@ header {
     animation: scroll 25s linear infinite;
 }
 
-.promo-marquee:hover .marquee-inner{
-    animation-play-state: paused;
-}
+.promo-marquee:hover .marquee-inner{animation-play-state: paused;}
 
 .marquee-item {
     display: flex;
@@ -659,10 +623,10 @@ header {
 }
 
 .title {
-  display: flex;           /* Располагает элементы в ряд */
+  display: flex; 
   align-items: center;
-  justify-content: center;   /* Вертикальное выравнивание по центру */
-  gap: 10px;               /* Расстояние между картинкой и текстом */
+  justify-content: center; 
+  gap: 10px; 
 }
 
 .title img {
@@ -672,9 +636,9 @@ header {
 
 .title h2 {
   font-size: 25px;
-  font-family: 'Gsans';
+  font-family: 'Jost';
   font-weight: 500;
-  margin: 0;               /* Убираем нижний отступ */
+  margin: 0;          
 }
 
 /* Сетка */
@@ -688,7 +652,7 @@ header {
   padding: 20px 0;
 }
 
-/* Размещение блоков как на твоей картинке */
+/* Размещение блоков */
 .item1 { grid-column: 1; grid-row: 1; }
 .item2 { grid-column: 2; grid-row: 1 / span 2; }
 .item3 { grid-column: 3; grid-row: 1; }
@@ -740,8 +704,228 @@ header {
 .item5 span{top: 90px;}
 .item6 span{top: 180px;}
 
-/* Эффект при наведении */
-.category-item:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+.category-item:hover {transform: scale(1.05); box-shadow: 0 8px 20px rgba(0,0,0,0.15);}
+
+/*КАРУСЕЛЬ ТОВАРОВ*/
+.carousel-container {
+  width: 100%;
+  height: 350px;
+  margin: 0px auto;
+  padding: 0px 30px;
+  overflow: hidden;
+}
+
+.carousel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.carousel-header h2 {
+  margin: 0;
+  font-family: 'Gsans';
+  font-weight: 500;
+}
+/*Кнопки в шапке карусели*/
+.carousel-controls button {
+  background: #F0F2F3;
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  padding: 10px 12px;
+}
+.carousel-controls img {
+    width: 14px;
+    height: 14px;
+}
+.carousel-controls button:hover{background: #604B42;}
+.carousel-controls button:hover img{filter: brightness(0) invert(1);}
+
+/*Карточки товаров*/
+.carousel-track {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+}
+
+.carousel-item {
+  margin-right: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+  display: flex;
+  flex-direction: column;
+  font-family: 'Jost';
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* плавный переход */
+}
+
+.carousel-item:hover {
+  transform: translateY(-10px); /* поднимаем на 10px */
+  box-shadow: 0 8px 15px rgba(0,0,0,0.2); /* более заметная тень */
+}
+
+.item-top {
+  position: relative;
+  width: 270px;
+  height: 200px; 
+  overflow: hidden;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.item-top img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+}
+/*Кнопка "Избранное"*/
+.favorite-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  overflow: visible;
+  transition: 0.3s;
+}
+
+.favorite-btn:hover {
+  transform: scale(1.1);
+}
+
+.favorite-btn img {
+  position: absolute; 
+  width: 20px;
+  height: 20px;
+  transition: 0.3s;
+}
+
+.heart-full {opacity: 0;}
+.favorite-btn:hover .heart-full {opacity: 1;}
+.favorite-btn:hover .heart-empty {opacity: 0;}
+
+.item-bottom {
+  padding: 10px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item-bottom h2 {
+  font-size: 18px;
+  font-family: 'Jost';
+  font-weight: 500;
+  margin: 0 0 8px 0;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.price-cart {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  font-weight: bold;
+  font-family: 'Jost';
+  font-size: 18px;
+}
+/*Кнопка "Корзина"*/
+.cart-btn {
+  background: #F0F2F3;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 6px 10px;
+  margin: 0 2px;
+}
+
+.cart-btn img{
+    width: 18px;
+    height: 18px;
+}
+.cart-btn:hover{background: #604B42;}
+.cart-btn:hover img{filter: brightness(0) invert(1);}
+
+/*Индивидуальный заказ*/
+.custom-order-section {
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.custom-order-content {
+  display: flex;
+  align-items: center; 
+  justify-content: space-between;
+  gap: 120px; 
+  flex-wrap: wrap;
+}
+
+.text-side {
+  max-width: 500px;
+}
+
+.title-line {
+  display: flex;
+  align-items: flex-start; 
+  gap: 15px;
+}
+
+.line {
+  width: 8px;
+  height: 350px;
+  background-color: #604B42;
+}
+
+.text-content h2 {
+  font-family: 'Jost';
+  font-weight: 500;
+  font-size: 30px;
+  margin: 0 0 30px 0; 
+}
+
+.text-content p {
+  font-family: 'Jost';
+  font-size: 18px;
+  line-height: 1.6;
+  margin: 0 0 50px 0;
+}
+
+.text-content .btn {
+  display: inline-block;
+  padding: 5px 100px;
+  background: #604B42;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-family: 'Jost';
+  font-weight: 500;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.text-content .btn:hover {
+  background: #805f4e;
+}
+
+.image-side img {
+  max-width: 300px;
+  object-fit: contain;
 }

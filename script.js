@@ -175,3 +175,54 @@ setInterval(() => {
     index = (index + 1) % slides.length;
     showSlide(index);
 }, 4000);
+
+const track = document.querySelector('.carousel-track');
+const prevButton = document.getElementById('prev');
+const nextButton = document.getElementById('next');
+const items = Array.from(track.children);
+
+// Узнаём ширину одной карточки (вместе с margin)
+function getItemWidth() {
+    const itemStyle = getComputedStyle(items[0]);
+    return items[0].offsetWidth + parseFloat(itemStyle.marginRight);
+}
+
+let currentIndex = 0;
+
+// Сколько карточек видно на экране
+const visibleItems = 4;
+
+// Функция перемещения
+function moveCarousel(animated = true) {
+    const itemWidth = getItemWidth();
+    if (animated) {
+        track.style.transition = 'transform 0.5s ease';
+    } else {
+        track.style.transition = 'none';
+    }
+    track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+}
+
+// Вперёд
+nextButton.addEventListener('click', () => {
+    if (currentIndex < items.length - visibleItems) {
+        currentIndex++;
+        moveCarousel();
+    } else {
+        // Прыжок в начало без анимации
+        currentIndex = 0;
+        moveCarousel(false);
+    }
+});
+
+// Назад
+prevButton.addEventListener('click', () => {
+    if (currentIndex > 0) {
+        currentIndex--;
+        moveCarousel();
+    } else {
+        // Прыжок в конец без анимации
+        currentIndex = items.length - visibleItems;
+        moveCarousel(false);
+    }
+});
