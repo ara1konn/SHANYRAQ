@@ -181,7 +181,6 @@ const prevButton = document.getElementById('prev');
 const nextButton = document.getElementById('next');
 const items = Array.from(track.children);
 
-// Узнаём ширину одной карточки (вместе с margin)
 function getItemWidth() {
     const itemStyle = getComputedStyle(items[0]);
     return items[0].offsetWidth + parseFloat(itemStyle.marginRight);
@@ -189,7 +188,6 @@ function getItemWidth() {
 
 let currentIndex = 0;
 
-// Сколько карточек видно на экране
 const visibleItems = 4;
 
 // Функция перемещения
@@ -209,19 +207,16 @@ nextButton.addEventListener('click', () => {
         currentIndex++;
         moveCarousel();
     } else {
-        // Прыжок в начало без анимации
         currentIndex = 0;
         moveCarousel(false);
     }
 });
 
-// Назад
 prevButton.addEventListener('click', () => {
     if (currentIndex > 0) {
         currentIndex--;
         moveCarousel();
     } else {
-        // Прыжок в конец без анимации
         currentIndex = items.length - visibleItems;
         moveCarousel(false);
     }
