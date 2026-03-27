@@ -1,3 +1,16 @@
+//Моб.адаптация - шапка
+const burger = document.getElementById('burger');
+const mobileMenu = document.getElementById('mobileMenu');
+const closeMenu = document.getElementById('closeMenu');
+
+burger.addEventListener('click', () => {
+    mobileMenu.classList.add('active');
+});
+
+closeMenu.addEventListener('click', () => {
+    mobileMenu.classList.remove('active');
+});
+
 //Выбор языка
 document.addEventListener("DOMContentLoaded", () => {
     const currentLangEl = document.getElementById("current-lang");

@@ -44,12 +44,28 @@
             <!-- Нижняя панель -->
             <div class="header-bottom">
                 <div class="container nav-content">
+                    <!-- Моб версия-->
+                    <div class="mobile-left">
+                        <div class="burger" id="burger">
+                            <img src="icons/burger.svg" alt="меню">
+                        </div>
+                        <div class="mobile-search">
+                            <img src="icons/poisk.svg" alt="поиск">
+                        </div>
+                    </div>
                     <!-- Логотип -->
                     <div class="logo">
                         <a href="index.html">
-                            <img src="images/Лого и бренд.svg" alt="Логотип">
+                            <img src="images/Лого и бренд.svg" alt="SHANYRAQ">
                         </a>
+                     </div>
+                     
+                    <div class="mobile-right">
+                        <img src="icons/phone.svg" alt="связь">
+                        <img src="icons/location.svg" alt="адрес">
                     </div>
+                
+
                     <!-- Меню -->
                     <ul class="nav-menu">
                         <li class="nav-item dropdown">
@@ -526,6 +542,49 @@
                     <p>©2026- «SHANYRAQ». Все права защищены.</p>
                 </div>
             </footer>
-        </body>
-        <script src="script.js"></script>
+            
+            <div class="mobile-menu" id="mobileMenu">
+                <div id="closeMenu">✕</div>
+                <div class="menu-items">
+                    <div><img src="images/орнамент.png" width="20"> КАТАЛОГ</div>
+                    <div>АКЦИИ</div>
+                    <div>О НАС</div>
+                    <div>КОНТАКТЫ</div>
+                    <div><img src="icons/heart.svg" width="20"> ИЗБРАННОЕ</div>
+                    <div><img src="icons/voiti.svg" width="20"> ВХОД/РЕГИСТРАЦИЯ</div>
+                </div>
+                <div class="menu-footer-options">
+                    <div class="option-btn">
+                        <span>></span> Қазақша
+                    </div>
+                    <div class="option-btn">
+                        <img src="icons/location.svg" width="16"> Алматы
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="bottom-nav">
+                <a href="#" class="nav-item">
+                    <img src="images/орнамент.png" alt="">
+                    <span>Каталог</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <img src="icons/heart.svg" alt="">
+                    <span>Избранное</span>
+                </a>
+                <a href="index.html" class="nav-item">
+                    <img src="icons/home.svg" alt="">
+                    <span>Главная</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <img src="icons/shop.svg" alt="">
+                    <span>Корзина</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <img src="icons/voiti.svg" alt="">
+                    <span>Войти</span>
+                </a>
+            </nav>
+            <script src="script.js"></script>
+    </body>
 </html>

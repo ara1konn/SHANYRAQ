@@ -1199,3 +1199,149 @@ header {
   font-size: 14px;
   color: #9A9CAA;
 }
+/* Бургер */
+.burger, 
+.mobile-menu, 
+.bottom-nav, 
+.mobile-left, 
+.mobile-right {
+    display: none;
+}
+
+/* Стили самого выезжающего меню */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    z-index: 9999;
+    transition: 0.3s ease;
+    padding: 20px;
+    flex-direction: column;
+}
+
+.mobile-menu.active {
+    display: flex; 
+    right: 0;
+}
+
+#closeMenu {
+    align-self: flex-end;
+    font-size: 28px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.menu-items div {
+    font-family: 'Jost';
+    font-size: 22px;
+    font-weight: bold;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.menu-footer-options {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.option-btn {
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+    font-family: 'Gsans';
+}
+
+/* Нижняя панель навигации */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border-top: 1px solid #eee;
+    justify-content: space-around;
+    padding: 10px 0;
+    z-index: 2500;
+}
+
+.bottom-nav .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    font-size: 10px;
+}
+
+.bottom-nav .nav-item img {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 4px;
+}
+
+@media (max-width: 768px) {
+    .header-top, 
+    .nav-menu, 
+    .nav-actions {
+        display: none !important;
+    }
+    .burger, 
+    .bottom-nav, 
+    .mobile-left, 
+    .mobile-right {
+        display: flex !important;
+    }
+
+    .header-bottom {
+        padding: 15px 0;
+    }
+
+    .header-bottom .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative; /
+    }
+
+    .mobile-left, .mobile-right {
+        gap: 15px;
+        align-items: center;
+        z-index: 10;
+    }
+
+    /*Логотип Shanyraq*/
+    .logo {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0 !important;
+    }
+
+    .logo img {
+        width: 80px !important; 
+        height: auto !important;
+    }
+
+    body {
+        padding-bottom: 70px;
+    }
+
+    .categories-grid {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: auto !important;
+    }
+}
