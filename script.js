@@ -11,6 +11,48 @@ closeMenu.addEventListener('click', () => {
     mobileMenu.classList.remove('active');
 });
 
+//Плавающий круглый виджет
+document.addEventListener('DOMContentLoaded', function() {
+    if (document.querySelector('.widget-container')) return;
+
+    // Создаем структуру виджета
+    const widgetHTML = `
+        <div class="widget-container">
+            <div class="contact-card" id="contactCard" style="display: none;">
+                <div class="card-header">Связаться с нами</div>
+                <div class="card-body">
+                    <a href="https://wa.me/77026154906" target="_blank" class="contact-link wa">
+                        <img src="images/whatsapp-icon.svg" alt="WhatsApp">
+                        <span>WhatsApp</span>
+                    </a>
+                    <a href="tel:+77026154906" class="contact-link phone">
+                        <img src="images/tel-icon.svg" alt="telephone">
+                        <span>+7 (702) 615-49-06</span>
+                    </a>
+                </div>
+            </div>
+            <div class="widget-button" id="mainWidgetBtn">
+                <img src="images/operator.png" alt="Contact">
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', widgetHTML);
+
+    const btn = document.getElementById('mainWidgetBtn');
+    const card = document.getElementById('contactCard');
+
+    btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        card.style.display = (card.style.display === 'none') ? 'block' : 'none';
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.widget-container')) {
+            card.style.display = 'none';
+        }
+    });
+});
+
 //Выбор языка
 document.addEventListener("DOMContentLoaded", () => {
     const currentLangEl = document.getElementById("current-lang");

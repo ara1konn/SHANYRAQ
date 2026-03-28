@@ -924,7 +924,7 @@ header {
   display: inline-block;
   padding: 5px 100px;
 
-  background: #919191;
+  background: #604B42;
   color: #fff;
   text-decoration: none;
 
@@ -936,7 +936,7 @@ header {
 }
 
 .text-content .btn:hover {
-  background: #604B42;
+  background: #806F68;
 }
 
 .image-side img {
@@ -1014,8 +1014,8 @@ header {
   font-family: 'Jost';
 }
 .card button {
-  background: #919191;
-  color: #000;
+  background: #604B42;
+  color: #fff;
   border: none;
 
   padding: 12px 20px;
@@ -1026,7 +1026,7 @@ header {
   font-weight: 500;
   font-size: 15px;
 }
-.card button:hover{background: #604B42; color: #fff;}
+.card button:hover{background: #806F68; color: #fff;}
 
 /*Коллаж из фотографии*/
 .shanyraq-collage {
@@ -1191,6 +1191,7 @@ header {
   transform: scale(1.2); 
   filter: brightness(1.5)
 }
+
 /*Нижняя часть подвала*/
 .footer-bottom {
   margin-top: 20px;
@@ -1199,6 +1200,92 @@ header {
   font-size: 14px;
   color: #9A9CAA;
 }
+
+/*Плавающий крулгый виджет*/
+.widget-container {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 9999;
+  font-family: 'Gsans';
+}
+.contact-card {
+  display: none; 
+  position: absolute;
+  bottom: 85px; 
+  right: 0;
+  width: 220px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  overflow: hidden;
+  animation: slideUp 0.3s ease-out;
+}
+.card-header {
+  background: #f8f9fa;
+  padding: 12px;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+.card-body {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Ссылки внутри контейнера */
+.contact-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 15px;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.contact-link img{
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+.contact-link span{
+    font-size: 14px;
+    font-weight: bold;
+    color: #000;
+    line-height: 1;
+    display: inline-block;
+}
+.wa span { color: #25D366;}
+.contact-link:hover {background: #f0f2f5;}
+
+/* Сама круглая кнопка */
+.widget-button {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  background-color: #fff;
+  transition: transform 0.2s;
+}
+.widget-button img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.widget-button:active {
+  transform: scale(0.9);
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* Бургер */
 .burger, 
 .mobile-menu, 
@@ -1304,7 +1391,7 @@ header {
     .mobile-right {
         display: flex !important;
     }
-
+    /*Шапка моб меню*/
     .header-bottom {
         padding: 15px 0;
     }
@@ -1317,9 +1404,13 @@ header {
     }
 
     .mobile-left, .mobile-right {
-        gap: 15px;
+        gap: 20px;
         align-items: center;
         z-index: 10;
+    }
+    .mobile-left, .mobile-right img {
+        width: 25px;
+        height: 25px;
     }
 
     /*Логотип Shanyraq*/
@@ -1332,16 +1423,178 @@ header {
     }
 
     .logo img {
-        width: 80px !important; 
+        width: 70px !important; 
         height: auto !important;
     }
-
+    /*Слайдер*/
+    .slide-content {
+        align-items: center;
+        top: 100px;
+        left: 40px;
+    }
+    .slide-content .title-slider {
+        font-size: 25px;
+    }
+    /*Контейнеры категории*/
+    .categories-grid {
+        grid-template-columns: 1fr 1fr !important;
+        grid-template-rows: auto !important;
+        gap: 8px;
+        padding: 10px;
+    }
+    .item1, .item2, .item3, .item4, .item5, .item6 {
+        grid-column: auto !important;
+        grid-row: auto !important;
+        height: 160px;
+    }
+    .category-item span {
+        font-size: 18px !important;
+        width: 90%;
+        text-align: center;
+        top: 50% !important;
+        transform: translate(-50%, -50%) !important;
+    }
+    .category-item:hover {
+        transform: none;
+        box-shadow: none;
+    }
+    /*Карусель товаров*/
+    .carousel-container {
+    height: auto;
+    padding: 0 15px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+  .carousel-container::-webkit-scrollbar {
+    display: none;
+  }
+  .carousel-header h2 {
+    font-size: 20px;
+  }
+  .carousel-controls {
+    display: none; 
+  }
+  .carousel-track {
+    gap: 12px;
+  }
+  .carousel-item {
+    min-width: 180px;
+    max-width: 180px;
+    margin-right: 0;
+  }
+  .carousel-item:hover {
+    transform: none;
+  }
+  .item-top {
+    width: 100%;
+    height: 140px;
+  }
+  .favorite-btn {
+    width: 32px;
+    height: 32px;
+    top: 10px;
+    right: 10px;
+  }
+  .favorite-btn img {
+    width: 16px;
+    height: 16px;
+  }
+  .item-bottom {
+    padding: 8px;
+  }
+  .item-bottom h2 {
+    font-size: 14px;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    height: 32px;
+  }
+  .price {
+    font-size: 15px;
+  }
+  .cart-btn {
+    padding: 8px 10px;
+  }
+  .cart-btn:active {
+        background: #604B42 !important;
+        transform: scale(0.95);
+    }
+    .cart-btn:active img {
+        filter: brightness(0) invert(1) !important;
+    }
+    /* Эффект для кнопки ИЗБРАННОГО при нажатии */
+    .favorite-btn:active {
+        background: #f0f0f0 !important; 
+        transform: scale(0.9);
+    }
+    .favorite-btn:active .heart-full {
+        opacity: 1 !important;
+    }
+    .favorite-btn:active .heart-empty {
+        opacity: 0 !important;
+    }
     body {
         padding-bottom: 70px;
     }
-
+    
     .categories-grid {
         grid-template-columns: 1fr !important;
         grid-template-rows: auto !important;
+    }
+    /*Индивидуальный заказ*/
+    .custom-order-section {
+        margin-top: 50px;
+        padding: 0 15px;
+    }
+    .custom-order-content {
+        flex-direction: column;
+        gap: 40px;
+        align-items: center;
+    }
+    .image-side {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .image-side img {
+        max-width: 250px;
+    }
+    .text-side {
+        max-width: 100%;
+        width: 100%;
+    }
+    .title-line {
+        gap: 15px;
+    }
+    .line {
+        width: 5px;
+        height: auto;
+        align-self: stretch;
+    }
+    .text-content h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    .text-content p {
+        font-size: 16px;
+        margin-bottom: 30px;
+        padding-right: 10px;
+    }
+    .text-content .btn {
+        display: block;
+        text-align: center;
+        padding: 15px 0;
+        width: 100%;
+    }
+    /*Плавающий виджет*/
+    .widget-container{
+        bottom: 85px !important;
+        right: 15px !important;
+        z-index: 999;
+    }
+    .widget-button{
+        width: 60px;
+        height: 60px;
     }
 }
