@@ -1,8 +1,11 @@
-html,
-*,
-*::after,
-*::before {
+html {
     box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
 }
 
 @font-face {
@@ -208,8 +211,8 @@ header {
 
 /* Выбор города: иконки, кнопка, выпадающее меню */
 .location img {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     font-size: 14px;
     color: #604B42;
 }
@@ -417,7 +420,7 @@ header {
 }
 
 .submenu-item>a {
-    /* позволяет выделить главную ссылку, не затрагивая остальные */
+    /* > - позволяет выделить главную ссылку, не затрагивая остальные */
     border-bottom: 1px solid #604B42;
 
     font-weight: 550;
@@ -486,13 +489,226 @@ header {
 }
 
 .icon-btn:hover,
-.icon-btn:hover img { color: #604B42; }
+.icon-btn:hover img {
+    color: #604B42;
+}
 
-.label { /*описание под иконок*/
+.label {
+    /*описание под иконок*/
     font-size: 12px;
     font-family: 'Jost';
     font-weight: 500;
     white-space: nowrap;
+}
+
+/* Моб.адаптация ХИДЕРА*/
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 25px;
+    }
+
+    .phone {
+        font-size: 18px;
+    }
+
+    .search-wrapper {
+        max-width: 200px;
+    }
+
+    .top-right {
+        gap: 10px;
+    }
+
+    .language-selector,
+    .location {
+        padding: 5px 8px;
+        font-size: 13px;
+    }
+
+    .nav-menu {
+        gap: 25px;
+    }
+
+    .nav-link {
+        font-size: 14px;
+        gap: 5px;
+        letter-spacing: 1px;
+    }
+
+    .dropdown-menu {
+        width: 700px;
+        min-height: auto;
+    }
+
+    .dropdown-menu li a {
+        height: 50px;
+        font-size: 12px;
+        gap: 4px;
+    }
+
+    .dropdown-menu li a img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .submenu-item {
+        width: 180px;
+    }
+
+    .submenu-item>a {
+        border-bottom: 0.5px solid #604B42;
+    }
+
+    .submenu li a {
+        font-size: 12px;
+    }
+
+    .user-actions {
+        gap: 20px;
+    }
+
+    .icon-btn img {
+        width: 25px;
+        height: 25px;
+    }
+
+    .icon-btn .label {
+        font-size: 10px;
+    }
+
+    .header-bottom .logo img {
+        width: 80px;
+        height: auto;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .header-top,
+    /* Скрываем эти блоки для ПК */
+    .nav-menu,
+    .user-actions {
+        display: none !important;
+        /* !important - принудительно перекрывает другие стили */
+    }
+
+    .burger,
+    /* Включаем отображение элементов */
+    .bottom-nav,
+    .mobile-left,
+    .mobile-right {
+        display: flex !important;
+        /* flex - чтобы удобно выравнивать */
+    }
+
+    /*Шапка моб меню*/
+    .header-bottom {
+        padding: 15px 0;
+    }
+
+    .header-bottom .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+    }
+
+    .mobile-left,
+    .mobile-right {
+        gap: 20px;
+        align-items: center;
+        z-index: 10;
+    }
+
+    .mobile-left img,
+    .mobile-right img {
+        width: 22px;
+        height: 22px;
+    }
+
+    /*Логотип Shanyraq*/
+    .logo {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0 !important;
+    }
+
+    .logo img {
+        width: 80px !important;
+        height: auto !important;
+    }
+
+    .mobile-search-bar {
+        /* Скрытый блок поиска */
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        padding: 8px 0;
+        border-bottom: 1px solid #604B42;
+        transform: translateY(-20px);
+        /* Эффект появления */
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 9;
+    }
+
+    .mobile-search-bar.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .mobile-search-bar .container {
+        display: flex;
+        gap: 10px;
+    }
+
+    .mobile-search-bar input {
+        flex: 1;
+        padding: 10px 15px;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        outline: none;
+        font-family: 'Jost';
+    }
+
+    .mobile-search-bar button {
+        background: #604B42;
+        color: #fff;
+        border: none;
+        padding: 0 15px;
+        border-radius: 20px;
+        font-family: 'Jost';
+    }
+}
+
+@media (max-width: 468px) {
+    .header-bottom {
+        padding: 10px 0;
+    }
+
+    .mobile-left,
+    .mobile-right {
+        gap: 12px;
+    }
+
+    .mobile-left img,
+    .mobile-right img {
+        width: 18px;
+        height: 18px;
+        gap: 5px;
+    }
+
+    .logo img {
+        width: 60px !important;
+        height: auto;
+    }
+
 }
 
 /*Слайдер*/
@@ -544,6 +760,7 @@ header {
 .slide-content .title-slider {
     font-family: 'Jost';
     font-size: 40px;
+    font-weight: 500;
 }
 
 /* Затемнение */
@@ -610,49 +827,83 @@ header {
     background: #fff;
 }
 
-@media (max-width: 768px) {
-
-    /*Слайдер*/
+@media (max-width: 1024px) {
+    .slider {
+        height: 450px;
+    }
     .slide-content {
-        align-items: center;
-        top: 100px;
-        left: 40px;
+        left: 100px;
+        max-width: 350px;
     }
 
     .slide-content .title-slider {
-        font-size: 25px;
+        font-size: 32px;
     }
 
-    /*Контейнеры категории*/
-    .categories-grid {
-        grid-template-columns: 1fr 1fr !important;
-        grid-template-rows: auto !important;
-        gap: 8px;
-        padding: 10px;
+    .prev,
+    .next {
+        padding: 8px 12px;
     }
 
-    .item1,
-    .item2,
-    .item3,
-    .item4,
-    .item5,
-    .item6 {
-        grid-column: auto !important;
-        grid-row: auto !important;
-        height: 160px;
+    .prev {
+        left: 10px;
     }
 
-    .category-item span {
-        font-size: 18px !important;
-        width: 90%;
+    .next {
+        right: 10px;
+    }
+
+    .dot {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .slider {
+        height: 380px;
+    }
+    .slide-content {
+        left: 50%;
+        transform: translate(-50%, -50%);
         text-align: center;
-        top: 50% !important;
-        transform: translate(-50%, -50%) !important;
+        width: 90%;
+        max-width: none;
     }
 
-    .category-item:hover {
-        transform: none;
-        box-shadow: none;
+    .slide-content .title-slider {
+        font-size: 30px;
+        margin-bottom: 15px;
+    }
+
+    .prev,
+    .next {
+        display: none;
+    }
+
+    .indicators {
+        bottom: 20px;
+        gap: 15px;
+    }
+
+    .btn {
+        padding: 12px 25px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .slider {
+        height: 320px;
+    }
+
+    .slide-content .title-slider {
+        font-size: 18px;
+    }
+
+    .btn {
+        padding: 8px 18px;
+        font-size: 12px;
     }
 }
 
@@ -722,6 +973,72 @@ header {
     }
 }
 
+@media (max-width: 1024px) {
+    .promo-marquee {
+        padding: 8px 0;
+    }
+
+    .marquee-item {
+        margin-right: 60px;
+    }
+
+    .text span {
+        font-size: 16px;
+    }
+
+    .marquee-item img {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+@media (max-width: 768px) {
+    .marquee-item {
+        margin-right: 40px;
+    }
+
+    .marquee-inner {
+        animation-duration: 20s;
+    }
+
+    .text span {
+        font-size: 15px;
+    }
+
+    .text p {
+        font-size: 13px;
+    }
+
+    .marquee-item img {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .promo-marquee {
+        padding: 6px 0;
+    }
+
+    .marquee-item {
+        margin-right: 30px;
+    }
+
+    .text span {
+        font-size: 14px;
+        white-space: nowrap;
+    }
+
+    .text p {
+        font-size: 12px;
+    }
+
+    .marquee-item img {
+        width: 26px;
+        height: 26px;
+    }
+}
+
 /*Популярные категории*/
 .popular-categories {
     padding: 30px;
@@ -754,7 +1071,7 @@ header {
     grid-template-columns: 1.6fr 1.5fr 1.4fr;
     grid-template-rows: 200px 200px 200px;
 
-    gap: 10px;
+    gap: 15px;
     padding: 20px 0;
 }
 
@@ -855,6 +1172,54 @@ header {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
+@media (max-width: 1024px) {
+    .categories-grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 180px);
+        gap: 15px;
+    }
+    .category-item span {
+        font-size: 24px;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+@media (max-width: 768px) {
+    .popular-categories {
+        padding: 20px 15px;
+    }
+    .title h2 {
+        font-size: 22px;
+    }
+    .category-item {
+        grid-column: auto !important;
+        grid-row: auto !important;
+        height: 180px; 
+        position: relative;
+    }
+    .category-item span {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .categories-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    .category-item {
+        height: 140px;
+    }
+    .category-item span {
+        font-size: 20px;
+        letter-spacing: 1px;
+    }
+    .title img {
+        width: 24px;
+        height: 24px;
+    }
+}
 /*КАРУСЕЛЬ ТОВАРОВ*/
 .carousel-container {
     width: 100%;
@@ -1639,58 +2004,6 @@ header {
 }
 
 @media (max-width: 768px) {
-
-    .header-top,
-    .nav-menu,
-    .user-actions {
-        display: none !important;
-    }
-
-    .burger,
-    .bottom-nav,
-    .mobile-left,
-    .mobile-right {
-        display: flex !important;
-    }
-
-    /*Шапка моб меню*/
-    .header-bottom {
-        padding: 15px 0;
-    }
-
-    .header-bottom .container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: relative;/
-    }
-
-    .mobile-left,
-    .mobile-right {
-        gap: 20px;
-        align-items: center;
-        z-index: 10;
-    }
-
-    .mobile-left,
-    .mobile-right img {
-        width: 25px;
-        height: 25px;
-    }
-
-    /*Логотип Shanyraq*/
-    .logo {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        margin: 0 !important;
-    }
-
-    .logo img {
-        width: 70px !important;
-        height: auto !important;
-    }
 
     /*Карусель товаров*/
     .carousel-container {
