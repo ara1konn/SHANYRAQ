@@ -55,76 +55,98 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //Выбор языка
 document.addEventListener("DOMContentLoaded", () => {
-    const currentLangEl = document.getElementById("current-lang");
-    const langDropdown = document.querySelector(".lang-dropdown");
-    const languageSelector = document.querySelector(".language-selector");
+    const currentLangEls = document.querySelectorAll("#current-lang, #mobile-current-lang");
+    const langDropdowns = document.querySelectorAll(".lang-dropdown, #mobileLangDropdown");
+    const langSelectors = document.querySelectorAll(".language-selector, #mobileLangToggle");
 
     const translations = {
-        ru: { welcome: "Добро пожаловать", searchPlaceholder: "Поиск..." },
-        kz: { welcome: "Қош келдіңіз", searchPlaceholder: "Іздеу..." }
+        ru: {
+            catalog: "Каталог",
+            promotions: "Акции",
+            about: "О нас",
+            contacts: "Контакты",
+            favorites: "Избранное",
+            mobfavs: "Избранное",
+            login: "Мой аккаунт",
+            moblogin: "Мой аккаунт",
+            main: "Главная",
+            searchPlaceholder: "Поиск..."
+        },
+        kz: {
+            catalog: "Каталог",
+            promotions: "Акциялар",
+            about: "Біз туралы",
+            contacts: "Байланыс",
+            favorites: "Таңдаулылар",
+            mobfavs: "Таңдаулылар",
+            login: "Менің аккаунтым",
+            moblogin: "Менің аккаунтым",
+            main: "Басты бет",
+            searchPlaceholder: "Іздеу..."
+        }
     };
 
     let lang = localStorage.getItem("lang") || "ru";
     setLanguage(lang);
 
-    // Клик по dropdown
-    langDropdown.querySelectorAll("li").forEach(li => {
-        li.addEventListener("click", () => {
-            const selectedLang = li.dataset.lang;
-            setLanguage(selectedLang);
-            localStorage.setItem("lang", selectedLang);
-            langDropdown.style.display = "none";
-            languageSelector.classList.remove("open");
+    function setLanguage(selectedLang) {
+        const otherLang = selectedLang === "ru" ? "kz" : "ru";
+
+        // Обновляем текст RUS/KAZ во всех местах
+        currentLangEls.forEach(el => el.textContent = selectedLang.toUpperCase());
+
+        // Обновляем все списки
+        langDropdowns.forEach(dropdown => {
+            const li = dropdown.querySelector("li");
+            if (li) {
+                li.textContent = otherLang.toUpperCase();
+                li.dataset.lang = otherLang;
+            }
         });
-    });
 
-    // Открытие/закрытие dropdown при клике на селектор
-    languageSelector.addEventListener("click", () => {
-        const isOpen = langDropdown.style.display === "block";
-        langDropdown.style.display = isOpen ? "none" : "block";
-        languageSelector.classList.toggle("open", !isOpen);
-    });
-
-    // Закрытие dropdown при клике вне
-    document.addEventListener("click", e => {
-        if(!languageSelector.contains(e.target)) {
-            langDropdown.style.display = "none";
-            languageSelector.classList.remove("open");
-        }
-    });
-
-    function setLanguage(lang) {
-        currentLangEl.textContent = lang.toUpperCase();
-        const otherLang = lang === "ru" ? "kz" : "ru";
-
-        // Обновляем dropdown — только альтернативный язык
-        const dropdownLi = langDropdown.querySelector("li");
-        dropdownLi.textContent = otherLang.toUpperCase();
-        dropdownLi.dataset.lang = otherLang;
-
-        // Перевод текстов на странице
+        // Переводим все элементы с data-i18n
         document.querySelectorAll("[data-i18n]").forEach(el => {
             const key = el.dataset.i18n;
-            if(translations[lang][key]) el.textContent = translations[lang][key];
+            if (translations[selectedLang][key]) {
+                // Если внутри есть span, меняем его, если нет - весь текст
+                const target = el.querySelector('span') || el;
+                target.textContent = translations[selectedLang][key];
+            }
         });
 
         // Placeholder поиска
-        const searchInput = document.querySelector(".search-input");
-        if(searchInput) searchInput.placeholder = translations[lang].searchPlaceholder;
+        document.querySelectorAll(".search-input").forEach(input => {
+            input.placeholder = translations[selectedLang].searchPlaceholder;
+        });
     }
+
+    // Логика кликов для ВСЕХ селекторов языка
+    document.addEventListener("click", (e) => {
+        // Клик по селектору (открыть/закрыть)
+        const selector = e.target.closest(".language-selector, #mobileLangToggle");
+        if (selector) {
+            e.stopPropagation();
+            langDropdowns.forEach(d => d.style.display = (d.style.display === "block" ? "none" : "block"));
+        } else {
+            // Клик вне меню - закрываем всё
+            langDropdowns.forEach(d => d.style.display = "none");
+        }
+
+        // Клик по самому языку (li)
+        if (e.target.dataset.lang) {
+            const selectedLang = e.target.dataset.lang;
+            setLanguage(selectedLang);
+            localStorage.setItem("lang", selectedLang);
+        }
+    });
 });
 
-
 //Опредление города
-document.addEventListener("DOMContentLoaded", async () => {
-    const modal = document.getElementById("cityModal");
-    const detectedCityEl = document.getElementById("detected-city");
-    const currentCity = document.getElementById("current-city");
-    const changeBtn = document.getElementById("change-city-btn");
-    const cityDropdown = document.getElementById("cityDropdown");
-    const changeCityBtn = document.getElementById("change-city");
+document.addEventListener("DOMContentLoaded", () => {
+    const currentCityEls = document.querySelectorAll("#current-city, #mobile-current-city");
+    const cityDropdowns = document.querySelectorAll("#cityDropdown, #mobileCityDropdown");
+    const cityToggles = document.querySelectorAll("#change-city-btn, #mobileCityToggle, .edit-city-btn");
 
-    // Список городов Казахстана
     const cities = [
         "Алматы", "Астана", "Шымкент", "Актобе", 
         "Караганда", "Тараз", "Павлодар", "Усть-Каменогорск",
@@ -132,65 +154,57 @@ document.addEventListener("DOMContentLoaded", async () => {
         "Петропавловск", "Актау", "Экибастуз", "Жезказган"
     ];
 
-    // Заполняем dropdown
-    cities.forEach(city => {
-        const li = document.createElement("li");
-        li.textContent = city;
-        cityDropdown.appendChild(li);
-
-        li.addEventListener("click", () => {
-            currentCity.textContent = city;
-            localStorage.setItem("city", city);
-            cityDropdown.style.display = "none";
+    // Функция заполнения всех списков городов
+    cityDropdowns.forEach(dropdown => {
+        dropdown.innerHTML = "";
+        cities.forEach(city => {
+            const li = document.createElement("li");
+            li.textContent = city;
+            li.addEventListener("click", (e) => {
+                e.stopPropagation();
+                
+                // Обновляем текст во всех местах сразу
+                currentCityEls.forEach(el => el.textContent = city);
+                localStorage.setItem("city", city);
+                
+                // Закрываем все выпадашки
+                cityDropdowns.forEach(d => d.style.display = "none");
+            });
+            dropdown.appendChild(li);
         });
     });
 
-    function showCityModal(city) {
-        detectedCityEl.textContent = city;
-        modal.style.display = "flex";
-    }
+    // Логика открытия выпадающего списка
+    cityToggles.forEach(toggle => {
+        toggle.addEventListener("click", (e) => {
+            e.stopPropagation();
+            
+            // Находим выпадашку, которая находится в том же блоке, что и нажатая кнопка
+            const parent = toggle.closest(".location, .mobile-option");
+            const dropdown = parent.querySelector(".city-dropdown, .mobile-dropdown");
 
-    async function detectCity() {
-        try {
-            const res = await fetch("https://ipapi.co/json/");
-            const data = await res.json();
-            return data.city || "Алматы";
-        } catch (e) {
-            return "Алматы";
-        }
-    }
+            const isVisible = dropdown.style.display === "block";
 
-    // Проверка localStorage
+            // Сначала закроем вообще все открытые списки городов на странице
+            cityDropdowns.forEach(d => d.style.display = "none");
+
+            // Открываем нужный
+            if (dropdown) {
+                dropdown.style.display = isVisible ? "none" : "block";
+            }
+        });
+    });
+
+    // Клик в любое место экрана закрывает списки
+    document.addEventListener("click", () => {
+        cityDropdowns.forEach(d => d.style.display = "none");
+    });
+
+    // Загрузка сохраненного города
     const savedCity = localStorage.getItem("city");
     if (savedCity) {
-        currentCity.textContent = savedCity;
-    } else {
-        const city = await detectCity();
-        showCityModal(city);
-
-        document.getElementById("confirm-city").onclick = () => {
-            currentCity.textContent = city;
-            localStorage.setItem("city", city);
-            modal.style.display = "none";
-        };
-
-        changeCityBtn.onclick = () => {
-            modal.style.display = "none";
-            cityDropdown.style.display = "block";
-        };
+        currentCityEls.forEach(el => el.textContent = savedCity);
     }
-
-    // Кнопка ✎ в шапке
-    changeBtn.onclick = () => {
-        cityDropdown.style.display = cityDropdown.style.display === "block" ? "none" : "block";
-    };
-
-    // Закрываем dropdown, если клик вне него
-    document.addEventListener("click", (e) => {
-        if (!cityDropdown.contains(e.target) && e.target !== changeBtn) {
-            cityDropdown.style.display = "none";
-        }
-    });
 });
 
 //Слайдер

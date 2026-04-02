@@ -557,20 +557,40 @@
             <!-- Мобильная адаптация: нижний панель навигации -->
             <div class="mobile-menu" id="mobileMenu">
                 <div id="closeMenu">✕</div>
-                <div class="menu-items">
-                    <div><img src="images/орнамент.png" width="20"> КАТАЛОГ</div>
-                    <div>АКЦИИ</div>
-                    <div>О НАС</div>
-                    <div>КОНТАКТЫ</div>
-                    <div><img src="icons/heart.svg" width="20"> ИЗБРАННОЕ</div>
-                    <div><img src="icons/voiti.svg" width="20"> ВХОД/РЕГИСТРАЦИЯ</div>
-                </div>
+                <nav class="menu-items">
+                    <a href="#" class="menu-link catalog-link"><img src="images/орнамент.png" width="20" data-i18n="catalog"> Каталог</a>
+                    <a href="#" class="menu-link" data-i18n="promotions">АКЦИИ</a>
+                    <a href="#" class="menu-link" data-i18n="about">О НАС</a>
+                    <a href="#" class="menu-link" data-i18n="contacts">КОНТАКТЫ</a>
+                    <a href="#" class="menu-link">
+                        <img src="icons/heart.svg" width="20">
+                        <span data-i18n="mobfavs"> Избранное</span>
+                    </a>
+                    <a href="#" class="menu-link">
+                        <img src="icons/voiti.svg" width="20">
+                        <span data-i18n="moblogin">Вход/Регистрация</span>
+                    </a>
+                </nav>
                 <div class="menu-footer-options">
-                    <div class="option-btn">
-                        <span>></span> Қазақша
+                    <!-- Выбор языка -->
+                    <div class="mobile-option">
+                        <div class="option-header" id="mobileLangToggle">
+                            <img src="icons/language.svg" width="16">
+                            <span id="mobile-current-lang">RUS</span>
+                            <img src="icons/arrow.svg" width="10" class="arrow-icon">
+                        </div>
+                        <ul class="mobile-dropdown" id="mobileLangDropdown">
+                            <li data-lang="kz">KAZ</li>
+                        </ul>
                     </div>
-                    <div class="option-btn">
-                        <img src="icons/location.svg" width="16"> Алматы
+                    <!-- Выбор города -->
+                    <div class="mobile-option">
+                        <div class="option-header" id="mobileCityToggle">
+                            <img src="icons/location.svg" width="16">
+                            <span id="mobile-current-city">Алматы</span>
+                            <button class="edit-city-btn">✎</button>
+                        </div>
+                        <ul class="mobile-dropdown" id="mobileCityDropdown"></ul>
                     </div>
                 </div>
             </div>
@@ -578,23 +598,23 @@
             <nav class="bottom-nav">
                 <a href="#" class="nav-item">
                     <img src="images/орнамент.png" alt="">
-                    <span>Каталог</span>
+                    <span data-i18n="catalog">Каталог</span>
                 </a>
                 <a href="#" class="nav-item">
                     <img src="icons/heart.svg" alt="">
-                    <span>Избранное</span>
+                    <span data-i18n="favorites">Избранное</span>
                 </a>
                 <a href="index.html" class="nav-item">
                     <img src="icons/home.svg" alt="">
-                    <span>Главная</span>
+                    <span data-i18n="main">Главная</span>
                 </a>
                 <a href="#" class="nav-item">
                     <img src="icons/shop.svg" alt="">
-                    <span>Корзина</span>
+                    <span data-i18n="cart">Корзина</span>
                 </a>
                 <a href="#" class="nav-item">
                     <img src="icons/voiti.svg" alt="">
-                    <span>Войти</span>
+                    <span data-i18n="login">Войти</span>
                 </a>
             </nav>
             <script src="script.js"></script>
