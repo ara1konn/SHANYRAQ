@@ -22,17 +22,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="card-header">Связаться с нами</div>
                 <div class="card-body">
                     <a href="https://wa.me/77026154906" target="_blank" class="contact-link wa">
-                        <img src="images/whatsapp-icon.svg" alt="WhatsApp">
+                        <img src="../images/whatsapp-icon.svg" alt="WhatsApp">
                         <span>WhatsApp</span>
                     </a>
                     <a href="tel:+77026154906" class="contact-link phone">
-                        <img src="images/tel-icon.svg" alt="telephone">
+                        <img src="../images/tel-icon.svg" alt="telephone">
                         <span>+7 (702) 615-49-06</span>
                     </a>
                 </div>
             </div>
             <div class="widget-button" id="mainWidgetBtn">
-                <img src="images/operator.png" alt="Contact">
+                <img src="../images/operator.png" alt="Contact">
             </div>
         </div>
     `;
