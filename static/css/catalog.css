@@ -42,6 +42,74 @@
     margin: 0;
 }
 
+@media (max-width: 1024px) {
+    .catalog-hero {
+        max-width: 95%;
+    }
+
+    .hero-container {
+        height: 150px;
+    }
+
+    .text-content {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-container {
+        flex-direction: column;
+        height: auto;
+        position: relative;
+        height: 300px;
+        display: block;
+    }
+
+    .hero-image-side {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+
+    .hero-image-side img {
+        filter: brightness(0.6);
+    }
+
+    .hero-text-side {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background: transparent;
+    }
+
+    .text-content {
+        color: #FFFFFF;
+        font-size: 22px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-container {
+        height: 180px;
+    }
+
+    .text-content {
+        font-size: 12px;
+    }
+}
+
 /* Хлебные крошки */
 .breadcrumbs {
     margin-bottom: 10px;
@@ -91,6 +159,31 @@
     font-weight: 400px;
 }
 
+@media (max-width: 1024px) {
+    .bread-container {
+        padding: 0 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .breadcrumbs {
+        padding: 5px 0;
+        margin-bottom: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .breadcrumbs__item {
+        font-size: 10px;
+    }
+
+    .breadcrumbs__arrow {
+        width: 10px;
+        height: 10px;
+        margin: 0 4px;
+    }
+}
+
 /* Навигация горизонтальных кнопок каталога  */
 .category-navigation {
     margin-bottom: 40px;
@@ -100,7 +193,6 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 10px;
-    flex-direction: column;
     gap: 20px;
 }
 
@@ -122,9 +214,10 @@
     background-color: #D9D9D9;
     color: #ffff;
 
-    font-family: 'Gsans', sans-serif;
+    font-family: 'Jost', sans-serif;
     font-size: 16px;
     font-weight: bold;
+    letter-spacing: 1px;
     text-transform: uppercase;
 
     cursor: pointer;
@@ -139,6 +232,45 @@
 
 .tab-btn:hover {
     background-color: #604B42;
+}
+
+@media (max-width: 1024px) {
+    .tab-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .category-tabs {
+        gap: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .category-navigation {
+        margin-bottom: 25px;
+    }
+
+    .tab-btn {
+        flex: 1 1 calc(50% - 10px);
+        padding: 12px 15px;
+        font-size: 13px;
+        letter-spacing: 0.5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .category-tabs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .tab-btn {
+        width: 100%;
+        padding: 10px 15px;
+        font-size: 12px;
+        border-radius: 10px;
+    }
 }
 
 /* Сортировка на правом краю */
@@ -204,31 +336,36 @@
     font-family: 'Jost', sans-serif;
     font-size: 18px;
     font-weight: 500;
-    text-transform: uppercase;
+    letter-spacing: 1px;
     margin-bottom: 20px;
     color: #333;
 }
 
 /* Стили инпутов цены */
-.price-inputs {
+.price-input {
     display: flex;
     align-items: center;
     gap: 10px;
+    border-bottom: 1px solid #dbdbdb;
+    padding-bottom: 20px;
 }
 
-.price-inputs input {
-    width: 100%;
-    padding: 10px;
+.price-input input {
+    width: 90px;
+    padding: 5px 10px;
     border: 1px solid #E0E0E0;
-    border-radius: 4px;
+    border-radius: 20px;
     font-family: 'Jost';
+    font-size: 12px;
     outline: none;
 }
 
-/* Кружочки цветов */
+/* Цвет: кружочки цветов */
 .color-options {
     display: flex;
     gap: 12px;
+    border-bottom: 1px solid #dbdbdb;
+    padding-bottom: 20px;
 }
 
 .color-circle {
@@ -249,9 +386,234 @@
 }
 
 .brown {
-    background-color: #8B4513;
+    background-color: #6f4d38;
 }
 
 .white {
     background-color: #FFF;
+}
+
+.grey {
+    background-color: #d1d1d1;
+}
+
+.beige {
+    background-color: #e8d0b9;
+}
+
+/* Список элементов */
+.checkbox-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    font-size: 18px;
+    position: relative;
+}
+
+.checkbox-item input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    width: 0;
+    height: 0;
+}
+
+.custom-checkbox {
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    background-color: #D9D9D9;
+    margin-right: 15px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.custom-checkbox::after {
+    content: "";
+    position: absolute;
+    display: none;
+
+    left: 8px;
+    top: 4px;
+    width: 6px;
+    height: 11px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox-item:hover .custom-checkbox {
+    background-color: #CCCCCC;
+}
+
+.checkbox-item input:checked+.custom-checkbox {
+    background-color: #333333;
+}
+
+.checkbox-item input:checked+.custom-checkbox::after {
+    display: block;
+}
+
+/* Карточки товаров */
+.catalog-container {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 40px;
+    max-width: 1300px;
+    margin: 40px auto;
+    padding: 0 20px;
+    align-items: flex-start;
+}
+
+.products-display {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 15px;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+}
+
+.carousel-item {
+    min-width: 220px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    flex-direction: column;
+    font-family: 'Jost';
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.carousel-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.item-top {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.item-top img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/*Кнопка "Избранное"*/
+.favorite-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    overflow: visible;
+    transition: 0.3s;
+}
+
+.favorite-btn:hover {
+    transform: scale(1.1);
+}
+
+.favorite-btn img {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    transition: 0.3s;
+}
+
+.heart-full {
+    opacity: 0;
+}
+
+.favorite-btn:hover .heart-full {
+    opacity: 1;
+}
+
+.favorite-btn:hover .heart-empty {
+    opacity: 0;
+}
+
+.item-bottom {
+    padding: 10px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.item-bottom h2 {
+    font-size: 18px;
+    font-family: 'Jost';
+    font-weight: 500;
+    margin: 0 0 8px 0;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.price-cart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price {
+    font-weight: bold;
+    font-family: 'Jost';
+    font-size: 18px;
+}
+
+/*Кнопка "Корзина"*/
+.cart-btn {
+    background: #F0F2F3;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 6px 10px;
+    margin: 0 2px;
+}
+
+.cart-btn img {
+    width: 18px;
+    height: 18px;
+}
+
+.cart-btn:hover {
+    background: #604B42;
+}
+
+.cart-btn:hover img {
+    filter: brightness(0) invert(1);
 }
