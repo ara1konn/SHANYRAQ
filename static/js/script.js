@@ -1,21 +1,22 @@
-//Моб.адаптация - шапка
+//Моб.адаптивность - бургер. Находим по айди элементы
 const burger = document.getElementById('burger');
 const mobileMenu = document.getElementById('mobileMenu');
 const closeMenu = document.getElementById('closeMenu');
 
+//При клике на бургер открывается "выезжающее" моб.меню (добавляет псевдокласс)
 burger.addEventListener('click', () => {
     mobileMenu.classList.add('active');
 });
-
+//При клике на крестик моб "выезжающее" меню закрывается (удаляет псевдокласс)
 closeMenu.addEventListener('click', () => {
     mobileMenu.classList.remove('active');
 });
 
-//Плавающий круглый виджет
+//Плавающий круглый виджет. Ждем полной загрузки ДОМ и проверяем есть ли виджет, что бы не создать дубликат
 document.addEventListener('DOMContentLoaded', function() {
     if (document.querySelector('.widget-container')) return;
 
-    // Создаем структуру виджета
+    // Создание самого виджета
     const widgetHTML = `
         <div class="widget-container">
             <div class="contact-card" id="contactCard" style="display: none;">
@@ -36,16 +37,19 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         </div>
     `;
+    //Вставляем виджет в конец
     document.body.insertAdjacentHTML('beforeend', widgetHTML);
 
+    //Находим элементы по айди на странице
     const btn = document.getElementById('mainWidgetBtn');
     const card = document.getElementById('contactCard');
 
+    //При клике на виджет карточка показывается
     btn.addEventListener('click', function(e) {
         e.stopPropagation();
         card.style.display = (card.style.display === 'none') ? 'block' : 'none';
     });
-
+    //При клике в место вне виджета карточка закрывается
     document.addEventListener('click', function(e) {
         if (!e.target.closest('.widget-container')) {
             card.style.display = 'none';
@@ -53,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-//Выбор языка
+//Выбор языка. ЖДем полной загрузки ДОМ
 document.addEventListener("DOMContentLoaded", () => {
     const currentLangEls = document.querySelectorAll("#current-lang, #mobile-current-lang");
     const langDropdowns = document.querySelectorAll(".lang-dropdown, #mobileLangDropdown");
@@ -88,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let lang = localStorage.getItem("lang") || "ru";
     setLanguage(lang);
-
+    //Определяем текущий и противоположный язык
     function setLanguage(selectedLang) {
         const otherLang = selectedLang === "ru" ? "kz" : "ru";
 
@@ -104,10 +108,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        // Переводим все элементы с data-i18n
+        //Переводим все элементы с атрибутом data-i18n
         document.querySelectorAll("[data-i18n]").forEach(el => {
             const key = el.dataset.i18n;
-            if (translations[selectedLang][key]) {
+            if (translations[selectedLang] && translations[selectedLang][key]) {
                 // Если внутри есть span, меняем его, если нет - весь текст
                 const target = el.querySelector('span') || el;
                 target.textContent = translations[selectedLang][key];
@@ -120,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Логика кликов для ВСЕХ селекторов языка
+    // Логика кликов для всех селекторов языка
     document.addEventListener("click", (e) => {
         // Клик по селектору (открыть/закрыть)
         const selector = e.target.closest(".language-selector, #mobileLangToggle");
@@ -210,41 +214,41 @@ document.addEventListener("DOMContentLoaded", () => {
 //Слайдер
 const slides = document.querySelectorAll('.slide');
 const dots = document.querySelectorAll('.dot');
-let index = 0;
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
 
-/* Функция показа слайда */
-function showSlide(i){
-    slides.forEach(slide => slide.classList.remove('active'));
-    dots.forEach(dot => dot.classList.remove('active'));
-    slides[i].classList.add('active');
-    dots[i].classList.add('active');
-}
-
-/* Стрелки */
-document.querySelector('.next').onclick = () => {
-    index = (index + 1) % slides.length;
-    showSlide(index);
-}
-
-document.querySelector('.prev').onclick = () => {
-    index = (index - 1 + slides.length) % slides.length;
-    showSlide(index);
-}
-
-/* Индикаторы */
-dots.forEach(dot => {
-    dot.onclick = () => {
-        index = parseInt(dot.dataset.slide);
+if (slides.length && dots.length &&  nextBtn && prevBtn) {
+    let index = 0; 
+    
+    //Функция показа слайда
+    function showSlide(i){
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+        slides[i].classList.add('active');
+        dots[i].classList.add('active');
+    }
+    //Стрелки на слайдере. 
+    nextBtn.onclick = () => {
+        index = (index + 1) % slides.length;
         showSlide(index);
     }
-});
+    prevBtn.onclick = () => {
+        index = (index - 1 + slides.length) % slides.length;
+        showSlide(index)
+    }
+    dots.forEach(dot => {
+        dot.onclick = () => {
+            index = parseInt(dot.dataset.slide)
+            showSlide(index);
+        }
+    })
+    setInterval(() => {
+        index = (index + 1) % slides.length;
+        showSlide(index);
+    }, 5400)
+}
 
-/* Автопрокрутка */
-setInterval(() => {
-    index = (index + 1) % slides.length;
-    showSlide(index);
-}, 4000);
-
+//Карусель товаров
 const track = document.querySelector('.carousel-track');
 const prevButton = document.getElementById('prev');
 const nextButton = document.getElementById('next');
