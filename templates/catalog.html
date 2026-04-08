@@ -51,7 +51,7 @@
                 <!-- Моб версия шапки-->
                 <div class="mobile-left">
                     <div class="burger" id="burger">
-                        <img src="../icons/burger.svg" alt="меню">
+                        <img src="../icons/mob-icons/burger.svg" alt="меню">
                     </div>
                     <!-- Моб.версия поиска в шапки -->
                     <div class="mobile-search">
@@ -138,7 +138,7 @@
                     </li>
                     <!-- Главная навигация в шапке меню начиная с каталога -->
                     <li class="nav-item"><a href="#" class="nav-link">АКЦИИ</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">О НАС</a></li>
+                    <li class="nav-item"><a href="about-us.html" class="nav-link">О НАС</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">КОНТАКТЫ</a></li>
                 </ul>
                 <!-- Иконки пользователя -->
@@ -203,204 +203,108 @@
                     <button class="tab-btn" data-category="office">Кабинет</button>
                     <button class="tab-btn" data-category="accessories">Аксессуары</button>
                 </div>
+                <!-- Мобильные кнопки фильтрации -->
+                 <div class="mobile-actions">
+                    <button id="open-filters" class="mobile-btn">
+                        <img src="../icons/mob-icons/mob-filter.svg" alt="Фильтры">Фильтры
+                    </button>
+                    <button id="mobile-sort" class="mobile-btn icon-only">
+                        <img src="../icons/mob-icons/mob-sort.svg" alt="Сортировка">
+                    </button>
+                </div>
                 <!-- Сортировка на правом краю -->
                 <div class="sort-bar">
                     <div class="sort-wrapper">
                         <span class="sort-label">Сортировать по:</span>
                         <select id="sort-select" class="sort-dropdown">
                             <option value="popular">Популярности</option>
-                            <option value="price-low">Самые дешевые</option>
-                            <option value="price-high">Самые дорогие</option>
+                            <option value="price-low">По возрастанию цены</option>
+                            <option value="price-high">По убыванию цены</option>
+                            <option value="price-high">В наличии</option>
                         </select>
                     </div>
                 </div>
         </section>
-        <!-- Боковый панель с фильтрами -->
+
         <section class="catalog-section">
             <div class="catalog-container">
-                <aside class="filters-sidebar">
-                    <!-- Поля для цен -->
+                <!-- Боковая панель с лева для фильтров -->
+                <aside class="filters-sidebar" id="filters-sidebar">
+                <div class="sidebar-header">
+                    <h3>Фильтры</h3>
+                    <button id="close-filters" class="close-btn">&times;</button>
+                </div>
+                
+                <!-- Оборачиваем всё в форму для FastAPI -->
+                <form id="filter-form">
                     <div class="filter-group">
                         <h3 class="filter-title">Цена</h3>
                         <div class="price-input">
-                            <input type="number" placeholder="От">
-                            <span class="price-divider">—</span>
-                            <input type="number" placeholder="До">
+                            <input type="number" name="min_price" placeholder="От">
+                            <span class="price-separator">—</span>
+                            <input type="number" name="max_price" placeholder="До">
                         </div>
                     </div>
-                    <!-- Цвета: кружочки -->
+
                     <div class="filter-group">
                         <h3 class="filter-title">Цвета</h3>
                         <div class="color-options">
-                            <button class="color-circle black" data-color="black"></button>
-                            <button class="color-circle brown" data-color="brown"></button>
-                            <button class="color-circle white" data-color="white"></button>
-                            <button class="color-circle grey" data-color="grey"></button>
-                            <button class="color-circle beige" data-color="beige"></button>
+                            <button type="button" class="color-circle black" data-color="black"></button>
+                            <button type="button" class="color-circle brown" data-color="brown"></button>
+                            <button type="button" class="color-circle white" data-color="white"></button>
+                            <button type="button" class="color-circle gray" data-color="gray"></button>
+                            <button type="button" class="color-circle beige" data-color="beige"></button>
                         </div>
                     </div>
-                    <!-- Чекбоксы для выбора типа мебели -->
-                    <div class="filter-checkbox">
-                        <h3 class="filter-title">Тип</h3>
+
+                    <div class="filter-group">
+                        <h3 class="filter-title">Тип мебели</h3>
                         <div class="checkbox-list">
                             <label class="checkbox-item">
-                                <input type="checkbox" name="furniture_types" value="case">
-                                <span class="custom-checkbox"></span>
-                                Корпусная
+                                <input type="checkbox" name="type" value="case">
+                                <span class="custom-checkbox"></span>Корпусная
                             </label>
                             <label class="checkbox-item">
-                                <input type="checkbox" name="furniture_types" value="soft">
-                                <span class="custom-checkbox"></span>
-                                Мягкая
+                                <input type="checkbox" name="type" value="soft">
+                                <span class="custom-checkbox"></span>Мягкая
                             </label>
                             <label class="checkbox-item">
-                                <input type="checkbox" name="furniture_types" value="decor">
-                                <span class="custom-checkbox"></span>
-                                Декоративная
+                                <input type="checkbox" name="type" value="decor">
+                                <span class="custom-checkbox"></span>Декоративная
                             </label>
                             <label class="checkbox-item">
-                                <input type="checkbox" name="furniture_types" value="trans">
-                                <span class="custom-checkbox"></span>
-                                Трансформируемая
+                                <input type="checkbox" name="type" value="trans">
+                                <span class="custom-checkbox"></span>Трансформируемая
                             </label>
                         </div>
                     </div>
-                </aside>
-                <!-- Сетка с карточками товаров -->
-                <div class="products-display">
-                    <div class="carousel-item">
-                        <div class="item-top">
-                            <!-- Вверхняя часть карточки: картина, кнопка избранное -->
-                            <button class="favorite-btn">
-                                <img class="heart-empty" src="../icons/icon-cards/favorite.svg" alt="избранное пустой">
-                                <img class="heart-full" src="../icons/icon-cards/fav-full.svg" alt="избранное полная">
-                            </button>
-                            <img src="../images/мебель/slider1.jpg" alt="Товар">
-                        </div>
-                        <!-- Нижняя часть карточки: название, цена, кнопка корзины -->
-                        <div class="item-bottom">
-                            <h2>Кресла Кереге</h2>
-                            <div class="price-cart">
-                                <span class="price">5000₸</span>
-                                <button class="cart-btn"><img src="../icons/icon-cards/basket.svg" alt="иконка корзины"></button>
-                            </div>
-                        </div>
+                    
+                    <button type="submit" class="filter-btn">Применить</button>
+                </form>
+            </aside>
+
+            <!-- Сетка товаров -->
+            <div class="products-display">
+                <div class="carousel-item">
+                    <div class="item-top">
+                        <div class="status-badge available">В наличии</div>
+                        <button class="favorite-btn">
+                            <img class="heart-empty" src="../icons/icon-cards/favorite.svg" alt="">
+                            <img class="heart-full" src="../icons/icon-cards/fav-full.svg" alt="">
+                        </button>
+                        <img src="../images/мебель/slider1.jpg" alt="Товар">
                     </div>
-                    <div class="carousel-item">
-                        <div class="item-top">
-                            <button class="favorite-btn">
-                                <img class="heart-empty" src="../icons/icon-cards/favorite.svg" alt="избранное пустой">
-                                <img class="heart-full" src="../icons/icon-cards/fav-full.svg" alt="избранное полная">
+                    <div class="item-bottom">
+                        <h2>Кресла Кереге</h2>
+                        <div class="price-cart">
+                            <span class="price">5000₸</span>
+                            <button class="cart-btn">
+                                <img src="../icons/icon-cards/basket.svg" alt="">
                             </button>
-                            <img src="../images/мебель/slider1.jpg" alt="Товар">
-                        </div>
-                        <div class="item-bottom">
-                            <h2>Кресла Кереге</h2>
-                            <div class="price-cart">
-                                <span class="price">5000₸</span>
-                                <button class="cart-btn"><img src="../icons/icon-cards/basket.svg" alt="иконка корзины"></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="item-top">
-                            <button class="favorite-btn">
-                                <img class="heart-empty" src="../icons/icon-cards/favorite.svg" alt="избранное пустой">
-                                <img class="heart-full" src="../icons/icon-cards/fav-full.svg" alt="избранное полная">
-                            </button>
-                            <img src="../images/мебель/slider1.jpg" alt="Товар">
-                        </div>
-                        <div class="item-bottom">
-                            <h2>Кресла Кереге</h2>
-                            <div class="price-cart">
-                                <span class="price">5000₸</span>
-                                <button class="cart-btn"><img src="../icons/icon-cards/basket.svg" alt="иконка корзины"></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="item-top">
-                            <button class="favorite-btn">
-                                <img class="heart-empty" src="../icons/icon-cards/favorite.svg" alt="избранное пустой">
-                                <img class="heart-full" src="../icons/icon-cards/fav-full.svg" alt="избранное полная">
-                            </button>
-                            <img src="../images/мебель/slider1.jpg" alt="Товар">
-                        </div>
-                        <div class="item-bottom">
-                            <h2>Кресла Кереге</h2>
-                            <div class="price-cart">
-                                <span class="price">5000₸</span>
-                                <button class="cart-btn"><img src="../icons/icon-cards/basket.svg" alt="иконка корзины"></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="item-top">
-                            <button class="favorite-btn">
-                                <img class="heart-empty" src="../icons/icon-cards/favorite.svg" alt="избранное пустой">
-                                <img class="heart-full" src="../icons/icon-cards/fav-full.svg" alt="избранное полная">
-                            </button>
-                            <img src="../images/мебель/slider1.jpg" alt="Товар">
-                        </div>
-                        <div class="item-bottom">
-                            <h2>Кресла Кереге</h2>
-                            <div class="price-cart">
-                                <span class="price">5000₸</span>
-                                <button class="cart-btn"><img src="../icons/icon-cards/basket.svg" alt="иконка корзины"></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="item-top">
-                            <button class="favorite-btn">
-                                <img class="heart-empty" src="../icons/icon-cards/favorite.svg" alt="избранное пустой">
-                                <img class="heart-full" src="../icons/icon-cards/fav-full.svg" alt="избранное полная">
-                            </button>
-                            <img src="../images/мебель/slider1.jpg" alt="Товар">
-                        </div>
-                        <div class="item-bottom">
-                            <h2>Кресла Кереге</h2>
-                            <div class="price-cart">
-                                <span class="price">5000₸</span>
-                                <button class="cart-btn"><img src="../icons/icon-cards/basket.svg" alt="иконка корзины"></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="item-top">
-                            <button class="favorite-btn">
-                                <img class="heart-empty" src="../icons/icon-cards/favorite.svg" alt="избранное пустой">
-                                <img class="heart-full" src="../icons/icon-cards/fav-full.svg" alt="избранное полная">
-                            </button>
-                            <img src="../images/мебель/slider1.jpg" alt="Товар">
-                        </div>
-                        <div class="item-bottom">
-                            <h2>Кресла Кереге</h2>
-                            <div class="price-cart">
-                                <span class="price">5000₸</span>
-                                <button class="cart-btn"><img src="../icons/icon-cards/basket.svg" alt="иконка корзины"></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="item-top">
-                            <button class="favorite-btn">
-                                <img class="heart-empty" src="../icons/icon-cards/favorite.svg" alt="избранное пустой">
-                                <img class="heart-full" src="../icons/icon-cards/fav-full.svg" alt="избранное полная">
-                            </button>
-                            <img src="../images/мебель/slider1.jpg" alt="Товар">
-                        </div>
-                        <div class="item-bottom">
-                            <h2>Кресла Кереге</h2>
-                            <div class="price-cart">
-                                <span class="price">5000₸</span>
-                                <button class="cart-btn"><img src="../icons/icon-cards/basket.svg" alt="иконка корзина"></button>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
      </main>
 
     <!-- Подвал: вверхняя часть  -->

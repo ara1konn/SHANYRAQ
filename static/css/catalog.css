@@ -317,8 +317,9 @@
 .filters-sidebar {
     width: 250px;
     flex-shrink: 0;
-    position: sticky;
     top: 20px;
+    position: sticky;
+    transition: transform 0.3s ease;
 }
 
 .filter-group {
@@ -456,7 +457,7 @@
 }
 
 .checkbox-item input:checked+.custom-checkbox {
-    background-color: #333333;
+    background-color: #604B42;
 }
 
 .checkbox-item input:checked+.custom-checkbox::after {
@@ -521,11 +522,30 @@
     object-position: center;
 }
 
+.status-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 3;
+    padding: 4px 12px;
+    border-radius: 4px;
+    
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-family: 'Jost', sans-serif;
+}
+
+.status-badge.available {
+    background-color: #604B42;
+    color: #ffffff;
+}
+
 /*Кнопка "Избранное"*/
 .favorite-btn {
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 10px;
+    right: 10px;
 
     width: 40px;
     height: 40px;
@@ -616,4 +636,119 @@
 
 .cart-btn:hover img {
     filter: brightness(0) invert(1);
+}
+
+.filter-btn {
+    width: 100%;
+    font-family: 'Jost';
+    font-size: 14px;
+    letter-spacing: 1px;
+    background-color: #604B42;
+    color: #FFF;
+
+}
+
+/* Скрываем мобильные кнопки по умолчанию*/
+.mobile-actions {
+    display: none;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.mobile-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    background: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 5px;
+    font-family: 'Jost', sans-serif;
+    cursor: pointer;
+}
+
+.mobile-btn.icon-only {
+    padding: 10px;
+}
+
+.mobile-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+/* Кнопка закрытия в сайдбаре (скрыта на ПК) */
+.sidebar-header {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .mobile-actions {
+        display: flex;
+    }
+    .sort-bar {
+        display: none;
+    }
+    .filters-sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 85%;
+        max-width: 300px;
+        height: 100%;
+        background: #fff;
+        z-index: 9999;
+        transform: translateX(-100%);
+
+    }
+
+    /* Активное состояние — выезжает */
+    .filters-sidebar.active {
+        transform: translateX(0);
+    }
+
+    /* Скрываем на мобилке обычные фильтры/кнопки ПК */
+    .catalog-body {
+        display: block; /* чтобы не ломать сетку */
+    }
+
+    /* Показываем заголовок и кнопку закрытия в меню */
+    .sidebar-header {
+        display: flex;
+    }
+
+    /* 4. Перестраиваем сетку товаров */
+    .catalog-container {
+        grid-template-columns: 1fr;
+        /* Убираем колонку сайдбара */
+        margin-top: 20px;
+    }
+
+    .products-display {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .carousel-item {
+        min-width: unset;
+        margin-right: 0;
+    }
+}
+
+/* Для совсем маленьких экранов (телефоны) */
+@media (max-width: 480px) {
+    .products-display {
+        grid-template-columns: 1fr;
+    }
 }
