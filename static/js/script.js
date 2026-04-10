@@ -249,48 +249,115 @@ if (slides.length && dots.length &&  nextBtn && prevBtn) {
 }
 
 //Карусель товаров
-const track = document.querySelector('.carousel-track');
-const prevButton = document.getElementById('prev');
-const nextButton = document.getElementById('next');
-const items = Array.from(track.children);
+document.addEventListener("DOMContentLoaded", () => {
 
-function getItemWidth() {
-    const itemStyle = getComputedStyle(items[0]);
-    return items[0].offsetWidth + parseFloat(itemStyle.marginRight);
-}
+    const track = document.querySelector('.carousel-track');
 
-let currentIndex = 0;
+    if (!track) return; // 🔥 ключ
 
-const visibleItems = 4;
+    const prevButton = document.getElementById('prev');
+    const nextButton = document.getElementById('next');
 
-// Функция перемещения
-function moveCarousel(animated = true) {
-    const itemWidth = getItemWidth();
-    if (animated) {
-        track.style.transition = 'transform 0.5s ease';
-    } else {
-        track.style.transition = 'none';
+    const items = Array.from(track.children);
+
+    let currentIndex = 0;
+    const visibleItems = 4;
+
+    function getItemWidth() {
+        const itemStyle = getComputedStyle(items[0]);
+        return items[0].offsetWidth + parseFloat(itemStyle.marginRight);
     }
-    track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
-}
 
-// Вперёд
-nextButton.addEventListener('click', () => {
-    if (currentIndex < items.length - visibleItems) {
-        currentIndex++;
+    function moveCarousel(animated = true) {
+        const itemWidth = getItemWidth();
+
+        track.style.transition = animated ? 'transform 0.5s ease' : 'none';
+        track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+    }
+
+    nextButton?.addEventListener('click', () => {
+        if (currentIndex < items.length - visibleItems) {
+            currentIndex++;
+        } else {
+            currentIndex = 0;
+        }
         moveCarousel();
-    } else {
-        currentIndex = 0;
-        moveCarousel(false);
-    }
+    });
+
+    prevButton?.addEventListener('click', () => {
+        if (currentIndex > 0) {
+            currentIndex--;
+        } else {
+            currentIndex = items.length - visibleItems;
+        }
+        moveCarousel();
+    });
+
 });
 
-prevButton.addEventListener('click', () => {
-    if (currentIndex > 0) {
-        currentIndex--;
-        moveCarousel();
-    } else {
-        currentIndex = items.length - visibleItems;
-        moveCarousel(false);
+document.addEventListener("DOMContentLoaded", () => {
+
+    const container = document.getElementById("products-container");
+    const buttons = document.querySelectorAll(".tab-btn");
+
+    let allProducts = [];
+
+    if (!container) return;
+
+    // загрузка товаров
+    fetch("http://127.0.0.1:8000/products")
+        .then(res => res.json())
+        .then(data => {
+            allProducts = data;
+            renderProducts(allProducts);
+        });
+
+    // клик по кнопкам
+    buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+
+            // активный класс
+            buttons.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+
+            const category = btn.dataset.category;
+
+            if (category === "all") {
+                renderProducts(allProducts);
+            } else {
+                const filtered = allProducts.filter(
+                    p => p.category === category
+                );
+                renderProducts(filtered);
+            }
+        });
+    });
+
+    // функция отрисовки карточек
+    function renderProducts(products) {
+
+        container.innerHTML = "";
+
+        products.forEach(product => {
+
+            const card = document.createElement("div");
+            card.className = "carousel-item";
+
+            card.innerHTML = `
+                <div class="item-top">
+                    <img src="http://127.0.0.1:8000${product.image}" alt="">
+                </div>
+
+                <div class="item-bottom">
+                    <h3>${product.name}</h3>
+                    <p>${product.price} ₸</p>
+                </div>
+            `;
+
+            container.appendChild(card);
+        });
     }
+
 });
+console.log(allProducts);
+console.log(category);
