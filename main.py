@@ -31,9 +31,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+import os
 from fastapi.staticfiles import StaticFiles
 
-app.mount("/images", StaticFiles(directory="."), name="images")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-import os
-print("IMAGES EXISTS:", os.path.exists("images"))
+app.mount(
+    "/static",
+    StaticFiles(directory=os.path.join(BASE_DIR, "static")),
+    name="static"
+)

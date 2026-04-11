@@ -487,7 +487,8 @@
 }
 
 .carousel-item {
-    min-width: 220px;
+    width: 100%;
+    margin: 0;
     margin-right: 20px;
     margin-bottom: 10px;
     background-color: #fff;
@@ -676,7 +677,6 @@
     height: 20px;
 }
 
-/* Кнопка закрытия в сайдбаре (скрыта на ПК) */
 .sidebar-header {
     display: none;
     justify-content: space-between;
@@ -712,26 +712,17 @@
         transform: translateX(-100%);
 
     }
-
-    /* Активное состояние — выезжает */
     .filters-sidebar.active {
         transform: translateX(0);
     }
-
-    /* Скрываем на мобилке обычные фильтры/кнопки ПК */
     .catalog-body {
-        display: block; /* чтобы не ломать сетку */
+        display: block;
     }
-
-    /* Показываем заголовок и кнопку закрытия в меню */
     .sidebar-header {
         display: flex;
     }
-
-    /* 4. Перестраиваем сетку товаров */
     .catalog-container {
         grid-template-columns: 1fr;
-        /* Убираем колонку сайдбара */
         margin-top: 20px;
     }
 
@@ -745,8 +736,6 @@
         margin-right: 0;
     }
 }
-
-/* Для совсем маленьких экранов (телефоны) */
 @media (max-width: 480px) {
     .products-display {
         grid-template-columns: 1fr;

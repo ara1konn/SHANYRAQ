@@ -23,17 +23,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="card-header">Связаться с нами</div>
                 <div class="card-body">
                     <a href="https://wa.me/77026154906" target="_blank" class="contact-link wa">
-                        <img src="../images/whatsapp-icon.svg" alt="WhatsApp">
+                        <img src="../static/images/whatsapp-icon.svg" alt="WhatsApp">
                         <span>WhatsApp</span>
                     </a>
                     <a href="tel:+77026154906" class="contact-link phone">
-                        <img src="../images/tel-icon.svg" alt="telephone">
+                        <img src="../static/images/tel-icon.svg" alt="telephone">
                         <span>+7 (702) 615-49-06</span>
                     </a>
                 </div>
             </div>
             <div class="widget-button" id="mainWidgetBtn">
-                <img src="../images/operator.png" alt="Contact">
+                <img src="../static/images/operator.png" alt="Contact">
             </div>
         </div>
     `;
@@ -345,12 +345,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
             card.innerHTML = `
                 <div class="item-top">
-                    <img src="http://127.0.0.1:8000${product.image}" alt="">
+                    <img src="${product.image}">
                 </div>
+                <button class="favorite-btn">
+                <img src="../static/icons/icon-cards/favorite.svg" class="heart-empty">
+                <img src="../static/icons/icon-cards/fav-full.svg" class="heart-full">
+                </button>
 
                 <div class="item-bottom">
-                    <h3>${product.name}</h3>
-                    <p>${product.price} ₸</p>
+                    <h2>${product.name}</h2>
+
+                    <div class="price-cart">
+                    <span class="price">${product.price} ₸</span>
+
+                    <button class="cart-btn">
+                    <img src="../static/icons/icon-cards/basket.svg">
+                    </button>
                 </div>
             `;
 
