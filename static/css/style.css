@@ -582,22 +582,17 @@ header {
 }
 
 @media (max-width: 768px) {
-
     .header-top,
-    /* Скрываем эти блоки для ПК */
     .nav-menu,
     .user-actions {
         display: none !important;
-        /* !important - принудительно перекрывает другие стили */
     }
 
     .burger,
-    /* Включаем отображение элементов */
     .bottom-nav,
     .mobile-left,
     .mobile-right {
         display: flex !important;
-        /* flex - чтобы удобно выравнивать */
     }
 
     /*Шапка моб меню*/
@@ -792,6 +787,12 @@ header {
 .footer-col p {
     margin: 5px 0;
     color: #000;
+}
+.footer-col a {
+  text-decoration: none;
+  color: #000000;
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
 }
 
 /*Соц сети*/
