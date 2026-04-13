@@ -297,16 +297,13 @@ header {
 }
 
 .nav-item {
-    /* Нужна для того чтобы выпад.меню у каталога появлялся под ним */
     position: relative;
 }
 
 .nav-link {
-    /* Стилизация нав.меню */
     display: flex;
     align-items: center;
     gap: 10px;
-    /* растояние иконки рядом с каталогом */
 
     text-decoration: none;
     color: #000000;
@@ -322,7 +319,6 @@ header {
 }
 
 .nav-link img {
-    /* иконка рядом с каталогом */
     width: 26px;
     height: 26px;
     transition: transform 0.3s ease;
@@ -333,7 +329,6 @@ header {
 }
 
 .nav-link::after {
-    /* Появление палки снизу навигации */
     content: '';
     position: absolute;
     left: 50%;
@@ -419,7 +414,6 @@ header {
 }
 
 .submenu-item>a {
-    /* > - позволяет выделить главную ссылку, не затрагивая остальные */
     border-bottom: 1px solid #604B42;
 
     font-weight: 550;
@@ -493,7 +487,6 @@ header {
 }
 
 .label {
-    /*описание под иконок*/
     font-size: 12px;
     font-family: 'Jost', sans-serif;
     font-weight: 500;
@@ -1018,17 +1011,16 @@ header {
 
 @media (max-width: 1024px) {
     .widget-button {
-        width: 75px;
-        height: 75px;
+        width: 80px;
+        height: 80px;
     }
-
     .widget-container {
-        bottom: 20px;
-        right: 20px;
+        bottom: 25px;
+        right: 25px;
     }
-
     .contact-card {
-        bottom: 75px;
+        bottom: 85px;
+        width: 200px;
     }
 }
 
