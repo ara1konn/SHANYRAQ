@@ -273,6 +273,54 @@
     }
 }
 
+/* Контейнер для подкатегорий */
+#sub-categories {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+    padding: 0 5px;
+}
+
+/* Базовый стиль кнопки-чипса */
+.sub-tab-btn {
+    padding: 8px 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 20px; 
+
+    background-color: #f9f9f9;
+    color: #555;
+
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Jost', sans-serif;
+    letter-spacing: 1px;
+    
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.sub-tab-btn:hover {
+    background-color: #f0f0f0;
+    border-color: #ccc;
+}
+
+.sub-tab-btn.active {
+    background-color: #604B42; 
+    color: white;
+    border-color: #604B42;
+}
+
+@keyframes fadeInSub {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.sub-tab-btn {
+    animation: fadeInSub 0.4s ease forwards;
+}
+
 /* Сортировка на правом краю */
 .sort-bar {
     display: flex;
@@ -370,18 +418,35 @@
 }
 
 .color-circle {
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
-    border: 1px solid #E0E0E0;
+    border: 1px solid #ddd;
     cursor: pointer;
-    transition: transform 0.2s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+.color-circle.active::after {
+    content: '';
+    width: 6px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    position: absolute;
+    top: 6px;
 }
 
-.color-circle:hover {
-    transform: scale(1.2);
+.color-circle.white.active::after {
+    border-color: #333;
 }
-
+.color-circle.active {
+    transform: scale(1.1);
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
 .black {
     background-color: #000;
 }
@@ -512,6 +577,7 @@
     width: 100%;
     height: 200px;
     overflow: hidden;
+    margin-bottom: 10px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 }

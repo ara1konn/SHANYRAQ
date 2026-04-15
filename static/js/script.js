@@ -13,7 +13,7 @@ closeMenu.addEventListener('click', () => {
 });
 
 //Плавающий круглый виджет. Ждем полной загрузки ДОМ и проверяем есть ли виджет, что бы не создать дубликат
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     if (document.querySelector('.widget-container')) return;
 
     // Создание самого виджета
@@ -45,12 +45,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const card = document.getElementById('contactCard');
 
     //При клике на виджет карточка показывается
-    btn.addEventListener('click', function(e) {
+    btn.addEventListener('click', function (e) {
         e.stopPropagation();
         card.style.display = (card.style.display === 'none') ? 'block' : 'none';
     });
     //При клике в место вне виджета карточка закрывается
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
         if (!e.target.closest('.widget-container')) {
             card.style.display = 'none';
         }
@@ -61,11 +61,10 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener("DOMContentLoaded", () => {
     const currentLangEls = document.querySelectorAll("#current-lang, #mobile-current-lang");
     const langDropdowns = document.querySelectorAll(".lang-dropdown, #mobileLangDropdown");
-    const langSelectors = document.querySelectorAll(".language-selector, #mobileLangToggle");
 
     const translations = {
         ru: {
-            catalog: "Каталог",
+            catalog: "КАТАЛОГ",
             promotions: "Акции",
             about: "О нас",
             contacts: "Контакты",
@@ -74,18 +73,20 @@ document.addEventListener("DOMContentLoaded", () => {
             login: "Мой аккаунт",
             moblogin: "Мой аккаунт",
             main: "Главная",
+            livingroom: "Гостиная",
             searchPlaceholder: "Поиск..."
         },
         kz: {
-            catalog: "Каталог",
-            promotions: "Акциялар",
+            catalog: "КАТАЛОГ",
+            promotions: "АКЦИЯЛАР",
             about: "Біз туралы",
-            contacts: "Байланыс",
+            contacts: "БАЙЛАНЫС",
             favorites: "Таңдаулылар",
             mobfavs: "Таңдаулылар",
             login: "Менің аккаунтым",
             moblogin: "Менің аккаунтым",
             main: "Басты бет",
+            livingroom: "Қонақ бөлме",
             searchPlaceholder: "Іздеу..."
         }
     };
@@ -152,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const cityToggles = document.querySelectorAll("#change-city-btn, #mobileCityToggle, .edit-city-btn");
 
     const cities = [
-        "Алматы", "Астана", "Шымкент", "Актобе", 
+        "Алматы", "Астана", "Шымкент", "Актобе",
         "Караганда", "Тараз", "Павлодар", "Усть-Каменогорск",
         "Костанай", "Кызылорда", "Атырау", "Семей",
         "Петропавловск", "Актау", "Экибастуз", "Жезказган"
@@ -166,11 +167,11 @@ document.addEventListener("DOMContentLoaded", () => {
             li.textContent = city;
             li.addEventListener("click", (e) => {
                 e.stopPropagation();
-                
+
                 // Обновляем текст во всех местах сразу
                 currentCityEls.forEach(el => el.textContent = city);
                 localStorage.setItem("city", city);
-                
+
                 // Закрываем все выпадашки
                 cityDropdowns.forEach(d => d.style.display = "none");
             });
@@ -182,7 +183,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cityToggles.forEach(toggle => {
         toggle.addEventListener("click", (e) => {
             e.stopPropagation();
-            
+
             // Находим выпадашку, которая находится в том же блоке, что и нажатая кнопка
             const parent = toggle.closest(".location, .mobile-option");
             const dropdown = parent.querySelector(".city-dropdown, .mobile-dropdown");
@@ -217,11 +218,11 @@ const dots = document.querySelectorAll('.dot');
 const prevBtn = document.querySelector('.prev');
 const nextBtn = document.querySelector('.next');
 
-if (slides.length && dots.length &&  nextBtn && prevBtn) {
-    let index = 0; 
-    
+if (slides.length && dots.length && nextBtn && prevBtn) {
+    let index = 0;
+
     //Функция показа слайда
-    function showSlide(i){
+    function showSlide(i) {
         slides.forEach(slide => slide.classList.remove('active'));
         dots.forEach(dot => dot.classList.remove('active'));
         slides[i].classList.add('active');
@@ -295,79 +296,205 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+
+//Фильтрация, сортировка и ссылка на выпадающее меню
 document.addEventListener("DOMContentLoaded", () => {
-
     const container = document.getElementById("products-container");
-    const buttons = document.querySelectorAll(".tab-btn");
+    const filterForm = document.getElementById("filter-form");
+    const categoryButtons = document.querySelectorAll(".tab-btn");
+    const colorButtons = document.querySelectorAll(".color-circle");
+    const sortSelect = document.getElementById("sort-select");
+    const subContainer = document.getElementById("sub-categories");
 
-    let allProducts = [];
+    let currentCategory = "all";
+    let currentSubCategory = null;
+    window.selectedColor = null;
+
+    const subCategoryData = {
+        "livingroom": [
+            { name: "Диваны", value: "sofa" },
+            { name: "Кресла", value: "armchair" },
+            { name: "Комоды", value: "dresser" },
+            { name: "Стеллажи", value: "rack" },
+            { name: "Журнальные столики", value: "Coffee table" }
+        ],
+        "bedroom": [
+            { name: "Кровати", value: "bed" },
+            { name: "Шкафы", value: "wardrobe" },
+            { name: "Прикроватные тумбы", value: "Bedside table" },
+            { name: "Туалетные столики", value: "Dressing table" }
+        ],
+        "diningroom": [
+            { name: "Обеденные столы", value: "Dining table" },
+            { name: "Стулья", value: "Chair" },
+            { name: "Буфеты", value: "Buffet" },
+            { name: "Барные столы", value: "Bar table" },
+            { name: "Барные стулья", value: "Bar stool" }
+        ],
+        "office": [
+            { name: "Рабочие столы", value: "Work desk" },
+            { name: "Рабочие кресла", value: "Work chair" },
+            { name: "Книжные шкафы", value: "Bookcase" },
+            { name: "Тумбы", value: "Cabinet" }
+        ],
+        "accessories": [
+            { name: "Картины", value: "Painting" },
+            { name: "Зеркала", value: "Mirror" },
+            { name: "Ковры", value: "Carpet" },
+            { name: "Вазы", value: "Vase" },
+            { name: "Лампы", value: "Lamp" }
+        ]
+    };
 
     if (!container) return;
 
-    // загрузка товаров
-    fetch("http://127.0.0.1:8000/products")
-        .then(res => res.json())
-        .then(data => {
-            allProducts = data;
-            renderProducts(allProducts);
-        });
+    // Функция загрузки (собирает ВСЁ: категорию, подкатегорию, цену, цвет, сорт)
+    function loadFilteredProducts() {
+        const formData = new FormData(filterForm);
+        const params = new URLSearchParams();
 
-    // клик по кнопкам
-    buttons.forEach(btn => {
-        btn.addEventListener("click", () => {
+        if (currentCategory !== "all") params.append("category", currentCategory);
 
-            // активный класс
-            buttons.forEach(b => b.classList.remove("active"));
-            btn.classList.add("active");
+        if (currentSubCategory) params.append("sub_category", currentSubCategory);
 
-            const category = btn.dataset.category;
+        if (sortSelect && sortSelect.value) params.append("sort", sortSelect.value);
 
-            if (category === "all") {
-                renderProducts(allProducts);
-            } else {
-                const filtered = allProducts.filter(
-                    p => p.category === category
-                );
-                renderProducts(filtered);
-            }
-        });
-    });
+        const minPrice = formData.get("min_price");
+        const maxPrice = formData.get("max_price");
+        if (minPrice) params.append("min_price", minPrice);
+        if (maxPrice) params.append("max_price", maxPrice);
 
-    // функция отрисовки карточек
+        const types = formData.getAll("type");
+        types.forEach(t => params.append("type", t));
+
+        if (window.selectedColor) params.append("color", window.selectedColor);
+
+        console.log("Запрос:", params.toString());
+
+        fetch(`http://127.0.0.1:8000/products?${params.toString()}`)
+            .then(res => res.json())
+            .then(data => renderProducts(data))
+            .catch(err => console.error("Ошибка:", err));
+    }
+
+    // 4. Функция отрисовки кнопок подкатегорий
+    function renderSubCategories(category) {
+        if (!subContainer) return;
+        subContainer.innerHTML = "";
+        currentSubCategory = null;
+
+        if (subCategoryData[category]) {
+            subCategoryData[category].forEach(sub => {
+                const btn = document.createElement("button");
+                btn.className = "sub-tab-btn";
+                btn.textContent = sub.name;
+
+                btn.dataset.subCategory = sub.value;
+
+                btn.addEventListener("click", () => {
+                    document.querySelectorAll(".sub-tab-btn").forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+
+                    currentSubCategory = sub.value;
+                    loadFilteredProducts();
+                });
+                subContainer.appendChild(btn);
+            });
+        }
+    }
+
+    // 5. Отрисовка карточек
     function renderProducts(products) {
-
         container.innerHTML = "";
+        if (products.length === 0) {
+            container.innerHTML = `<div class="empty-state" style="grid-column: 1/-1; text-align:center; padding: 40px; font-family: 'Jost", sans-serif;>
+            <p>Товары не найдены</p></div>`;
+            return;
+        }
 
         products.forEach(product => {
-
             const card = document.createElement("div");
             card.className = "carousel-item";
-
             card.innerHTML = `
-                <div class="item-top">
-                    <img src="${product.image}">
-                </div>
+                <div class="item-top"><img src="${product.image}" alt="${product.name}"></div>
                 <button class="favorite-btn">
-                <img src="../static/icons/icon-cards/favorite.svg" class="heart-empty">
-                <img src="../static/icons/icon-cards/fav-full.svg" class="heart-full">
+                    <img src="../static/icons/icon-cards/favorite.svg" class="heart-empty">
+                    <img src="../static/icons/icon-cards/fav-full.svg" class="heart-full">
                 </button>
-
                 <div class="item-bottom">
-                    <h2>${product.name}</h2>
-
+                    <h2 class="product-title">${product.name}</h2> 
                     <div class="price-cart">
-                    <span class="price">${product.price} ₸</span>
-
-                    <button class="cart-btn">
-                    <img src="../static/icons/icon-cards/basket.svg">
-                    </button>
-                </div>
-            `;
-
+                        <span class="price">${Number(product.price).toLocaleString()} ₸</span>
+                        <button class="cart-btn"><img src="../static/icons/icon-cards/basket.svg"></button>
+                    </div>
+                </div>`;
             container.appendChild(card);
         });
     }
 
+    if (sortSelect) sortSelect.addEventListener("change", loadFilteredProducts);
+
+    categoryButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            categoryButtons.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            currentCategory = btn.dataset.category;
+
+            renderSubCategories(currentCategory);
+            loadFilteredProducts();
+        });
+    });
+
+    colorButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            if (btn.classList.contains("active")) {
+                btn.classList.remove("active");
+                window.selectedColor = null;
+            } else {
+                colorButtons.forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                window.selectedColor = btn.dataset.color;
+            }
+            loadFilteredProducts();
+        });
+    });
+
+    filterForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        loadFilteredProducts();
+    });
+
+    loadFilteredProducts();
+    // Функция для автоматического применения фильтров из URL
+    function checkUrlParameters() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const categoryFromUrl = urlParams.get('category');
+        const subFromUrl = urlParams.get('sub');
+
+        if (categoryFromUrl) {
+            const mainBtn = document.querySelector(`.tab-btn[data-category="${categoryFromUrl}"]`);
+            if (mainBtn) {
+                // Убираем активный класс у всех и ставим этой
+                categoryButtons.forEach(b => b.classList.remove("active"));
+                mainBtn.classList.add("active");
+                currentCategory = categoryFromUrl;
+
+                renderSubCategories(currentCategory);
+            }
+        }
+
+        if (subFromUrl) {
+            setTimeout(() => {
+                const subBtn = document.querySelector(`.sub-tab-btn[data-sub-category="${subFromUrl}"]`);
+                if (subBtn) {
+                    subBtn.classList.add("active");
+                    currentSubCategory = subFromUrl;
+                    loadFilteredProducts();
+                }
+            }, 300);
+        } else {
+            loadFilteredProducts();
+        }
+    }
+    checkUrlParameters();
 });
-console.log(allProducts);
-console.log(category);

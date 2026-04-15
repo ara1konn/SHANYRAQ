@@ -8,6 +8,9 @@ class ProductBase(BaseModel):
     image_url: str
     description: Optional[str]
     category: str
+    color: str
+    type: str
+    sub_category: str
 
     class Config:
         from_attributes = True

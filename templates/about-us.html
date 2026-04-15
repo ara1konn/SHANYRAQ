@@ -10,33 +10,35 @@
 </head>
 
 <body>
+    <!-- Шапка сайта -->
     <header class="header">
         <!-- Верхняя информационная панель -->
         <div class="header-top">
             <div class="container header-top-content">
                 <!-- Контактные данные на верхней панели шапки сайта -->
                 <div class="phone">
-                    <img src="../static/icons/phone.svg" alt="телефон">
+                    <img src="../static/icons/phone.svg" alt="иконка телефон">
                     <span>+ 7(702) 615-49-06</span>
                 </div>
                 <!-- Поиск на шапке сайта -->
                 <div class="search-wrapper">
                     <input type="text" class="search-input" placeholder="Поиск...">
-                    <img src="../static/icons/poisk.svg" class="search-icon" alt="поиск">
+                    <img src="../static/icons/poisk.svg" class="search-icon" alt="иконка поиска">
                 </div>
                 <!-- Правая вверхняя шапка сайта -->
                 <div class="top-right">
+                    <!-- Выбор языка: есть выпадающий список для смены -->
                     <div class="language-selector">
-                        <img src="../static/icons/language.svg" alt="иконка языка" class="lang-icon">
-                        <span id="current-lang">RU</span>
-                        <img src="../static/icons/arrow.svg" alt="иконка стрелки" class="arrow-icon">
+                        <img src="../static/icons/language.svg" alt="" class="lang-icon">
+                        <span id="current-lang">RUS</span>
+                        <img src="../static/icons/arrow.svg" alt="arrow" class="arrow-icon">
                         <ul class="lang-dropdown">
-                            <li data-lang="kz">KZ</li>
+                            <li data-lang="kz">KAZ</li>
                         </ul>
                     </div>
-
+                    <!-- Определение города пользователя: выпадающий список с кнопкой для смены -->
                     <div class="location">
-                        <img src="../static/icons/location.svg" alt="иконка локации">
+                        <img src="../static/icons/location.svg" alt="">
                         <span id="current-city">Алматы</span>
                         <button id="change-city-btn" title="Изменить город">✎</button>
                         <ul class="city-dropdown" id="cityDropdown"></ul>
@@ -52,6 +54,7 @@
                     <div class="burger" id="burger">
                         <img src="../static/icons/mob-icons/burger.svg" alt="меню">
                     </div>
+                    <!-- Моб.версия поиска в шапки -->
                     <div class="mobile-search">
                         <img src="../static/icons/poisk.svg" alt="поиск" id="search-trigger">
                     </div>
@@ -62,13 +65,13 @@
                         </div>
                     </div>
                 </div>
-                <!-- логотип -->
+                <!-- Лого бренда -->
                 <div class="logo">
                     <a href="index.html">
                         <img src="../static/images/Лого и бренд.svg" alt="SHANYRAQ">
                     </a>
                 </div>
-
+                <!-- Правая сторона моб.шапки: иконка телефона и адреса -->
                 <div class="mobile-right">
                     <img src="../static/icons/phone.svg" alt="связь">
                     <img src="../static/icons/location.svg" alt="адрес">
@@ -77,83 +80,159 @@
                 <!-- Меню -->
                 <ul class="nav-menu">
                     <li class="nav-item dropdown">
-                        <a href="catalog.html" class="nav-link">
+                        <a href="#" class="nav-link">
                             <img src="../static/images/орнамент.png" alt="иконка орнамента">
                             <span>КАТАЛОГ</span>
                         </a>
                         <!-- Выпадающее меню с категориями комнат -->
                         <ul class="dropdown-menu">
                             <li class="submenu-item">
-                                <a href="#"><img src="../static/icons/icons header/гостиная.svg">Гостиная</a>
+                                <a href="catalog.html?category=livingroom">
+                                    <img src="../static/icons/icons header/гостиная.svg">Гостиная
+                                </a>
                                 <!-- Подменю выпадающего меню с товарами для комнат -->
                                 <ul class="submenu">
-                                    <li><a href="#"><img src="../static/icons/icons header/диваны.svg"
-                                                alt="иконка дивана">Диваны</a></li>
-                                    <li><a href="#"><img src="../static/icons/icons header/кресло.svg"
-                                                alt="иконка кресла">Кресла</a></li>
-                                    <li><a href="#"><img src="../static/icons/icons header/комоды.svg"
-                                                alt="иконка комода">Комоды</a></li>
-                                    <li><a href="#"><img src="../static/icons/icons header/стеллаж.svg"
-                                                alt="иконка стеллажа">Стеллажи</a></li>
-                                    <li><a href="#"><img src="../static/icons/icons header/ж-стол.svg"
-                                                alt="иконка столика">Журнальные столики</a></li>
-                                </ul>
-                            </li>
-                            <li class="submenu-item">
-                                <a href="#"><img src="../static/icons/icons header/спальня.svg">Спальня</a>
-                                <ul class="submenu">
-                                    <li><a href="#"><img src="../static/icons/icons header/кровать.svg"
-                                                alt="иконка кровати">Кровати</a></li>
-                                    <li><a href="#"><img src="../static/icons/icons header/Шкаф.svg"
-                                                alt="иконка шкафа">Шкафы</a></li>
-                                    <li><a href="#"><img src="../static/icons/icons header/тумба.svg"
-                                                alt="иконка тумбы">Прикроватные тумбы</a></li>
-                                    <li><a href="#"><img src="../static/icons/icons header/т-столик.svg"
-                                                alt="иконка туалетного столика">Туалетные столики</a></li>
-                                </ul>
-                            </li>
-                            <li class="submenu-item">
-                                <a href="#"><img src="../static/icons/icons header/столовая.svg">Столовая</a>
-                                <ul class="submenu">
-                                    <li><a href="#"><img src="../static/icons/icons header/о-столы.svg"
-                                                alt="иконка стола">Обеденные столы</a></li>
-                                    <li><a href="#"><img src="../static/icons/icons header/стул.svg"
-                                                alt="иконка стула">Стулья</a></li>
-                                    <li><a href="#"><img src="../static/icons/icons header/буфет.svg"
-                                                alt="иконка буфета">Буфеты</a></li>
-                                    <li><a href="#"><img src="../static/icons/icons header/б-стойка.svg"
-                                                alt="иконка барного стола">Барные столы</a></li>
-                                    <li><a href="#"><img src="../static/icons/icons header/б-стулья.svg"
-                                                alt="иконка барного стула">Барные стулья</a></li>
-                                </ul>
-                            </li>
-                            <li class="submenu-item">
-                                <a href="#"><img src="../static/icons/icons header/кабинет.svg">Кабинет</a>
-                                <ul class="submenu">
-                                    <li><a href="#"><img src="../static/icons/icons header/р-стол.svg"
-                                                alt="иконка рабочего стола">Рабочие столы</a></li>
-                                    <li><a href="#"><img src="../static/icons/icons header/р-кресла.svg"
-                                                alt="иконка рабочего кресла">Рабочее кресла</a></li>
-                                    <li><a href="#"><img src="../static/icons/icons header/к-шкафы.svg"
-                                                alt="иконка книжнего шкафа">Книжные шкафы</a></li>
-                                    <li><a href="#"><img src="../static/icons/icons header/тумба2.svg"
-                                                alt="иконка тумбы">Тумбы</a></li>
-                                </ul>
-                            </li>
-                            <li class="submenu-item">
-                                <a href="#"><img src="../static/icons/icons header/аксесс.svg">Аксессуары</a>
-                                <ul class="submenu">
-                                    <li><a href="#"><img src="../static/icons/icons header/картина.svg"
-                                                alt="иконка картины">Картины</a></li>
-                                    <li><a href="#"><img src="../static/icons/icons header/зеркало.svg"
-                                                alt="иконка зеркала">Зеркала</a></li>
-                                    <li><a href="#"><img src="../static/icons/icons header/ковры.svg"
-                                                alt="иконка ковра">Ковры</a></li>
-                                    <li><a href="#"><img src="../static/icons/icons header/ваза.svg"
-                                                alt="иконка вазы">Вазы</a>
+                                    <li>
+                                        <a href="catalog.html?category=livingroom&sub=sofa" class="catalog-link">
+                                            <img src="../static/icons/icons header/диваны.svg"
+                                                alt="иконка дивана">Диваны
+                                        </a>
                                     </li>
-                                    <li><a href="#"><img src="../static/icons/icons header/лампы.svg"
-                                                alt="иконка лампы">Лампы</a></li>
+                                    <li>
+                                        <a href="catalog.html?category=livingroom&sub=armchair" class="catalog-link">
+                                            <img src="../static/icons/icons header/кресло.svg"
+                                                alt="иконка кресла">Кресла
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="catalog.html?category=livingroom&sub=dresser" class="catalog-link">
+                                            <img src="../static/icons/icons header/комоды.svg"
+                                                alt="иконка комода">Комоды
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="catalog.html?category=livingroom&sub=rack" class="catalog-link">
+                                            <img src="../static/icons/icons header/стеллаж.svg"
+                                                alt="иконка стеллажа">Стеллажи
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="catalog.html?category=livingroom&sub=Coffee table"
+                                            class="catalog-link">
+                                            <img src="../static/icons/icons header/ж-стол.svg"
+                                                alt="иконка журнального столика">Журнальные столики
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="catalog.html?category=bedroom">
+                                    <img src="../static/icons/icons header/спальня.svg">Спальня
+                                </a>
+                                <ul class="submenu">
+                                    <li><a href="catalog.html?category=bedroom&sub=bed" class="catalog-link">
+                                            <img src="../static/icons/icons header/кровать.svg"
+                                                alt="иконка Кровати">Кровати
+                                        </a>
+                                    </li>
+                                    <li><a href="catalog.html?category=bedroom&sub=wardrobe" class="catalog-link">
+                                            <img src="../static/icons/icons header/Шкаф.svg" alt="иконка шкафа">Шкафы
+                                        </a>
+                                    </li>
+                                    <li><a href="catalog.html?category=bedroom&sub=Bedside table" class="catalog-link">
+                                            <img src="../static/icons/icons header/тумба.svg"
+                                                alt="иконка тумбы">Прикроватные тумбы
+                                        </a>
+                                    </li>
+                                    <li><a href="catalog.html?category=bedroom&sub=Dressing table" class="catalog-link">
+                                            <img src="../static/icons/icons header/т-столик.svg"
+                                                alt="иконка туалетного столика">Туалетные столики
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="catalog.html?category=diningroom">
+                                    <img src="../static/icons/icons header/столовая.svg">Столовая
+                                </a>
+                                <ul class="submenu">
+                                    <li><a href="catalog.html?category=diningroom&sub=Dining table"
+                                            class="catalog-link">
+                                            <img src="../static/icons/icons header/о-столы.svg"
+                                                alt="иконка обеденные столы">Обеденные столы
+                                        </a>
+                                    </li>
+                                    <li><a href="catalog.html?category=diningroom&sub=Chair" class="catalog-link">
+                                            <img src="../static/icons/icons header/стул.svg" alt="иконка стула">Стулья
+                                        </a>
+                                    </li>
+                                    <li><a href="catalog.html?category=diningroom&sub=Buffet" class="catalog-link">
+                                            <img src="../static/icons/icons header/буфет.svg" alt="иконка буфета">Буфеты
+                                        </a>
+                                    </li>
+                                    <li><a href="catalog.html?category=diningroom&sub=Bar table" class="catalog-link">
+                                            <img src="../static/icons/icons header/б-стойка.svg"
+                                                alt="иконка барного столика">Барные столы
+                                        </a>
+                                    </li>
+                                    <li><a href="catalog.html?category=diningroom&sub=Bar stool" class="catalog-link">
+                                            <img src="../static/icons/icons header/б-стулья.svg"
+                                                alt="иконка барного стула">Барные стулья
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="catalog.html?category=office">
+                                    <img src="../static/icons/icons header/кабинет.svg">Кабинет</a>
+                                <ul class="submenu">
+                                    <li><a href="catalog.html?category=office&sub=Work desk" class="catalog-link">
+                                            <img src="../static/icons/icons header/р-стол.svg"
+                                                alt="иконка рабочего стола">Рабочие столы
+                                        </a>
+                                    </li>
+                                    <li><a href="catalog.html?category=office&sub=Work chair" class="catalog-link">
+                                            <img src="../static/icons/icons header/р-кресла.svg"
+                                                alt="иконка рабочего кресла">Рабочее кресла
+                                        </a>
+                                    </li>
+                                    <li><a href="catalog.html?category=office&sub=Bookcase" class="catalog-link">
+                                            <img src="../static/icons/icons header/к-шкафы.svg"
+                                                alt="иконка книжнего шкафа">Книжные шкафы
+                                        </a>
+                                    </li>
+                                    <li><a href="catalog.html?category=office&sub=Cabinet" class="catalog-link">
+                                            <img src="../static/icons/icons header/тумба2.svg" alt="иконка тумбы">Тумбы
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="catalog.html?category=accessories">
+                                    <img src="../static/icons/icons header/аксесс.svg">Аксессуары</a>
+                                <ul class="submenu">
+                                    <li><a href="catalog.html?category=accessories&sub=Painting" class="catalog-link">
+                                            <img src="../static/icons/icons header/картина.svg"
+                                                alt="иконка картины">Картины
+                                        </a>
+                                    </li>
+                                    <li><a href="catalog.html?category=accessories&sub=Mirror" class="catalog-link">
+                                            <img src="../static/icons/icons header/зеркало.svg"
+                                                alt="иконка зеркала">Зеркала
+                                        </a>
+                                    </li>
+                                    <li><a href="catalog.html?category=accessories&sub=Carpet" class="catalog-link">
+                                            <img src="../static/icons/icons header/ковры.svg" alt="иконка ковра">Ковры
+                                        </a>
+                                    </li>
+                                    <li><a href="catalog.html?category=accessories&sub=Vase" class="catalog-link">
+                                            <img src="../static/icons/icons header/ваза.svg" alt="иконка вазы">Вазы
+                                        </a>
+                                    </li>
+                                    <li><a href="catalog.html?category=accessories&sub=Lamp" class="catalog-link">
+                                            <img src="../static/icons/icons header/лампы.svg" alt="иконка лампы">Лампы
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
@@ -420,11 +499,11 @@
                 <div class="footer-col">
                     <h4>Каталог</h4>
                     <ul>
-                        <li><a href="#">Гостиная</a></li>
-                        <li><a href="#">Спальня</a></li>
-                        <li><a href="#">Столовая</a></li>
-                        <li><a href="#">Кабинет</a></li>
-                        <li><a href="#">Аксессуары</a></li>
+                        <li><a href="catalog.html?category=livingroom">Гостиная</a></li>
+                        <li><a href="catalog.html?category=bedroom">Спальня</a></li>
+                        <li><a href="catalog.html?category=diningroom">Столовая</a></li>
+                        <li><a href="catalog.html?category=office">Кабинет</a></li>
+                        <li><a href="catalog.html?category=accessories">Аксессуары</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -432,20 +511,19 @@
                     <ul>
                         <li><a href="about-us.html">О нас</a></li>
                         <li><a href="#">Акции</a></li>
-                        <li><a href="#">Контакты</a></li>
+                        <li><a href="contact.html">Контакты</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Контакты</h4>
                     <p>г. Алматы <br> Алмалинский р-н, Сейфуллина 521</p>
                     <p>Тел: +7 (702) 615-49-06</p>
-                    <p>Email: shanyraq.kz@gmail.com</p>
+                    <p><a href="mailto:shanyraq.kz@mail.ru">email: shanyraq.kz@mail.ru</a></p>
                 </div>
                 <div class="footer-col">
                     <h4>Мы в соцсетях</h4>
                     <div class="socials">
-                        <a href="https://www.instagram.com/ara1konnn?igsh=azMzZnNjbDBnamtz" target="_blank"
-                            class="social-link instagram">
+                        <a href="https://instagram.com" target="_blank" class="social-link instagram">
                             <img src="../static/icons/icon-footer/inst.svg" alt="инстаграм">
                         </a>
                         <a href="https://wa.me/77026154906" target="_blank" class="social-link whatsapp">
@@ -461,7 +539,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Подвал: нижняя часть -->
         <div class="footer-bottom">
             <p>©2026- «SHANYRAQ». Все права защищены.</p>

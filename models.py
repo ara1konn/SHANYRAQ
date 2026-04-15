@@ -10,3 +10,6 @@ class Product(Base):
     image_url = Column(Text)
     description = Column(Text)
     category = Column(String)
+    color = Column(String)
+    type = Column(String)
+    sub_category = Column(String)
