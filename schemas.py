@@ -11,6 +11,9 @@ class ProductBase(BaseModel):
     color: str
     type: str
     sub_category: str
+    old_price: Optional[int]
+    discount_percent: Optional[int]
+    is_promo: bool = False
 
     class Config:
         from_attributes = True

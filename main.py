@@ -35,9 +35,14 @@ def get_products(
     type: Optional[List[str]] = Query(None), 
     color: Optional[str] = None,
     sort: Optional[str] = None,
+    is_promo: Optional[bool] = None,
     db: Session = Depends(get_db)
 ):
     query = db.query(Product)
+
+    # Фильтрация по акции
+    if is_promo is not None:
+        query = query.filter(Product.is_promo == is_promo)
     
     if min_price:
         query = query.filter(Product.price >= min_price)
@@ -54,6 +59,7 @@ def get_products(
     if sub_category:
         query = query.filter(Product.sub_category == sub_category)
     
+    # Сортировка
     if sort == "price-low":
         query = query.order_by(asc(Product.price))
     elif sort == "price-high":

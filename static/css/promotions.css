@@ -1,0 +1,479 @@
+/* Баннер с хлебными крошками */
+.promo-banner {
+    position: relative;
+    width: 100%;
+    height: 260px;
+    overflow: hidden;
+    background: url('../images/promo-banner.jpg') no-repeat center center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner-overlay {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    text-align: center;
+    color: #ffffff;
+    z-index: 2;
+}
+
+.banner-title {
+    font-family: 'Jost', sans-serif;
+    font-size: 52px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin: 0 0 10px 0;
+}
+
+.banner-subtitle-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.banner-subtitle {
+    font-size: 20px;
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+    margin: 0;
+}
+
+.ornament {
+    width: 30px;
+    height: auto;
+}
+
+@media (max-width: 1024px) {
+    .banner-title {
+        font-size: 44px;
+        letter-spacing: 1.5px;
+    }
+    
+    .banner-subtitle {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    .promo-banner {
+        height: 220px;
+    }
+
+    .banner-title {
+        font-size: 36px;
+        letter-spacing: 1px;
+    }
+
+    .banner-subtitle-row {
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    .banner-subtitle {
+        font-size: 16px;
+    }
+
+    .ornament {
+        width: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .promo-banner {
+        height: 200px;
+    }
+
+    .banner-title {
+        font-size: 28px;
+        margin-bottom: 8px;
+    }
+
+    .banner-subtitle-row {
+        flex-direction: row;
+        gap: 8px;
+    }
+
+    .banner-subtitle {
+        font-size: 14px;
+        line-height: 1.2;
+    }
+
+    .ornament {
+        width: 18px;
+    }
+}
+/* Хлебные крошки */
+.bread-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+.breadcrumbs {
+    margin-bottom: 10px;
+}
+
+.breadcrumbs__list {
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.breadcrumbs__item {
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    line-height: 1;
+}
+
+.breadcrumbs__link {
+    color: #fff;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.breadcrumbs__link:hover {
+    color: blanchedalmond;
+}
+
+.breadcrumbs__arrow {
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+}
+
+.breadcrumbs__current {
+    color: #ffffff;
+    font-weight: 400;
+}
+
+@media (max-width: 1024px) {
+    .bread-container {
+        padding: 0 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .breadcrumbs {
+        padding: 5px 0;
+        margin-bottom: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .breadcrumbs__item {
+        font-size: 10px;
+    }
+
+    .breadcrumbs__arrow {
+        width: 10px;
+        height: 10px;
+        margin: 0 4px;
+    }
+}
+
+/* Карточки выгодные предложения */
+.offers {
+    padding: 40px 0;
+}
+
+.offers-title {
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: #000;
+}
+
+.offers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.offer-card {
+    position: relative;
+    height: 450px;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #f4f4f4;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.3s ease;
+}
+
+.card-1 { background-image: url('../static/images/promo1.jpg'); }
+.card-2 { background-image: url('../static/images/promo2.jpg'); }
+.card-3 { background-image: url('../static/images/promo3.jpg'); }
+
+.offer-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 20px;
+    transition: background 0.3s ease;
+}
+
+.offer-card:hover .offer-overlay {
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.offer-card:hover {
+    transform: translateY(-8px);
+}
+
+.offer-text {
+    color: #ffffff;
+    font-family: 'Jost', sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.offer-btn {
+    background-color: #634d44;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 35px;
+    font-family: 'Jost', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.offer-btn:hover {
+    background-color: #604B42;
+    transform: scale(1.05);
+}
+
+
+@media (max-width: 1024px) {
+    .offers-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .offers-grid { grid-template-columns: 1fr; }
+    .offer-card { height: 380px; }
+}
+
+.sales-title {
+    font-family: 'Jost', sans-serif;
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: #000;
+    margin: 20px 0;
+}
+
+.catalog-container {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 40px;
+    max-width: 1300px;
+    margin: 40px auto;
+    padding: 0 20px;
+    align-items: flex-start;
+}
+
+.products-display, 
+#promo-products-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 15px;
+}
+
+#promo-products-container {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.carousel-item {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    font-family: 'Jost', sans-serif;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.carousel-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.item-top {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    margin-bottom: 2px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.item-top img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.discount-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 10;
+    
+    background-color: #E31E24;
+    color: #ffffff;
+    
+    width: 55px; 
+    height: 55px;
+    border-radius: 50%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Jost', sans-serif;
+    
+    box-shadow: 0 2px 8px rgba(227, 30, 36, 0.4);
+}
+
+.status-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 3;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.status-badge.available {
+    background-color: #604B42;
+    color: #ffffff;
+}
+
+.favorite-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    z-index: 10;
+}
+
+.favorite-btn:hover { transform: scale(1.1); }
+.favorite-btn img { position: absolute; width: 20px; height: 20px; transition: 0.3s; }
+.heart-full { opacity: 0; }
+.favorite-btn:hover .heart-full { opacity: 1; }
+.favorite-btn:hover .heart-empty { opacity: 0; }
+
+.item-bottom {
+    padding: 5px 15px 15px 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 5px;
+}
+
+.item-bottom h2 {
+    width: 100%;
+    text-align: left;
+    font-size: 18px;
+    font-family: 'Jost';
+    font-weight: 500;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #2D2D2D;
+}
+
+.price-cart {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.price-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.price {
+    font-weight: bold;
+    font-family: 'Jost';
+    font-size: 18px;
+    color: #2D2D2D;
+}
+
+.price.current-promo {
+    color: #E31E24;
+}
+
+.old-price {
+    font-size: 13px;
+    text-decoration: line-through;
+    color: #999;
+    font-family: 'Jost';
+}
+
+.cart-btn {
+    background: #F0F2F3;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 6px 10px;
+    transition: 0.3s;
+}
+
+.cart-btn img { width: 18px; height: 18px; }
+.cart-btn:hover { background: #604B42; }
+.cart-btn:hover img { filter: brightness(0) invert(1); }
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+    #promo-products-container { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+    #promo-products-container { grid-template-columns: 1fr; }
+}

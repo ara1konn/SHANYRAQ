@@ -2,7 +2,7 @@
 .about-banner {
     position: relative;
     width: 100%;
-    height: 400px;
+    height: 350px;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -86,12 +86,11 @@
 .breadcrumbs__link {
     color: #fff;
     text-decoration: none;
-    opacity: 0.8;
     transition: opacity 0.3s ease;
 }
 
 .breadcrumbs__link:hover {
-    opacity: 1;
+    color: blanchedalmond;
 }
 
 .breadcrumbs__arrow {
@@ -99,14 +98,12 @@
     display: flex;
     align-items: center;
     font-size: 12px;
-    opacity: 0.5;
 }
 
 .breadcrumbs__current {
-    color: #d4d4d4;
+    color: #ffffff;
     font-weight: 400;
 }
-
 
 @media (max-width: 1024px) {
     .bread-container {
@@ -130,20 +127,6 @@
         width: 10px;
         height: 10px;
         margin: 0 4px;
-    }
-}
-
-@media (max-width: 768px) {
-    .about-banner {
-        height: 250px;
-    }
-
-    .banner-title {
-        font-size: 28px;
-    }
-
-    .banner-subtitle {
-        font-size: 16px;
     }
 }
 

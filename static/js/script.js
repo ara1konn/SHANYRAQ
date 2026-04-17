@@ -316,24 +316,24 @@ document.addEventListener("DOMContentLoaded", () => {
             { name: "Кресла", value: "armchair" },
             { name: "Комоды", value: "dresser" },
             { name: "Стеллажи", value: "rack" },
-            { name: "Журнальные столики", value: "Coffee table" }
+            { name: "Журнальные столики", value: "Coffeetable" }
         ],
         "bedroom": [
             { name: "Кровати", value: "bed" },
             { name: "Шкафы", value: "wardrobe" },
-            { name: "Прикроватные тумбы", value: "Bedside table" },
-            { name: "Туалетные столики", value: "Dressing table" }
+            { name: "Прикроватные тумбы", value: "Bedsidetable" },
+            { name: "Туалетные столики", value: "Dressingtable" }
         ],
         "diningroom": [
-            { name: "Обеденные столы", value: "Dining table" },
+            { name: "Обеденные столы", value: "Diningtable" },
             { name: "Стулья", value: "Chair" },
             { name: "Буфеты", value: "Buffet" },
-            { name: "Барные столы", value: "Bar table" },
-            { name: "Барные стулья", value: "Bar stool" }
+            { name: "Барные столы", value: "Bartable" },
+            { name: "Барные стулья", value: "Barstool" }
         ],
         "office": [
-            { name: "Рабочие столы", value: "Work desk" },
-            { name: "Рабочие кресла", value: "Work chair" },
+            { name: "Рабочие столы", value: "Workdesk" },
+            { name: "Рабочие кресла", value: "Workchair" },
             { name: "Книжные шкафы", value: "Bookcase" },
             { name: "Тумбы", value: "Cabinet" }
         ],
@@ -377,7 +377,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .catch(err => console.error("Ошибка:", err));
     }
 
-    // 4. Функция отрисовки кнопок подкатегорий
+    //  Функция отрисовки кнопок подкатегорий
     function renderSubCategories(category) {
         if (!subContainer) return;
         subContainer.innerHTML = "";
@@ -403,7 +403,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // 5. Отрисовка карточек
+    // Отрисовка карточек
     function renderProducts(products) {
         container.innerHTML = "";
         if (products.length === 0) {

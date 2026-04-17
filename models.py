@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text
+from sqlalchemy import Column, Integer, String, Text, Boolean
 from database import Base
 
 class Product(Base):
@@ -13,3 +13,6 @@ class Product(Base):
     color = Column(String)
     type = Column(String)
     sub_category = Column(String)
+    old_price = Column(Integer, nullable=True)
+    discount_percent = Column(Integer, nullable=True)
+    is_promo = Column(Boolean, default=False)

@@ -546,11 +546,6 @@
     gap: 15px;
 }
 
-.carousel-track {
-    display: flex;
-    transition: transform 0.3s ease-in-out;
-}
-
 .carousel-item {
     width: 100%;
     margin: 0;
