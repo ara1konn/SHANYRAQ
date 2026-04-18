@@ -41,8 +41,10 @@ def get_products(
     query = db.query(Product)
 
     # Фильтрация по акции
-    if is_promo is not None:
-        query = query.filter(Product.is_promo == is_promo)
+    if is_promo:
+        query = query.filter(Product.is_promo == True)
+    else:
+        query = query.filter(Product.is_promo == False)
     
     if min_price:
         query = query.filter(Product.price >= min_price)

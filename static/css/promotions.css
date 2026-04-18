@@ -382,28 +382,107 @@
     color: #ffffff;
 }
 
+.carousel-item {
+    width: 100%;
+    margin: 0;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    flex-direction: column;
+    font-family: 'Jost';
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.carousel-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.item-top {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.item-top img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.status-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 3;
+    padding: 4px 12px;
+    border-radius: 4px;
+    
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-family: 'Jost', sans-serif;
+}
+
+.status-badge.available {
+    background-color: #604B42;
+    color: #ffffff;
+}
+
+/*Кнопка "Избранное"*/
 .favorite-btn {
     position: absolute;
     top: 10px;
     right: 10px;
+
     width: 40px;
     height: 40px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     background: #FFFFFF;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+
+    overflow: visible;
     transition: 0.3s;
-    z-index: 10;
 }
 
-.favorite-btn:hover { transform: scale(1.1); }
-.favorite-btn img { position: absolute; width: 20px; height: 20px; transition: 0.3s; }
-.heart-full { opacity: 0; }
-.favorite-btn:hover .heart-full { opacity: 1; }
-.favorite-btn:hover .heart-empty { opacity: 0; }
+.favorite-btn:hover {
+    transform: scale(1.1);
+}
+
+.favorite-btn img {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    transition: 0.3s;
+}
+
+.heart-full {
+    opacity: 0;
+}
+
+.favorite-btn:hover .heart-full {
+    opacity: 1;
+}
+
+.favorite-btn:hover .heart-empty {
+    opacity: 0;
+}
 
 .item-bottom {
     padding: 5px 15px 15px 15px;
@@ -447,7 +526,7 @@
 }
 
 .price.current-promo {
-    color: #E31E24;
+    color: #E31E24 !important;
 }
 
 .old-price {
@@ -470,10 +549,115 @@
 .cart-btn:hover { background: #604B42; }
 .cart-btn:hover img { filter: brightness(0) invert(1); }
 
-/* Адаптивность */
 @media (max-width: 1024px) {
     #promo-products-container { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 480px) {
     #promo-products-container { grid-template-columns: 1fr; }
+}
+
+/* Секция с подарками заказов */
+.gift-section {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.gift-title {
+    text-align: center;
+    font-family: 'Jost', sans-serif;
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-bottom: 40px;
+}
+
+.bundle-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.bundle {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.bundle-plus {
+    font-family: 'Jost', sans-serif;
+    font-size: 40px;
+    font-weight: 300;
+    color: #ff0000;
+    margin-bottom: 80px;
+}
+
+.bundle .carousel-item {
+    width: 260px;
+    margin: 0;
+}
+
+.gift-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    background-color: #74c77b;
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.favorite-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.favorite-btn img {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    transition: opacity 0.3s ease;
+}
+
+.heart-full {
+    opacity: 0;
+}
+
+.favorite-btn:hover .heart-full {
+    opacity: 1;
+}
+
+.favorite-btn:hover .heart-empty {
+    opacity: 0;
+}
+
+.current-promo {
+    color: var(--promo-red) !important;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 14px;
+    margin-right: 8px;
 }

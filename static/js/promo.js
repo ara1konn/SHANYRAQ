@@ -8,15 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Загрузка только акционных товаров
     fetch("http://127.0.0.1:8000/products?is_promo=true")
-        .then(res => {
-            if (!res.ok) throw new Error("Ошибка API: " + res.status);
-            return res.json();
-        })
-        .then(data => {
-            console.log("Данные для акций загружены:", data);
-            renderHomeCards(data, promoContainer);
-        })
-        .catch(err => console.error("Ошибка при загрузке акций:", err));
+        .then(res => res.json())
+        .then(data => renderHomeCards(data, promoContainer));
 });
 
 function renderHomeCards(products, target) {
@@ -55,7 +48,7 @@ function renderHomeCards(products, target) {
         card.innerHTML = `
             <div class="item-top">
                 ${badgeHTML}
-                <img src="${product.image || product.image_url || '../static/images/placeholder.jpg'}" alt="${product.name}">
+                <img src="${product.image_url || product.image_url || '../static/images/placeholder.jpg'}" alt="${product.name}">
             </div>
             <button class="favorite-btn">
                 <img src="../static/icons/icon-cards/favorite.svg" class="heart-empty">

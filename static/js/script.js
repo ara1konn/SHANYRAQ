@@ -316,33 +316,33 @@ document.addEventListener("DOMContentLoaded", () => {
             { name: "Кресла", value: "armchair" },
             { name: "Комоды", value: "dresser" },
             { name: "Стеллажи", value: "rack" },
-            { name: "Журнальные столики", value: "Coffeetable" }
+            { name: "Журнальные столики", value: "coffeetable" }
         ],
         "bedroom": [
             { name: "Кровати", value: "bed" },
             { name: "Шкафы", value: "wardrobe" },
-            { name: "Прикроватные тумбы", value: "Bedsidetable" },
-            { name: "Туалетные столики", value: "Dressingtable" }
+            { name: "Прикроватные тумбы", value: "bedsidetable" },
+            { name: "Туалетные столики", value: "dressingtable" }
         ],
         "diningroom": [
-            { name: "Обеденные столы", value: "Diningtable" },
-            { name: "Стулья", value: "Chair" },
-            { name: "Буфеты", value: "Buffet" },
-            { name: "Барные столы", value: "Bartable" },
-            { name: "Барные стулья", value: "Barstool" }
+            { name: "Обеденные столы", value: "diningtable" },
+            { name: "Стулья", value: "chair" },
+            { name: "Буфеты", value: "buffet" },
+            { name: "Барные столы", value: "bartable" },
+            { name: "Барные стулья", value: "barstool" }
         ],
         "office": [
-            { name: "Рабочие столы", value: "Workdesk" },
-            { name: "Рабочие кресла", value: "Workchair" },
-            { name: "Книжные шкафы", value: "Bookcase" },
-            { name: "Тумбы", value: "Cabinet" }
+            { name: "Рабочие столы", value: "workdesk" },
+            { name: "Рабочие кресла", value: "workchair" },
+            { name: "Книжные шкафы", value: "bookcase" },
+            { name: "Тумбы", value: "cabinet" }
         ],
         "accessories": [
-            { name: "Картины", value: "Painting" },
-            { name: "Зеркала", value: "Mirror" },
-            { name: "Ковры", value: "Carpet" },
-            { name: "Вазы", value: "Vase" },
-            { name: "Лампы", value: "Lamp" }
+            { name: "Картины", value: "painting" },
+            { name: "Зеркала", value: "mirror" },
+            { name: "Ковры", value: "carpet" },
+            { name: "Вазы", value: "vase" },
+            { name: "Лампы", value: "lamp" }
         ]
     };
 
@@ -416,7 +416,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const card = document.createElement("div");
             card.className = "carousel-item";
             card.innerHTML = `
-                <div class="item-top"><img src="${product.image}" alt="${product.name}"></div>
+                <div class="item-top"><img src="${product.image_url}" alt="${product.name}"></div>
                 <button class="favorite-btn">
                     <img src="../static/icons/icon-cards/favorite.svg" class="heart-empty">
                     <img src="../static/icons/icon-cards/fav-full.svg" class="heart-full">
