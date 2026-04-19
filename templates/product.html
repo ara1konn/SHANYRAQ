@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHANYRAQ - Интернет магазин мебели в современном казахском стиле</title>
+    <title>SHANYRAQ - </title>
     <link rel="stylesheet" href="../static/css/style.css">
-    <link rel="stylesheet" href="../static/css/main-page.css">
+    <link rel="stylesheet" href="../static/css/poduct.css">
 </head>
 
 <body>
@@ -117,8 +117,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="catalog.html?category=livingroom&sub=coffeetable"
-                                            class="catalog-link">
+                                        <a href="catalog.html?category=livingroom&sub=coffeetable" class="catalog-link">
                                             <img src="../static/icons/icons header/ж-стол.svg"
                                                 alt="иконка журнального столика">Журнальные столики
                                         </a>
@@ -156,8 +155,7 @@
                                     <img src="../static/icons/icons header/столовая.svg">Столовая
                                 </a>
                                 <ul class="submenu">
-                                    <li><a href="catalog.html?category=diningroom&sub=diningtable"
-                                            class="catalog-link">
+                                    <li><a href="catalog.html?category=diningroom&sub=diningtable" class="catalog-link">
                                             <img src="../static/icons/icons header/о-столы.svg"
                                                 alt="иконка обеденные столы">Обеденные столы
                                         </a>
@@ -260,371 +258,91 @@
             </div>
         </div>
     </header>
-
-    <!-- Главное содержимое сайта -->
     <main>
-        <!-- Слайдер -->
-        <section class="slider">
-            <div class="slides">
-                <!-- Активный слайд слайдера, при открытии сайта будет этот активный слайд -->
-                <div class="slide active">
-                    <img src="../static/images/slider1.jpg" alt="слайдер 1">
-                    <div class="slide-content">
-                        <h2 class="title-slider">Скидки до 30%</h2>
-                        <p>На мебель для гостиной</p>
-                        <a href="promotions.html" class="btn">Смотреть каталог</a>
+        <!-- Хлебные крошки -->
+        <nav class="breadcrumbs">
+            <ul class="breadcrumbs__list">
+                <li class="breadcrumbs__item">
+                    <a href="/" class="breadcrumbs__link">Главная</a>
+                </li>
+                <li class="breadcrumbs__arrow">
+                    <img src="../static/icons/bc-arrow.svg" alt="›">
+                </li>
+                <li class="breadcrumbs__item">
+                    <a href="/catalog" class="breadcrumbs__link">Акции</a>
+                </li>
+                <li class="breadcrumbs__arrow">
+                    <img src="../static/icons/bc-arrow.svg" alt="›">
+                </li>
+                <li class="breadcrumbs__item">
+                    <span class="breadcrumbs__current">Кресло KEREGE</span>
+                </li>
+            </ul>
+        </nav>
+        <!-- Главное содержимое странички: фото товара и характеристика -->
+        <section class="main-grid">
+            <div class="product-grid">
+                <div class="gallery-container">
+                    <div class="main-image">
+                        <img src="../static/images/slider1.jpg" alt="Kerege">
                     </div>
-                </div>
-                <!-- Слайды которые появляются после активного слайдера -->
-                <div class="slide">
-                    <img src="../static/images/banner2.jpg" alt="слайдер 2">
-                    <div class="slide-content">
-                        <h2 class="title-slider">Новая коллекция</h2>
-                        <p>Современные решения для дома</p>
-                        <a href="#" class="btn">Подробнее</a>
-                    </div>
-                </div>
-                <div class="slide">
-                    <img src="../static/images/banner3.jpg" alt="слайдер 3">
-                    <div class="slide-content">
-                        <h2 class="title-slider">Уют начинается здесь</h2>
-                        <p>Выберите свою мебель</p>
-                        <a href="#" class="btn">Перейти</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Кнопки навигации -->
-            <button class="prev"><img src="../static/icons/arrow1.svg" alt="⬅"></button>
-            <button class="next"><img src="../static/icons/arrow2.svg" alt="⮕"></button>
-
-            <!-- Индикаторы -->
-            <div class="indicators">
-                <span class="dot active" data-slide="0"></span>
-                <span class="dot" data-slide="1"></span>
-                <span class="dot" data-slide="2"></span>
-            </div>
-        </section>
-
-        <!-- Бегущая строка снизу карусели -->
-        <section class="promo-marquee">
-            <div class="marquee-inner">
-                <!-- Элементы находящиеся внутри бегующей строки -->
-                <div class="marquee-item">
-                    <img src="../static/icons/icon-marquee/box-sale.svg" alt="иконка бокса">
-                    <div class="text">
-                        <span>Скидки до 50%</span>
-                        <p>Каждую неделю новые продажи</p>
+                    <div class="thumbnails">
+                        <div class="thumb"><img src="../static/images/slider1.jpg" alt=""></div>
+                        <div class="thumb"></div>
+                        <div class="thumb"></div>
+                        <div class="thumb"></div>
+                        <div class="thumb"></div>
                     </div>
                 </div>
 
-                <div class="marquee-item">
-                    <img src="../static/icons/icon-marquee/delivery.svg" alt="иконка грузовика">
-                    <div class="text">
-                        <span>Бесплатная доставка</span>
-                        <p>Бесплатная доставка на первый заказ</p>
+                <div class="info-container">
+                    <h1 class="product-title">Кресло KEREGE</h1>
+
+                    <div class="price-row">
+                        <span class="price-current">1 300 000 ₸</span>
+                        <span class="price-old">2 000 000 ₸</span>
                     </div>
-                </div>
 
-                <div class="marquee-item">
-                    <img src="../static/icons/icon-marquee/24hour.svg" alt="иконка 24/7">
-                    <div class="text">
-                        <span>Служба поддержка 24/7</span>
-                        <p>Нам важен ваш опыт</p>
+                    <div class="spec-item">
+                        <span class="spec-label">Материал:</span>
+                        <span class="spec-value">Натуральное дерево, формованный войлок</span>
                     </div>
-                </div>
 
-                <!-- Дублирование для бесконечного покрутки карусели -->
-                <div class="marquee-item">
-                    <img src="../static/icons/icon-marquee/box-sale.svg" alt="иконка бокса">
-                    <div class="text">
-                        <span>Скидки до 50%</span>
-                        <p>Каждую неделю новые продажи</p>
+                    <div class="spec-item">
+                        <span class="spec-label">Размер:</span>
+                        <span class="spec-value">80 x 90 x 100 см</span>
                     </div>
-                </div>
 
-                <div class="marquee-item">
-                    <img src="../static/icons/icon-marquee/delivery.svg" alt="иконка грузовика">
-                    <div class="text">
-                        <span>Бесплатная доставка</span>
-                        <p>Бесплатная доставка на первый заказ</p>
+                    <div class="spec-item">
+                        <span class="spec-label">Цвет:</span>
+                        <span class="spec-value">Пепельно-серый</span>
                     </div>
-                </div>
 
-                <div class="marquee-item">
-                    <img src="../static/icons/icon-marquee/24hour.svg" alt="иконка 24/7">
-                    <div class="text">
-                        <span>Служба поддержка 24/7</span>
-                        <p>Нам важен ваш опыт</p>
-                    </div>
-                </div>
-
-                <div class="marquee-item">
-                    <img src="../static/icons/icon-marquee/box-sale.svg" alt="иконка бокса">
-                    <div class="text">
-                        <span>Скидки до 50%</span>
-                        <p>Каждую неделю новые продажи</p>
-                    </div>
-                </div>
-
-                <div class="marquee-item">
-                    <img src="../static/icons/icon-marquee/delivery.svg" alt="иконка грузовика">
-                    <div class="text">
-                        <span>Бесплатная доставка</span>
-                        <p>Бесплатная доставка на первый заказ</p>
-                    </div>
-                </div>
-
-                <div class="marquee-item">
-                    <img src="../static/icons/icon-marquee/24hour.svg" alt="иконка 24/7">
-                    <div class="text">
-                        <span>Служба поддержка 24/7</span>
-                        <p>Нам важен ваш опыт</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Популярные категории -->
-        <section class="popular-categories">
-            <div class="title">
-                <img src="../static/images/pop-cat.png" alt="иконка орнамента">
-                <h2>Популярные категории</h2>
-                <img src="../static/images/pop-cat.png" alt="иконка орнамента">
-            </div>
-            <!-- Сетка категорий -->
-            <div class="categories-grid">
-                <a href="catalog.html?category=livingroom&sub=sofa" class="category-item item1">
-                    <img src="../static/images/slider1.jpg" alt="Диваны">
-                    <span>ДИВАНЫ</span>
-                </a>
-                <a href="catalog.html?category=bedroom&sub=bed" class="category-item item2">
-                    <img src="../static/images/slider1.jpg" alt="Кровати">
-                    <span>КРОВАТИ</span>
-                </a>
-                <a href="catalog.html?category=livingroom&sub=armchair" class="category-item item3">
-                    <img src="../static/images/slider1.jpg" alt="Кресла">
-                    <span>КРЕСЛА</span>
-                </a>
-                <a href="catalog.html?category=diningroom&sub=diningtable" class="category-item item4">
-                    <img src="../static/images/slider1.jpg" alt="Столы">
-                    <span>СТОЛЫ</span>
-                </a>
-                <a href="catalog.html?category=diningroom&sub=chair" class="category-item item5">
-                    <img src="../static/images/slider1.jpg" alt="Стулья">
-                    <span>СТУЛЬЯ</span>
-                </a>
-                <a href="catalog.html?category=accessories" class="category-item item6">
-                    <img src="../static/images/slider1.jpg" alt="Аксессуары">
-                    <span>АКСЕССУАРЫ</span>
-                </a>
-            </div>
-        </section>
-
-        <!-- Хиты продаж - Карусель -->
-        <section class="carousel-container">
-            <!-- Вверхняя часть: название и стрелки карусели -->
-            <div class="carousel-header">
-                <h2>Хиты продаж</h2>
-                <div class="carousel-controls">
-                    <button id="prev"><img src="../static/icons/arrow5.svg" alt="⬅"></button>
-                    <button id="next"><img src="../static/icons/arrow4.svg" alt="к⮕"></button>
-                </div>
-            </div>
-            <!-- Нижняя часть: карточки товаров -->
-            <div class="carousel-track-container">
-                <div class="carousel-track">
-                    <!-- Карточка товара -->
-                    <div class="carousel-item">
-                        <div class="item-top">
-                            <button class="favorite-btn">
-                                <img class="heart-empty" src="../static/icons/icon-cards/favorite.svg"
-                                    alt="избранное пустой">
-                                <img class="heart-full" src="../static/icons/icon-cards/fav-full.svg"
-                                    alt="избранное полный">
-                            </button>
-                            <img src="../static/images/slider1.jpg" alt="Товар">
-                        </div>
-
-                        <div class="item-bottom">
-                            <h2>Кресла Кереге</h2>
-                            <div class="price-cart">
-                                <span class="price">5000₸</span>
-                                <button class="cart-btn"><img src="../static/icons/icon-cards/basket.svg"
-                                        alt="корзина"></button>
+                    <div class="purchase-block">
+                        <div class="qty-section">
+                            <span class="spec-label">Количество:</span>
+                            <div class="qty-stepper">
+                                <button type="button" onclick="this.nextElementSibling.stepDown()">-</button>
+                                <input type="number" value="1" min="1">
+                                <button type="button" onclick="this.previousElementSibling.stepUp()">+</button>
                             </div>
                         </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="item-top">
-                            <button class="favorite-btn">
-                                <img class="heart-empty" src="../static/icons/icon-cards/favorite.svg"
-                                    alt="избранное пустой">
-                                <img class="heart-full" src="../static/icons/icon-cards/fav-full.svg"
-                                    alt="избранное полный">
-                            </button>
-                            <img src="../static/images/мебель/slider1.jpg" alt="Товар">
-                        </div>
-                        <div class="item-bottom">
-                            <h2>Кресла Кереге</h2>
-                            <div class="price-cart">
-                                <span class="price">5000₸</span>
-                                <button class="cart-btn"><img src="../static/icons/icon-cards/basket.svg"
-                                        alt="корзина"></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="item-top">
-                            <button class="favorite-btn">
-                                <img class="heart-empty" src="../static/icons/icon-cards/favorite.svg"
-                                    alt="избранное пустой">
-                                <img class="heart-full" src="../static/icons/icon-cards/fav-full.svg"
-                                    alt="избранное полный">
-                            </button>
-                            <img src="../static/images/мебель/slider1.jpg" alt="Товар">
-                        </div>
-                        <div class="item-bottom">
-                            <h2>Кресла Кереге</h2>
-                            <div class="price-cart">
-                                <span class="price">5000₸</span>
-                                <button class="cart-btn"><img src="../static/icons/icon-cards/basket.svg"
-                                        alt="корзина"></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="item-top">
-                            <button class="favorite-btn">
-                                <img class="heart-empty" src="../static/icons/icon-cards/favorite.svg"
-                                    alt="избранное пустой">
-                                <img class="heart-full" src="../static/icons/icon-cards/fav-full.svg"
-                                    alt="избранное полный">
-                            </button>
-                            <img src="../static/images/мебель/slider1.jpg" alt="Товар">
-                        </div>
-                        <div class="item-bottom">
-                            <h2>Кресла Кереге</h2>
-                            <div class="price-cart">
-                                <span class="price">5000₸</span>
-                                <button class="cart-btn"><img src="../static/icons/icon-cards/basket.svg"
-                                        alt="корзина"></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="item-top">
-                            <button class="favorite-btn">
-                                <img class="heart-empty" src="../static/icons/icon-cards/favorite.svg"
-                                    alt="избранное пустой">
-                                <img class="heart-full" src="../static/icons/icon-cards/fav-full.svg"
-                                    alt="избранное полный">
-                            </button>
-                            <img src="../static/images/мебель/slider1.jpg" alt="Товар">
-                        </div>
-                        <div class="item-bottom">
-                            <h2>Кресла Кереге</h2>
-                            <div class="price-cart">
-                                <span class="price">5000₸</span>
-                                <button class="cart-btn"><img src="../static/icons/icon-cards/basket.svg"
-                                        alt="корзина"></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="item-top">
-                            <button class="favorite-btn">
-                                <img class="heart-empty" src="../static/icons/icon-cards/favorite.svg"
-                                    alt="избранное пустой">
-                                <img class="heart-full" src="../static/icons/icon-cards/fav-full.svg"
-                                    alt="избранное полный">
-                            </button>
-                            <img src="../static/images/мебель/slider1.jpg" alt="Товар">
-                        </div>
-                        <div class="item-bottom">
-                            <h2>Кресла Кереге</h2>
-                            <div class="price-cart">
-                                <span class="price">5000₸</span>
-                                <button class="cart-btn"><img src="../static/icons/icon-cards/basket.svg"
-                                        alt="корзина"></button>
-                            </div>
+
+                        <div class="actions-section">
+                            <button class="btn-add-to-cart">Добавить в корзину</button>
+                            <button class="btn-wishlist"><img src="../static/icons/heart.svg" alt="favorite"></button>
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
-
-        <!-- Индивидуальные заказы -->
-        <section class="custom-order-section">
-            <div class="custom-order-content">
-                <div class="text-side">
-                    <div class="title-line">
-                        <div class="line"></div>
-                        <div class="text-content">
-                            <h2>Индивидуальные заказы</h2>
-                            <p>Компания предоставляет услугу изготовления мебели по индивидуальному заказу, что
-                                позволяет клиентам выбрать размеры, материалы, цветовые решения и декоративные элементы
-                                в соответствии с их потребностями и концепцией интерьера.</p>
-                            <a href="https://wa.me/77026154906" class="btn">Связаться</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="image-side">
-                    <img src="../static/images/custom-order.jpg" alt="Индивидуальный заказ">
-                </div>
-            </div>
-        </section>
-
-        <!-- Контейнер бонусы -->
-        <section class="bonus">
-            <h2>Бонусы от <span>SHANYRAQ</span></h2>
-            <div class="bonus-cards">
-                <div class="card">
-                    <div class="icon-circle">
-                        <img src="../static/icons/icon-bonus/icon-b1.svg" alt="иконка торта">
-                    </div>
-                    <h3>День рождение</h3>
-                    <p>Скидка 15% на любую мебель в день вашего рождения.</p>
-                    <button onclick="getPromo('birthday')">Получить подарок!</button>
-                </div>
-                <div class="card">
-                    <div class="icon-circle">
-                        <img src="../static/icons/icon-bonus/icon-b2.svg" alt="иконка 1 заказа">
-                    </div>
-                    <h3>Первый заказ</h3>
-                    <p>Скидка 10% на любую мебель на ваш первый заказ.</p>
-                    <button onclick="getPromo('first')">Получить -10%</button>
-                </div>
-                <div class="card">
-                    <div class="icon-circle">
-                        <img src="../static/icons/icon-bonus/icon-b3.svg" alt="иконка подарка">
-                    </div>
-                    <h3>Подарок к заказу</h3>
-                    <p>Подарок для интерьера при покупке определенных моделей.</p>
-                    <a href="promotions.html" class="card-link">
-                        <button>Посмотреть модели</button>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Коллаж из фотографии -->
-        <section class="shanyraq-collage">
-            <div class="collage-header">
-                <p class="subtitle">Покажите свой уют с</p>
-                <h1 class="hashtag">#SHANYRAQ</h1>
-            </div>
-
-            <div class="collage-grid">
-                <div class="grid-item item-1"><img src="../static/images/slider1.jpg" alt="Картина 1"></div>
-                <div class="grid-item item-2"><img src="../static/images/slider1.jpg" alt="Картина 2"></div>
-                <div class="grid-item item-3"><img src="../static/images/slider1.jpg" alt="Картина 3"></div>
-                <div class="grid-item item-4"><img src="../static/images/slider1.jpg" alt="Картина 4"></div>
-                <div class="grid-item item-5"><img src="../static/images/slider1.jpg" alt="Картина 5"></div>
-                <div class="grid-item item-6"><img src="../static/images/slider1.jpg" alt="Картина 6"></div>
-                <div class="grid-item item-7"><img src="../static/images/slider1.jpg" alt="Картина 7"> </div>
-                <div class="grid-item item-8"><img src="../static/images/slider1.jpg" alt="Картина 8"></div>
-                <div class="grid-item item-9"><img src="../static/images/slider1.jpg" alt="Картина 9"></div>
+        <!-- Описание товара -->
+        <section class="description-section">
+            <h2 class="section-title">ОПИСАНИЕ</h2>
+            <div class="description-content">
+                <p><strong>Современная интерпретация каркаса юрты.</strong></p>
+                <p>Каркас: изогнутые деревянные рейки, образующие легкую решетку.<br>
+                    Сиденье: плотный формованный войлок или мягкая обивка.<br>
+                    Деталь: кожаный ремень на спинке.</p>
             </div>
         </section>
     </main>
@@ -684,7 +402,6 @@
             <p>©2026- «SHANYRAQ». Все права защищены.</p>
         </div>
     </footer>
-
     <!-- Мобильная адаптация: нижний панель навигации, меню появляющийся при нажатии на бургера -->
     <div class="mobile-menu" id="mobileMenu">
         <div id="closeMenu">✕</div>

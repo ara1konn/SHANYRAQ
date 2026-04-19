@@ -1,0 +1,500 @@
+/* Хлебные крошки */
+.breadcrumbs {
+    padding: 10px 0;
+    background-color: transparent;
+    max-width: 1200px;
+    margin: 20px auto 0 auto;
+    padding: 10px 10px;
+}
+
+.breadcrumbs__list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.breadcrumbs__item {
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    line-height: 1;
+}
+
+.breadcrumbs__current {
+    color: #454545;
+    font-weight: 400;
+}
+
+.breadcrumbs__link {
+    color: #000000;
+    text-decoration: none;
+    transition: color 0.2 ease;
+}
+
+.breadcrumbs__link:hover {
+    color: #959595;
+}
+
+.breadcrumbs__arrow {
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+}
+
+.breadcrumbs__current {
+    color: #454545;
+    font-weight: 400px;
+}
+
+/* Основной контейнер сетки */
+.product-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    max-width: 1200px;
+    margin: 20px auto;
+    align-items: start;
+}
+
+/* Заголовок товара */
+.product-title {
+    font-family: 'Jost', sans-serif;
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+/* Цена */
+.price-row {
+    margin-bottom: 20px;
+}
+
+.price-current {
+    font-size: 24px;
+    font-weight: 600;
+    font-family: 'Jost', sans-serif;
+    color: #000;
+}
+
+.price-old {
+    font-size: 18px;
+    color: #959595;
+    text-decoration: line-through;
+    margin-left: 10px;
+}
+
+/* Характеристики */
+.spec-item {
+    margin-bottom: 15px;
+    font-family: 'Jost', sans-serif;
+    letter-spacing: 1px;
+    font-size: 14px;
+}
+
+.spec-label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Блок покупки */
+.purchase-block {
+    margin-top: 40px;
+}
+
+.controls-row {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Контейнер для количества */
+.qty-section {
+    margin-bottom: 25px;
+}
+
+.qty-stepper {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #E5E5E5;
+    border-radius: 25px;
+    padding: 5px 15px;
+    margin-top: 10px;
+}
+
+.qty-stepper button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #454545;
+    padding: 0 10px;
+}
+
+.qty-stepper input {
+    width: 45px;
+    text-align: center;
+    border: none;
+    font-family: 'Jost', sans-serif;
+    font-size: 16px;
+    background: transparent;
+}
+
+/* Контейнер для кнопок (нижний ряд) */
+.actions-section {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.btn-add-to-cart {
+    background-color: #604B42;
+    color: #ffffff;
+    border: none;
+    padding: 18px 40px;
+    border-radius: 10px;
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    flex-grow: 1;
+    transition: background 0.3s ease;
+}
+
+.btn-add-to-cart:hover {
+    background-color: #4A3C36;
+}
+
+.btn-wishlist {
+    background: none;
+    border: 1px solid #E5E5E5;
+    border-radius: 10px;
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.btn-wishlist:hover {
+    border-color: #000;
+    background-color: #f9f9f9;
+}
+
+.qty-stepper input::-webkit-outer-spin-button,
+.qty-stepper input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Главная коричневая кнопка */
+.btn-add-to-cart {
+    background-color: #604B42;
+    color: #ffffff;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 10px;
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    flex-grow: 1;
+    transition: background 0.3s;
+}
+
+/* Кнопка избранного */
+.btn-wishlist {
+    background: none;
+    border: 1px solid #E5E5E5;
+    border-radius: 10px;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Главное большое фото */
+.main-image {
+    width: 100%;
+    height: 400px;
+    aspect-ratio: 1 / 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    background-color: #F8F8F8;
+    border-radius: 30px;
+}
+
+.main-image img {
+    width: 100%;
+    height: 400px;
+    object-fit: contain;
+}
+
+/* Маленькие квадратики после самой большой */
+.thumbnails {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    justify-content: flex-start;
+}
+
+.thumb {
+    width: 100px;
+    height: 80px;
+    flex-shrink: 0;
+    background-color: #F8F8F8;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: border-color 0.3s;
+}
+
+.thumb:hover {
+    border-color: #604B42;
+}
+
+.thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Цена */
+.price-row {
+    margin: 20px 0;
+}
+
+.price-current {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.price-old {
+    color: var(--text-muted);
+    text-decoration: line-through;
+    margin-left: 15px;
+}
+
+/* Цвет, материал, размер */
+.spec-item {
+    margin-bottom: 15px;
+    font-family: 'Jost', sans-serif;
+    font-size: 15px;
+}
+
+.spec-label {
+    font-weight: 600;
+    font-family: 'Jost', sans-serif;
+    color: #000;
+    margin-right: 5px;
+}
+
+.spec-value {
+    color: #454545;
+}
+
+/* Кнопки */
+.controls-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.qty-stepper {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #E5E5E5;
+    border-radius: 25px;
+    padding: 5px 15px;
+    margin-top: 10px;
+}
+
+.qty-stepper button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 0 10px;
+}
+
+.qty-stepper input {
+    width: 40px;
+    text-align: center;
+    border: none;
+    font-family: 'Jost', sans-serif;
+    background: transparent;
+}
+
+/* Убираем стрелочки input */
+.qty-stepper input::-webkit-outer-spin-button,
+.qty-stepper input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Описание */
+.description-section {
+    margin-top: 20px;
+    border-top: 1px solid #EEE;
+    border-bottom: 1px solid #EEE;
+    padding: 40px 0;
+}
+
+.section-title {
+    font-family: 'Jost', sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+
+    color: #959595;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    text-align: center;
+    display: block;
+}
+
+.description-content {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+
+    line-height: 1.8;
+    color: #454545;
+    font-family: 'Jost', sans-serif;
+}
+
+.description-content p {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .product-grid {
+        gap: 40px;
+        padding: 0 20px;
+    }
+
+    .product-title {
+        font-size: 24px;
+    }
+
+    .price-current {
+        font-size: 18px;
+    }
+
+    .spec-label {
+        font-size: 14px;
+    }
+
+    .main-image {
+        height: 350px;
+    }
+
+    .description-section {
+        padding: 30px 20px;
+    }
+
+    .description-content {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .gallery-container {
+        max-width: 100%;
+    }
+
+    .main-image {
+        height: 400px;
+        aspect-ratio: 1 / 1;
+    }
+
+    .breadcrumbs {
+        margin: 15px auto 0 auto;
+        padding: 10px 20px;
+    }
+
+    .description-content {
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-title {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    .price-current {
+        font-size: 22px;
+    }
+
+    .actions-section {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        align-items: center;
+        width: 100%;
+    }
+
+    .btn-add-to-cart {
+        flex: 1;
+        padding: 15px 10px;
+        font-size: 13px;
+        white-space: nowrap;
+    }
+
+    .btn-wishlist {
+        width: 50px;
+        height: 50px;
+        flex-shrink: 0;
+        font-size: 20px;
+    }
+
+    .thumb {
+        width: 80px;
+        height: 60px;
+    }
+
+    .main-image {
+        height: 250px;
+        border-radius: 20px;
+    }
+
+    .main-image img {
+        height: 90%;
+    }
+
+    .thumbnails {
+        gap: 8px;
+        margin-top: 15px;
+    }
+
+    .thumb {
+        width: 55px;
+        height: 55px;
+        border-radius: 8px;
+    }
+}
