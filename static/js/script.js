@@ -483,18 +483,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        if (subFromUrl) {
-            setTimeout(() => {
-                const subBtn = document.querySelector(`.sub-tab-btn[data-sub-category="${subFromUrl}"]`);
-                if (subBtn) {
-                    subBtn.classList.add("active");
-                    currentSubCategory = subFromUrl;
-                    loadFilteredProducts();
-                }
-            }, 300);
-        } else {
-            loadFilteredProducts();
+        const subBtn = document.querySelector(`.sub-tab-btn[data-sub-category="${subFromUrl}"]`);
+        if (subBtn) {
+            subBtn.classList.add("active");
+            currentSubCategory = subFromUrl;
         }
+        loadFilteredProducts();
     }
     checkUrlParameters();
+
 });
