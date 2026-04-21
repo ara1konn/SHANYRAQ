@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Загрузка только акционных товаров
-    fetch("http://127.0.0.1:8000/products?is_promo=true")
+    fetch("/products?is_promo=true")
         .then(res => res.json())
         .then(data => renderHomeCards(data, promoContainer));
 });

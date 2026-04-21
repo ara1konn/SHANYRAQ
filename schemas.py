@@ -14,6 +14,8 @@ class ProductBase(BaseModel):
     old_price: Optional[int]
     discount_percent: Optional[int]
     is_promo: bool = False
+    material : str
+    size : int
 
     class Config:
         from_attributes = True

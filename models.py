@@ -16,3 +16,5 @@ class Product(Base):
     old_price = Column(Integer, nullable=True)
     discount_percent = Column(Integer, nullable=True)
     is_promo = Column(Boolean, default=False)
+    material = Column(String)
+    size = Column(String)

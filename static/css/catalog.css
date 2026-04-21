@@ -283,7 +283,7 @@
 .sub-tab-btn {
     padding: 8px 20px;
     border: 1px solid #e0e0e0;
-    border-radius: 20px; 
+    border-radius: 20px;
 
     background-color: #f9f9f9;
     color: #555;
@@ -292,7 +292,7 @@
     font-weight: 600;
     font-family: 'Jost', sans-serif;
     letter-spacing: 1px;
-    
+
     cursor: pointer;
     transition: all 0.3s ease;
     outline: none;
@@ -304,14 +304,21 @@
 }
 
 .sub-tab-btn.active {
-    background-color: #604B42; 
+    background-color: #604B42;
     color: white;
     border-color: #604B42;
 }
 
 @keyframes fadeInSub {
-    from { opacity: 0; transform: translateY(5px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .sub-tab-btn {
@@ -426,6 +433,7 @@
     justify-content: center;
     transition: all 0.2s ease;
 }
+
 .color-circle.active::after {
     content: '';
     width: 6px;
@@ -440,10 +448,12 @@
 .color-circle.white.active::after {
     border-color: #333;
 }
+
 .color-circle.active {
     transform: scale(1.1);
-    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
+
 .black {
     background-color: #000;
 }
@@ -545,18 +555,15 @@
 
 .carousel-item {
     width: 100%;
-    margin: 0;
-    margin-right: 20px;
-    margin-bottom: 10px;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-
     display: flex;
     flex-direction: column;
-    font-family: 'Jost';
+    font-family: 'Jost', sans-serif;
     position: relative;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
 }
 
 .carousel-item:hover {
@@ -564,133 +571,117 @@
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
 
+.main-card-link, 
+.product-link, 
+.product-title {
+    text-decoration: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: #2c2c2c !important;
+    display: block;
+}
+
 .item-top {
     position: relative;
     width: 100%;
     height: 200px;
     overflow: hidden;
-    margin-bottom: 10px;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
 }
 
 .item-top img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    pointer-events: none;
+    transition: transform 0.5s ease;
 }
 
-.status-badge {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 3;
-    padding: 4px 12px;
-    border-radius: 4px;
-    
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    font-family: 'Jost', sans-serif;
+.carousel-item:hover img {
+    transform: scale(1.05);
 }
 
-.status-badge.available {
-    background-color: #604B42;
-    color: #ffffff;
-}
-
-/*Кнопка "Избранное"*/
+/* Кнопка "Избранное" */
 .favorite-btn {
     position: absolute;
     top: 10px;
     right: 10px;
-
     width: 40px;
     height: 40px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     background: #FFFFFF;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-
-    overflow: visible;
+    z-index: 10;
     transition: 0.3s;
 }
 
-.favorite-btn:hover {
-    transform: scale(1.1);
-}
+.favorite-btn:hover { transform: scale(1.1); }
+.heart-full { opacity: 0; }
+.favorite-btn:hover .heart-full { opacity: 1; }
+.favorite-btn:hover .heart-empty { opacity: 0; }
 
-.favorite-btn img {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    transition: 0.3s;
-}
-
-.heart-full {
-    opacity: 0;
-}
-
-.favorite-btn:hover .heart-full {
-    opacity: 1;
-}
-
-.favorite-btn:hover .heart-empty {
-    opacity: 0;
-}
-
+/* Нижняя часть */
 .item-bottom {
     padding: 10px;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
 
-.item-bottom h2 {
+.product-title {
     font-size: 18px;
-    font-family: 'Jost';
     font-weight: 500;
-    margin: 0 0 8px 0;
+    margin: 5px 0 8px 0;
     white-space: nowrap;
     overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.3s;
 }
 
+.carousel-item:hover .product-title {
+    color: #604B42 !important;
+}
+
+/* Флекс-контейнер для цены и корзины */
 .price-cart {
-    display: flex;
+    display: flex !important;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    margin-top: auto; /* Прижимает к самому низу item-bottom */
 }
 
 .price {
     font-weight: bold;
-    font-family: 'Jost';
     font-size: 18px;
+    color: #333;
 }
 
-/*Кнопка "Корзина"*/
+/* Кнопка "Корзина" */
 .cart-btn {
-    background: #F0F2F3;
-    border: none;
+    background: #F0F2F3 !important;
+    border: none !important;
     border-radius: 4px;
+    padding: 8px 10px;
     cursor: pointer;
-    padding: 6px 10px;
-    margin: 0 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    z-index: 10;
 }
 
 .cart-btn img {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
+    transition: 0.3s;
 }
 
 .cart-btn:hover {
-    background: #604B42;
+    background: #604B42 !important;
 }
 
 .cart-btn:hover img {
@@ -704,7 +695,6 @@
     letter-spacing: 1px;
     background-color: #604B42;
     color: #FFF;
-
 }
 
 /* Скрываем мобильные кнопки по умолчанию*/
@@ -755,9 +745,11 @@
     .mobile-actions {
         display: flex;
     }
+
     .sort-bar {
         display: none;
     }
+
     .filters-sidebar {
         position: fixed;
         top: 0;
@@ -770,15 +762,19 @@
         transform: translateX(-100%);
 
     }
+
     .filters-sidebar.active {
         transform: translateX(0);
     }
+
     .catalog-body {
         display: block;
     }
+
     .sidebar-header {
         display: flex;
     }
+
     .catalog-container {
         grid-template-columns: 1fr;
         margin-top: 20px;
@@ -794,6 +790,7 @@
         margin-right: 0;
     }
 }
+
 @media (max-width: 480px) {
     .products-display {
         grid-template-columns: 1fr;

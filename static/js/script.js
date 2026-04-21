@@ -371,7 +371,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         console.log("Запрос:", params.toString());
 
-        fetch(`http://127.0.0.1:8000/products?${params.toString()}`)
+        fetch(`/products?${params.toString()}`)
             .then(res => res.json())
             .then(data => renderProducts(data))
             .catch(err => console.error("Ошибка:", err));
@@ -407,27 +407,39 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderProducts(products) {
         container.innerHTML = "";
         if (products.length === 0) {
-            container.innerHTML = `<div class="empty-state" style="grid-column: 1/-1; text-align:center; padding: 40px; font-family: 'Jost", sans-serif;>
-            <p>Товары не найдены</p></div>`;
+            // Исправлена кавычка в font-family и закрыта кавычка стиля
+            container.innerHTML = `<div class="empty-state" style="grid-column: 1/-1; text-align:center; padding: 40px; font-family: 'Jost', sans-serif;">
+        <p>Товары не найдены</p></div>`;
             return;
         }
 
         products.forEach(product => {
             const card = document.createElement("div");
             card.className = "carousel-item";
+
             card.innerHTML = `
-                <div class="item-top"><img src="${product.image_url}" alt="${product.name}"></div>
-                <button class="favorite-btn">
-                    <img src="../static/icons/icon-cards/favorite.svg" class="heart-empty">
-                    <img src="../static/icons/icon-cards/fav-full.svg" class="heart-full">
-                </button>
-                <div class="item-bottom">
-                    <h2 class="product-title">${product.name}</h2> 
-                    <div class="price-cart">
-                        <span class="price">${Number(product.price).toLocaleString()} ₸</span>
-                        <button class="cart-btn"><img src="../static/icons/icon-cards/basket.svg"></button>
-                    </div>
-                </div>`;
+        <a href="/products/${product.id}" class="main-card-link">
+            <div class="item-top">
+                <img src="${product.image_url}" alt="${product.name}">
+                ${product.status ? `<div class="status-badge available">${product.status}</div>` : ''}
+            </div>
+            
+            <div class="item-bottom">
+                <h2 class="product-title">${product.name}</h2>
+                <div class="price-cart">
+                    <span class="price">${Number(product.price).toLocaleString()} ₸</span>
+                    <button class="cart-btn" onclick="event.preventDefault(); addToCart(${product.id})">
+                        <img src="../static/icons/icon-cards/basket.svg">
+                    </button>
+                </div>
+            </div>
+        </a>
+
+        <button class="favorite-btn" onclick="event.preventDefault(); toggleFavorite(${product.id})">
+            <img src="../static/icons/icon-cards/favorite.svg" class="heart-empty">
+            <img src="../static/icons/icon-cards/fav-full.svg" class="heart-full">
+        </button>
+    `;
             container.appendChild(card);
         });
     }
@@ -492,4 +504,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     checkUrlParameters();
 
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const mainImage = document.querySelector('.main-image img');
+    const thumbnails = document.querySelectorAll('.thumb');
+
+    thumbnails.forEach(thumb => {
+        thumb.addEventListener('click', function () {
+            // 1. Находим картинку внутри кликнутого дива
+            const newSrc = this.querySelector('img').src;
+
+            // 2. Меняем путь у главного фото
+            mainImage.src = newSrc;
+
+            // 3. Переключаем класс active (для рамочки)
+            thumbnails.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
 });

@@ -255,11 +255,16 @@
     height: 80px;
     flex-shrink: 0;
     background-color: #F8F8F8;
-    border-radius: 12px;
+    border-radius: 8px;
     overflow: hidden;
     cursor: pointer;
     border: 1px solid transparent;
     transition: border-color 0.3s;
+}
+
+.thumb.active {
+    border-color: #454545;
+    transform: scale(1.02);
 }
 
 .thumb:hover {
