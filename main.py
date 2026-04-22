@@ -50,7 +50,8 @@ async def get_product_page(request: Request, product_id: int, db: Session = Depe
     # Отправляем данные в шаблон
     return templates.TemplateResponse("product.html", {
         "request": request, 
-        "product": product
+        "product": product,
+        "category_name": product.name
     })
 
 @app.get("/products")

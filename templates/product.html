@@ -263,21 +263,43 @@
         <!-- Хлебные крошки -->
         <nav class="breadcrumbs">
             <ul class="breadcrumbs__list">
+
                 <li class="breadcrumbs__item">
                     <a href="/" class="breadcrumbs__link">Главная</a>
                 </li>
-                <li class="breadcrumbs__arrow">
-                    <img src="{{ url_for('static', path='icons/bc-arrow.svg') }}" alt="›">
-                </li>
+
+                <li class="breadcrumbs__arrow">›</li>
+
                 <li class="breadcrumbs__item">
-                    <a href="/products" class="breadcrumbs__link">Акции</a>
+                    <a href="/catalog" class="breadcrumbs__link">Каталог</a>
                 </li>
-                <li class="breadcrumbs__arrow">
-                    <img src="{{ url_for('static', path='icons/bc-arrow.svg') }}" alt="›">
+
+                {% if category %}
+                <li class="breadcrumbs__arrow">›</li>
+
+                <li class="breadcrumbs__item">
+                    <a href="/products?category={{ category }}" class="breadcrumbs__link">
+                        {{ category }}
+                    </a>
                 </li>
+                {% endif %}
+
+                {% if sub_category %}
+                <li class="breadcrumbs__arrow">›</li>
+
+                <li class="breadcrumbs__item">
+                    <a href="/products?sub_category={{ sub_category }}" class="breadcrumbs__link">
+                        {{ sub_category }}
+                    </a>
+                </li>
+                {% endif %}
+
+                <li class="breadcrumbs__arrow">›</li>
+
                 <li class="breadcrumbs__item">
                     <span class="breadcrumbs__current">{{ product.name }}</span>
                 </li>
+
             </ul>
         </nav>
         <!-- Главное содержимое странички: фото товара и характеристика -->
@@ -364,7 +386,7 @@
                 </div>
             </div>
         </section>
-
+        <!-- Описание для товаров, описание пишем в базе данных -->
         <section class="description-section">
             <h2 class="section-title">ОПИСАНИЕ</h2>
             <div class="description-content">

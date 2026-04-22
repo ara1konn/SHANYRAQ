@@ -512,13 +512,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     thumbnails.forEach(thumb => {
         thumb.addEventListener('click', function () {
-            // 1. Находим картинку внутри кликнутого дива
             const newSrc = this.querySelector('img').src;
 
-            // 2. Меняем путь у главного фото
             mainImage.src = newSrc;
 
-            // 3. Переключаем класс active (для рамочки)
             thumbnails.forEach(t => t.classList.remove('active'));
             this.classList.add('active');
         });
