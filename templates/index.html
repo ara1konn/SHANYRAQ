@@ -420,6 +420,21 @@
         </section>
 
         <!-- Хиты продаж - Карусель -->
+        <style>
+            .carousel-item,
+            .carousel-item h2,
+            .carousel-item .price {
+                color: #000000 !important;
+                text-decoration: none !important;
+            }
+            .carousel-item:hover h2 {
+                color: #604B42 !important;
+            }
+            .carousel-item img {
+                color: #000000;
+                font-size: 14px;
+            }
+        </style>
         <section class="carousel-container">
             <!-- Вверхняя часть: название и стрелки карусели -->
             <div class="carousel-header">
@@ -432,122 +447,29 @@
             <!-- Нижняя часть: карточки товаров -->
             <div class="carousel-track-container">
                 <div class="carousel-track">
-                    <!-- Карточка товара -->
-                    <div class="carousel-item">
+                    {% for product in hit_products %}
+                    <a href="/products/{{ product.id }}" class="carousel-item">
                         <div class="item-top">
-                            <button class="favorite-btn">
+                            <button class="favorite-btn"
+                                onclick="event.preventDefault(); toggleFavorite({{ product.id }});">
                                 <img class="heart-empty" src="../static/icons/icon-cards/favorite.svg"
                                     alt="избранное пустой">
                                 <img class="heart-full" src="../static/icons/icon-cards/fav-full.svg"
                                     alt="избранное полный">
                             </button>
-                            <img src="../static/images/slider1.jpg" alt="Товар">
-                        </div>
-
-                        <div class="item-bottom">
-                            <h2>Кресла Кереге</h2>
-                            <div class="price-cart">
-                                <span class="price">5000₸</span>
-                                <button class="cart-btn"><img src="../static/icons/icon-cards/basket.svg"
-                                        alt="корзина"></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="item-top">
-                            <button class="favorite-btn">
-                                <img class="heart-empty" src="../static/icons/icon-cards/favorite.svg"
-                                    alt="избранное пустой">
-                                <img class="heart-full" src="../static/icons/icon-cards/fav-full.svg"
-                                    alt="избранное полный">
-                            </button>
-                            <img src="../static/images/мебель/slider1.jpg" alt="Товар">
+                            <img src="/static/images/{{ product.images[0] }}" alt="{{ product.name }}">
                         </div>
                         <div class="item-bottom">
-                            <h2>Кресла Кереге</h2>
+                            <h2>{{ product.name }}</h2>
                             <div class="price-cart">
-                                <span class="price">5000₸</span>
-                                <button class="cart-btn"><img src="../static/icons/icon-cards/basket.svg"
-                                        alt="корзина"></button>
+                                <span class="price">{{ product.price }}₸</span>
+                                <button class="cart-btn" onclick="event.preventDefault(); addToCart({{ product.id }});">
+                                    <img src="../static/icons/icon-cards/basket.svg" alt="корзина">
+                                </button>
                             </div>
                         </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="item-top">
-                            <button class="favorite-btn">
-                                <img class="heart-empty" src="../static/icons/icon-cards/favorite.svg"
-                                    alt="избранное пустой">
-                                <img class="heart-full" src="../static/icons/icon-cards/fav-full.svg"
-                                    alt="избранное полный">
-                            </button>
-                            <img src="../static/images/мебель/slider1.jpg" alt="Товар">
-                        </div>
-                        <div class="item-bottom">
-                            <h2>Кресла Кереге</h2>
-                            <div class="price-cart">
-                                <span class="price">5000₸</span>
-                                <button class="cart-btn"><img src="../static/icons/icon-cards/basket.svg"
-                                        alt="корзина"></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="item-top">
-                            <button class="favorite-btn">
-                                <img class="heart-empty" src="../static/icons/icon-cards/favorite.svg"
-                                    alt="избранное пустой">
-                                <img class="heart-full" src="../static/icons/icon-cards/fav-full.svg"
-                                    alt="избранное полный">
-                            </button>
-                            <img src="../static/images/мебель/slider1.jpg" alt="Товар">
-                        </div>
-                        <div class="item-bottom">
-                            <h2>Кресла Кереге</h2>
-                            <div class="price-cart">
-                                <span class="price">5000₸</span>
-                                <button class="cart-btn"><img src="../static/icons/icon-cards/basket.svg"
-                                        alt="корзина"></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="item-top">
-                            <button class="favorite-btn">
-                                <img class="heart-empty" src="../static/icons/icon-cards/favorite.svg"
-                                    alt="избранное пустой">
-                                <img class="heart-full" src="../static/icons/icon-cards/fav-full.svg"
-                                    alt="избранное полный">
-                            </button>
-                            <img src="../static/images/мебель/slider1.jpg" alt="Товар">
-                        </div>
-                        <div class="item-bottom">
-                            <h2>Кресла Кереге</h2>
-                            <div class="price-cart">
-                                <span class="price">5000₸</span>
-                                <button class="cart-btn"><img src="../static/icons/icon-cards/basket.svg"
-                                        alt="корзина"></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="item-top">
-                            <button class="favorite-btn">
-                                <img class="heart-empty" src="../static/icons/icon-cards/favorite.svg"
-                                    alt="избранное пустой">
-                                <img class="heart-full" src="../static/icons/icon-cards/fav-full.svg"
-                                    alt="избранное полный">
-                            </button>
-                            <img src="../static/images/мебель/slider1.jpg" alt="Товар">
-                        </div>
-                        <div class="item-bottom">
-                            <h2>Кресла Кереге</h2>
-                            <div class="price-cart">
-                                <span class="price">5000₸</span>
-                                <button class="cart-btn"><img src="../static/icons/icon-cards/basket.svg"
-                                        alt="корзина"></button>
-                            </div>
-                        </div>
-                    </div>
+                    </a>
+                    {% endfor %}
                 </div>
             </div>
         </section>

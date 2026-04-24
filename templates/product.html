@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHANYRAQ - </title>
+    <title>SHANYRAQ - Страничка товара</title>
     <link rel="stylesheet" href="../static/css/style.css">
     <link rel="stylesheet" href="../static/css/poduct.css">
 </head>
@@ -307,34 +307,34 @@
             <div class="product-grid">
                 <div class="gallery-container">
                     <div class="main-image">
-                        <img src="{{ url_for('static', path=product.image_url) }}" alt="{{ product.name }}">
+                        <img src="{{ product.images }}" alt="{{ product.name }}">
                     </div>
                     <div class="thumbnails">
                         <div class="thumb active">
-                            <img src="{{ url_for('static', path=product.image_url) }}" alt="{{ product.name }}">
+                            <img src="{{ product.images }}" alt="{{ product.name }}">
                         </div>
 
-                        {% if product.image_url_2 %}
+                        {% if product.images2 %}
                         <div class="thumb">
-                            <img src="{{ url_for('static', path=product.image_url_2) }}" alt="">
-                        </div>
-                        {% endif %}
-
-                        {% if product.image_url_3 %}
-                        <div class="thumb">
-                            <img src="{{ url_for('static', path=product.image_url_3) }}" alt="">
+                            <img src="{{ product.images2 }}" alt="{{ product.name }}">
                         </div>
                         {% endif %}
 
-                        {% if product.image_url_4 %}
+                        {% if product.images3 %}
                         <div class="thumb">
-                            <img src="{{ url_for('static', path=product.image_url_4) }}" alt="">
+                            <img src="{{ product.images }}" alt="{{ product.name }}">
                         </div>
                         {% endif %}
 
-                        {% if product.image_url_5 %}
+                        {% if product.images4 %}
                         <div class="thumb">
-                            <img src="{{ url_for('static', path=product.image_url_5) }}" alt="">
+                            <img src="{{ product.images }}" alt="{{ product.name }}">
+                        </div>
+                        {% endif %}
+
+                        {% if product.images5 %}
+                        <div class="thumb">
+                            <img src="{{ product.images }}" alt="{{ product.name }}">
                         </div>
                         {% endif %}
                     </div>

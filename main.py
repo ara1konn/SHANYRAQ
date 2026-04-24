@@ -9,7 +9,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from sqlalchemy import asc, desc
 
-# Твои файлы
 from database import SessionLocal
 from models import Product
 from schemas import ProductBase
@@ -36,8 +35,13 @@ def get_db():
         db.close()
 
 @app.get("/", response_class=HTMLResponse)
-async def read_index(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+async def read_index(request: Request, db: Session = Depends(get_db)):
+    hits = db.query(Product).filter(Product.is_hit == True).all()
+    
+    return templates.TemplateResponse("index.html", {
+        "request": request, 
+        "hit_products": hits 
+    })
 
 @app.get("/products/{product_id}", response_class=HTMLResponse)
 async def get_product_page(request: Request, product_id: int, db: Session = Depends(get_db)):
@@ -46,7 +50,7 @@ async def get_product_page(request: Request, product_id: int, db: Session = Depe
     
     if not product:
         raise HTTPException(status_code=404, detail="Товар не найден")
-
+    
     # Отправляем данные в шаблон
     return templates.TemplateResponse("product.html", {
         "request": request, 
@@ -54,19 +58,21 @@ async def get_product_page(request: Request, product_id: int, db: Session = Depe
         "category_name": product.name
     })
 
+
 @app.get("/products")
 def get_products(
     category: Optional[str] = None,
     sub_category: Optional[str] = None,
     min_price: Optional[int] = None, 
     max_price: Optional[int] = None, 
-    type: Optional[List[str]] = Query(None), 
+    type: Optional[List[str]] = Query(None),
     color: Optional[str] = None,
     sort: Optional[str] = None,
     is_promo: Optional[bool] = None,
     db: Session = Depends(get_db)
 ):
     query = db.query(Product)
+
 
     if is_promo:
         query = query.filter(Product.is_promo == True)

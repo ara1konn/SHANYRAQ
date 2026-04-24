@@ -571,8 +571,8 @@
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
 
-.main-card-link, 
-.product-link, 
+.main-card-link,
+.product-link,
 .product-title {
     text-decoration: none !important;
     border: none !important;
@@ -603,25 +603,53 @@
 /* Кнопка "Избранное" */
 .favorite-btn {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 15px;
+    right: 15px;
+
     width: 40px;
     height: 40px;
+
+    background: #fff;
+    border: none;
+    border-radius: 5px;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #FFFFFF;
-    border: none;
-    border-radius: 5px;
+
     cursor: pointer;
-    z-index: 10;
+    overflow: hidden;
+}
+
+.favorite-btn img {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
     transition: 0.3s;
 }
 
-.favorite-btn:hover { transform: scale(1.1); }
-.heart-full { opacity: 0; }
-.favorite-btn:hover .heart-full { opacity: 1; }
-.favorite-btn:hover .heart-empty { opacity: 0; }
+
+.favorite-btn:hover {
+    transform: scale(1.1);
+}
+
+
+.heart-full {
+    opacity: 0;
+}
+
+.favorite-btn:hover .heart-full {
+    opacity: 1;
+}
+
+.favorite-btn:hover .heart-empty {
+    opacity: 0;
+}
 
 /* Нижняя часть */
 .item-bottom {
@@ -651,7 +679,8 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-top: auto; /* Прижимает к самому низу item-bottom */
+    margin-top: auto;
+    /* Прижимает к самому низу item-bottom */
 }
 
 .price {

@@ -407,7 +407,6 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderProducts(products) {
         container.innerHTML = "";
         if (products.length === 0) {
-            // Исправлена кавычка в font-family и закрыта кавычка стиля
             container.innerHTML = `<div class="empty-state" style="grid-column: 1/-1; text-align:center; padding: 40px; font-family: 'Jost', sans-serif;">
         <p>Товары не найдены</p></div>`;
             return;
@@ -420,7 +419,7 @@ document.addEventListener("DOMContentLoaded", () => {
             card.innerHTML = `
         <a href="/products/${product.id}" class="main-card-link">
             <div class="item-top">
-                <img src="${product.image_url}" alt="${product.name}">
+            <img src="${product.images}" alt="${product.name}">
                 ${product.status ? `<div class="status-badge available">${product.status}</div>` : ''}
             </div>
             
@@ -486,7 +485,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (categoryFromUrl) {
             const mainBtn = document.querySelector(`.tab-btn[data-category="${categoryFromUrl}"]`);
             if (mainBtn) {
-                // Убираем активный класс у всех и ставим этой
                 categoryButtons.forEach(b => b.classList.remove("active"));
                 mainBtn.classList.add("active");
                 currentCategory = categoryFromUrl;
