@@ -228,7 +228,7 @@ if (slides.length && dots.length && nextBtn && prevBtn) {
         slides[i].classList.add('active');
         dots[i].classList.add('active');
     }
-    //Стрелки на слайдере. 
+    //Стрелки на слайдере
     nextBtn.onclick = () => {
         index = (index + 1) % slides.length;
         showSlide(index);
@@ -254,7 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const track = document.querySelector('.carousel-track');
 
-    if (!track) return; // 🔥 ключ
+    if (!track) return;
 
     const prevButton = document.getElementById('prev');
     const nextButton = document.getElementById('next');

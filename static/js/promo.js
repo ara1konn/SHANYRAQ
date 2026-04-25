@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    // Загрузка только акционных товаров
     fetch("/products?is_promo=true")
         .then(res => res.json())
         .then(data => renderHomeCards(data, promoContainer));
@@ -25,11 +24,9 @@ function renderHomeCards(products, target) {
         const card = document.createElement("div");
         card.className = "carousel-item";
 
-        // 1. Логика бейджа (красный кружок)
         const discount = product.discount_percent;
         const badgeHTML = discount ? `<div class="discount-badge">-${discount}%</div>` : "";
 
-        // 2. Логика цен (перечеркнутая и основная)
         const price = product.price ? Number(product.price).toLocaleString() : "0";
         const oldPrice = product.old_price ? Number(product.old_price).toLocaleString() : null;
 
@@ -44,11 +41,10 @@ function renderHomeCards(products, target) {
             priceHTML = `<span class="price">${price} ₸</span>`;
         }
 
-        // 3. Твоя родная HTML структура
         card.innerHTML = `
             <div class="item-top">
                 ${badgeHTML}
-                <img src="${product.image_url || product.image_url || '../static/images/placeholder.jpg'}" alt="${product.name}">
+                <img src="${product.images || product.images || '../static/images/placeholder.jpg'}" alt="${product.name}">
             </div>
             <button class="favorite-btn">
                 <img src="../static/icons/icon-cards/favorite.svg" class="heart-empty">

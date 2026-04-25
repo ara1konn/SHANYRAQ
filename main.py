@@ -8,6 +8,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from sqlalchemy import asc, desc
+from sqlalchemy.orm import joinedload
 
 from database import SessionLocal
 from models import Product
@@ -45,13 +46,11 @@ async def read_index(request: Request, db: Session = Depends(get_db)):
 
 @app.get("/products/{product_id}", response_class=HTMLResponse)
 async def get_product_page(request: Request, product_id: int, db: Session = Depends(get_db)):
-    # Ищем товар в базе по ID
     product = db.query(Product).filter(Product.id == product_id).first()
     
     if not product:
         raise HTTPException(status_code=404, detail="Товар не найден")
     
-    # Отправляем данные в шаблон
     return templates.TemplateResponse("product.html", {
         "request": request, 
         "product": product,
@@ -96,9 +95,17 @@ def get_products(
         
     return query.all()
 
-@app.get("/promotions", response_class=HTMLResponse)
-async def get_promotions(request: Request):
-    return templates.TemplateResponse("promotions.html", {"request": request})
+@app.get("/promotions")
+async def get_promotions(request: Request, db: Session = Depends(get_db)):
+        promo_with_gifts = db.query(Product).filter(
+            Product.is_gift_promo == True,
+            Product.gifts.any()
+        ).all()
+        
+        return templates.TemplateResponse("promotions.html", {
+            "request": request, 
+            "promo_products": promo_with_gifts
+        })
 
 @app.get("/about", response_class=HTMLResponse)
 async def get_about(request: Request):

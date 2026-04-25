@@ -625,17 +625,6 @@
     position: absolute;
     width: 20px;
     height: 20px;
-
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    transition: 0.3s;
-}
-
-
-.favorite-btn:hover {
-    transform: scale(1.1);
 }
 
 
@@ -673,14 +662,12 @@
     color: #604B42 !important;
 }
 
-/* Флекс-контейнер для цены и корзины */
 .price-cart {
     display: flex !important;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     margin-top: auto;
-    /* Прижимает к самому низу item-bottom */
 }
 
 .price {
@@ -689,7 +676,6 @@
     color: #333;
 }
 
-/* Кнопка "Корзина" */
 .cart-btn {
     background: #F0F2F3 !important;
     border: none !important;

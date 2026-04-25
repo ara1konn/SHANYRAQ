@@ -310,6 +310,7 @@
 .carousel-item {
     width: 100%;
     background-color: #fff;
+    color: initial;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -558,9 +559,8 @@
 
 /* Секция с подарками заказов */
 .gift-section {
-    max-width: 1200px;
-    margin: 60px auto;
-    padding: 0 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 40px;
 }
 
 .gift-title {
@@ -582,16 +582,21 @@
 
 .bundle {
     display: flex;
+    flex-direction: row;
     align-items: center;
     gap: 20px;
+    flex-wrap: nowrap;
+    margin-bottom: 40px;
+    overflow-x: auto;
+    padding: 10px 0;
 }
 
 .bundle-plus {
-    font-family: 'Jost', sans-serif;
-    font-size: 40px;
-    font-weight: 300;
-    color: #ff0000;
-    margin-bottom: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 100%;
 }
 
 .bundle .carousel-item {
@@ -660,4 +665,83 @@
     color: #999;
     font-size: 14px;
     margin-right: 8px;
+}
+
+@media (max-width: 1024px) {
+    .bundle-container {
+        gap: 30px;
+    }
+
+    .bundle .carousel-item {
+        width: 220px;
+    }
+
+    .gift-title {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .bundle-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .bundle {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 340px;
+        border: 1px solid #eee;
+        padding: 20px;
+        border-radius: 12px;
+        overflow: visible;
+        gap: 15px;
+    }
+
+    .bundle .carousel-item {
+        width: 100%;
+    }
+
+    .bundle-plus {
+        height: auto;
+        font-size: 28px;
+        margin: 10px 0;
+    }
+
+    .gift-title {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gift-title {
+        font-size: 20px;
+        padding: 0 10px;
+    }
+
+    .bundle {
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    .bundle .carousel-item {
+        max-width: 260px;
+    }
+
+    .favorite-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .favorite-btn img {
+        width: 18px;
+        height: 18px;
+    }
+
+    .gift-badge {
+        font-size: 11px;
+        padding: 3px 8px;
+    }
 }

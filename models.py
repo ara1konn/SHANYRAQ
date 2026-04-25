@@ -1,5 +1,13 @@
-from sqlalchemy import Column, Integer, String, Text, Boolean, ARRAY
+from sqlalchemy import Column, Integer, String, Text, Boolean, ARRAY, Table, ForeignKey
 from database import Base
+from sqlalchemy.orm import relationship
+
+product_gifts = Table(
+    "product_gifts",
+    Base.metadata,
+    Column("main_product_id", Integer, ForeignKey("products.id"), primary_key=True),
+    Column("gift_product_id", Integer, ForeignKey("products.id"), primary_key=True)
+)
 
 class Product(Base):
     __tablename__ = "products"
@@ -22,3 +30,14 @@ class Product(Base):
 
     is_promo = Column(Boolean, default=False)
     is_hit = Column(Boolean, default=False)
+
+    is_gift_promo = Column(Boolean, default=False)
+    is_gift = Column(Boolean, default=False)
+
+    gifts = relationship(
+        "Product",
+        secondary="product_gifts",
+        primaryjoin="Product.id == product_gifts.c.main_product_id",
+        secondaryjoin="Product.id == product_gifts.c.gift_product_id",
+        backref="is_gift_for"
+    )

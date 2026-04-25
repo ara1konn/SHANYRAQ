@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SHANYRAQ - Акции и скидки</title>
+    <link rel="icon" href="/static/images/logo.png">
     <link rel="stylesheet" href="../static/css/style.css">
     <link rel="stylesheet" href="../static/css/promotions.css">
 </head>
@@ -258,7 +259,7 @@
             </div>
         </div>
     </header>
-    
+
     <main>
         <!-- Баннер после шапки -->
         <section class="promo-banner">
@@ -303,124 +304,94 @@
                     <div class="offer-card card-2">
                         <div class="offer-overlay">
                             <h3 class="offer-text">Скидка на определнные мебели</h3>
-                            <button class="offer-btn">Хочу скидки</button>
+                            <a href="/promotions#discounts-section"><button class="offer-btn">Хочу скидки</button></a>
                         </div>
                     </div>
 
                     <div class="offer-card card-3">
                         <div class="offer-overlay">
                             <h3 class="offer-text">Подарок к заказу на определнные мебели</h3>
-                            <button class="offer-btn">Посмотреть модели</button>
+                            <a href="/promotions#bundles-section"><button class="offer-btn">Посмотреть модели</button></a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
         <!-- Карточки товаров со скидками -->
-        <section class="sales-section">
+        <section id="discounts-section" class="sales-section">
             <div class="container">
                 <h2 class="sales-title">Уютные скидки</h2>
                 <div id="promo-products-container" class="products-display"></div>
             </div>
         </section>
         <!-- Секция подарки к заказу -->
-        <section class="gift-section">
+        <section id="bundles-section" class="gift-section">
             <h2 class="gift-title">Подарки к заказу</h2>
 
-            <div class="bundle-wrapper">
+            <div class="bundle-container"> {% for product in promo_products %}
                 <div class="bundle">
-
                     <div class="carousel-item">
                         <div class="item-top">
                             <button class="favorite-btn">
-                                <img class="heart-empty" src="../static/icons/icon-cards/favorite.svg"
-                                    alt="избранное пустой">
-                                <img class="heart-full" src="../static/icons/icon-cards/fav-full.svg"
-                                    alt="избранное полный">
+                                <img class="heart-empty" src="/static/icons/icon-cards/favorite.svg" alt="избранное">
+                                <img class="heart-full" src="/static/icons/icon-cards/fav-full.svg" alt="избранное полный">
                             </button>
-                            <img src="../static/images/мебель/chair-main.jpg" alt="Товар">
+                            <a href="/products/{{ product.id }}">
+                                <img src="/static/{{ product.images[0] if product.images else 'default.jpg' }}"
+                                    alt="{{ product.name }}">
+                            </a>
                         </div>
                         <div class="item-bottom">
-                            <h2>Кресло Кереге</h2>
+                            <a href="/products/{{ product.id }}" style="text-decoration: none; color: inherit;">
+                                <h2>{{ product.name }}</h2>
+                            </a>
                             <div class="price-cart">
-                                <span class="price">200 000₸</span>
-                                <button class="cart-btn"><img src="../static/icons/icon-cards/basket.svg"
-                                        alt="корзина"></button>
+                                <span class="price">{{ product.price }}₸</span>
+                                <button class="cart-btn">
+                                    <img src="/static/icons/icon-cards/basket.svg" alt="корзина">
+                                </button>
                             </div>
                         </div>
                     </div>
 
+                    {% for gift in product.gifts %}
                     <div class="bundle-plus">+</div>
 
                     <div class="carousel-item gift-card">
                         <div class="item-top">
+                            <button class="favorite-btn">
+                                <img class="heart-empty" src="/static/icons/icon-cards/favorite.svg" alt="избранное">
+                                <img class="heart-full" src="/static/icons/icon-cards/fav-full.svg" alt="избранное полный">
+                            </button>
                             <div class="gift-badge">+ В ПОДАРОК</div>
-
-                            <button class="favorite-btn">
-                                <img class="heart-empty" src="../static/icons/icon-cards/favorite.svg"
-                                    alt="избранное пустой">
-                                <img class="heart-full" src="../static/icons/icon-cards/fav-full.svg"
-                                    alt="избранное полный">
-                            </button>
-                            <img src="../static/images/мебель/chair-gift.jpg" alt="Товар">
+                            <a href="/products/{{ gift.id }}">
+                                <img src="/static/{{ gift.images[0] if gift.images else 'default.jpg' }}"
+                                    alt="{{ gift.name }}">
+                            </a>
                         </div>
                         <div class="item-bottom">
-                            <h2>Кресло Кереге (Gift)</h2>
+                            <a href="/products/{{ gift.id }}" style="text-decoration: none; color: inherit;">
+                                <h2>{{ gift.name }}</h2>
+                            </a>
                             <div class="price-cart">
-                                <span class="price">200 000₸</span>
-                                <button class="cart-btn"><img src="../static/icons/icon-cards/basket.svg"
-                                        alt="корзина"></button>
+                                <div class="price-wrapper">
+                                    <span class="old-price">{{ gift.price }}₸</span>
+                                    <span class="price">0₸</span>
+                                </div>
+                                <button class="cart-btn">
+                                    <img src="/static/icons/icon-cards/basket.svg" alt="корзина">
+                                </button>
                             </div>
                         </div>
                     </div>
-                    <div class="carousel-item">
-                        <div class="item-top">
-                            <button class="favorite-btn">
-                                <img class="heart-empty" src="../static/icons/icon-cards/favorite.svg"
-                                    alt="избранное пустой">
-                                <img class="heart-full" src="../static/icons/icon-cards/fav-full.svg"
-                                    alt="избранное полный">
-                            </button>
-                            <img src="../static/images/мебель/chair-main.jpg" alt="Товар">
-                        </div>
-                        <div class="item-bottom">
-                            <h2>Кресло Кереге</h2>
-                            <div class="price-cart">
-                                <span class="price">200 000₸</span>
-                                <button class="cart-btn"><img src="../static/icons/icon-cards/basket.svg"
-                                        alt="корзина"></button>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
 
-                    <div class="bundle-plus">+</div>
-
-                    <div class="carousel-item gift-card">
-                        <div class="item-top">
-                            <div class="gift-badge">+ В ПОДАРОК</div>
-
-                            <button class="favorite-btn">
-                                <img class="heart-empty" src="../static/icons/icon-cards/favorite.svg"
-                                    alt="избранное пустой">
-                                <img class="heart-full" src="../static/icons/icon-cards/fav-full.svg"
-                                    alt="избранное полный">
-                            </button>
-                            <img src="../static/images/мебель/chair-gift.jpg" alt="Товар">
-                        </div>
-                        <div class="item-bottom">
-                            <h2>Кресло Кереге (Gift)</h2>
-                            <div class="price-cart">
-                                <span class="price">200 000₸</span>
-                                <button class="cart-btn"><img src="../static/icons/icon-cards/basket.svg"
-                                        alt="корзина"></button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
+                {% endfor %}
             </div>
         </section>
     </main>
-    
+
     <!-- Подвал: вверхняя часть  -->
     <footer class="footer">
         <div class="footer-top">
