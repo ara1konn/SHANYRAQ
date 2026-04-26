@@ -118,3 +118,7 @@ async def get_contact(request: Request):
 @app.get("/catalog", response_class=HTMLResponse)
 async def get_catalog(request: Request):
     return templates.TemplateResponse("catalog.html", {"request": request})
+
+@app.get("/favorites", response_class=HTMLResponse)
+async def get_catalog(request: Request):
+    return templates.TemplateResponse("favorites.html", {"request": request})

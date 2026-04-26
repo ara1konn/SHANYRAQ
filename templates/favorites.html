@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHANYRAQ - Акции и скидки</title>
+    <title>Ваши избранные товары</title>
     <link rel="icon" href="/static/images/logo.png">
     <link rel="stylesheet" href="../static/css/style.css">
-    <link rel="stylesheet" href="../static/css/promotions.css">
+    <link rel="stylesheet" href="../static/css/fav.css">
 </head>
 
 <body>
@@ -267,140 +267,48 @@
             </div>
         </div>
     </header>
-    
+
     <main>
-        <!-- Баннер после шапки -->
-        <section class="promo-banner">
-            <div class="banner-overlay">
-                <div class="container">
-                    <h1 class="banner-title">Акции</h1>
-                    <div class="banner-subtitle-row">
-                        <img src="../static/icons/promo ornament r.svg" class="ornament" alt="иконка орнамента">
-                        <h2 class="banner-subtitle">Выгода для дома с теплом традиций</h2>
-                        <img src="../static/icons/promo ornament l.svg" class="ornament" alt="иконка орнамента">
-                    </div>
-                    <!-- Хлебные крошки -->
-                    <nav class="breadcrumbs">
+        <div class="favorites-page container">
+            <div class="page-header">
+                <h1 class="page-title">Мой список желаний</h1>
+                <!-- Хлебные крошки -->
+                <nav class="breadcrumbs">
+                    <div class="bread-container">
                         <ul class="breadcrumbs__list">
                             <li class="breadcrumbs__item">
                                 <a href="index.html" class="breadcrumbs__link">Главная</a>
                             </li>
                             <li class="breadcrumbs__arrow">
-                                <img src="../static/icons/bc-arrow-w.svg" alt="›">
+                                <img src="../static/icons/bc-arrow.svg" alt="›">
                             </li>
                             <li class="breadcrumbs__item">
-                                <span class="breadcrumbs__current">Акции</span>
+                                <span class="breadcrumbs__current">Избранное</span>
                             </li>
                         </ul>
-                    </nav>
-                </div>
+                    </div>
+                </nav>
             </div>
-        </section>
-        <!-- Блок выгодные предложения -->
-        <section class="offers">
-            <div class="container">
-                <h2 class="offers-title">Выгодные предложения</h2>
+            <!-- Вверхняя линия -->
+            <hr class="divider">
 
-                <div class="offers-grid">
-                    <div class="offer-card card-1">
-                        <div class="offer-overlay">
-                            <h3 class="offer-text">Качественные мебели</h3>
-                            <a href="/catalog"><button class="offer-btn">Перейти в каталог</button></a>
-                        </div>
-                    </div>
-
-                    <div class="offer-card card-2">
-                        <div class="offer-overlay">
-                            <h3 class="offer-text">Скидка на определнные мебели</h3>
-                            <a href="/promotions#discounts-section"><button class="offer-btn">Хочу скидки</button></a>
-                        </div>
-                    </div>
-
-                    <div class="offer-card card-3">
-                        <div class="offer-overlay">
-                            <h3 class="offer-text">Подарок к заказу на определнные мебели</h3>
-                            <a href="/promotions#bundles-section"><button class="offer-btn">Посмотреть
-                                    модели</button></a>
-                        </div>
+            <section id="wishlist-content">
+                <div id="empty-favorites" class="empty-state">
+                    <h2 class="empty-title">Ваш список желаний пуст</h2>
+                    <div class="empty-heart-icon">
+                        <img src="../static/icons/heart.svg" alt="иконка избранное">
                     </div>
                 </div>
+
+                <div id="favorites-grid" class="products-display"></div>
+            </section>
+            <!-- Нижняя линия -->
+            <hr class="divider">
+
+            <div class="actions-footer">
+                <a href="/catalog" class="btn-continue">Продолжить покупки</a>
             </div>
-        </section>
-        <!-- Карточки товаров со скидками -->
-        <section id="discounts-section" class="sales-section">
-            <div class="container">
-                <h2 class="sales-title">Уютные скидки</h2>
-                <div id="promo-products-container" class="products-display"></div>
-            </div>
-        </section>
-        <!-- Секция подарки к заказу -->
-        <section id="bundles-section" class="gift-section">
-            <h2 class="gift-title">Подарки к заказу</h2>
-
-            <div class="bundle-container"> {% for product in promo_products %}
-                <div class="bundle">
-                    <div class="carousel-item">
-                        <div class="item-top">
-                            <button class="favorite-btn">
-                                <img class="heart-empty" src="/static/icons/icon-cards/favorite.svg" alt="избранное">
-                                <img class="heart-full" src="/static/icons/icon-cards/fav-full.svg"
-                                    alt="избранное полный">
-                            </button>
-                            <a href="/products/{{ product.id }}">
-                                <img src="/static/{{ product.images[0] if product.images else 'default.jpg' }}"
-                                    alt="{{ product.name }}">
-                            </a>
-                        </div>
-                        <div class="item-bottom">
-                            <a href="/products/{{ product.id }}" style="text-decoration: none; color: inherit;">
-                                <h2>{{ product.name }}</h2>
-                            </a>
-                            <div class="price-cart">
-                                <span class="price">{{ product.price }}₸</span>
-                                <button class="cart-btn">
-                                    <img src="/static/icons/icon-cards/basket.svg" alt="корзина">
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    {% for gift in product.gifts %}
-                    <div class="bundle-plus">➕</div>
-
-                    <div class="carousel-item gift-card">
-                        <div class="item-top">
-                            <button class="favorite-btn">
-                                <img class="heart-empty" src="/static/icons/icon-cards/favorite.svg" alt="избранное">
-                                <img class="heart-full" src="/static/icons/icon-cards/fav-full.svg"
-                                    alt="избранное полный">
-                            </button>
-                            <div class="gift-badge">+ В ПОДАРОК</div>
-                            <a href="/products/{{ gift.id }}">
-                                <img src="/static/{{ gift.images[0] if gift.images else 'default.jpg' }}"
-                                    alt="{{ gift.name }}">
-                            </a>
-                        </div>
-                        <div class="item-bottom">
-                            <a href="/products/{{ gift.id }}" style="text-decoration: none; color: inherit;">
-                                <h2>{{ gift.name }}</h2>
-                            </a>
-                            <div class="price-cart">
-                                <div class="price-wrapper">
-                                    <span class="old-price">{{ gift.price }}₸</span>
-                                    <span class="price">0₸</span>
-                                </div>
-                                <button class="cart-btn">
-                                    <img src="/static/icons/icon-cards/basket.svg" alt="корзина">
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-
-                </div>
-                {% endfor %}
-            </div>
-        </section>
+        </div>
     </main>
 
     <!-- Подвал: вверхняя часть  -->
@@ -470,7 +378,7 @@
             <a href="/promotions" class="menu-link" data-i18n="promotions">АКЦИИ</a>
             <a href="/about" class="menu-link" data-i18n="about">О НАС</a>
             <a href="/contact" class="menu-link" data-i18n="contacts">КОНТАКТЫ</a>
-            <a href="#" class="menu-link">
+            <a href="/favorites" class="menu-link">
                 <img src="../static/icons/heart.svg" width="20">
                 <span data-i18n="mobfavs"> Избранное</span>
             </a>
@@ -526,7 +434,6 @@
         </a>
     </nav>
     <script src="../static/js/script.js"></script>
-    <script src="../static/js/promo.js"></script>
     <script src="../static/js/ui.js"></script>
 </body>
 

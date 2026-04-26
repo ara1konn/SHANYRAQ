@@ -52,6 +52,7 @@ body {
     margin: 0;
     padding: 0;
 }
+
 /* Контейнер шапки */
 header {
     position: sticky;
@@ -472,9 +473,12 @@ header {
 
     cursor: pointer;
     transition: color 0.3s;
+    transition: transform 0.3s, color 0.3s;
 
     font-size: 12px;
     color: #000000;
+    text-decoration: none;
+    display: inline-flex
 }
 
 .icon-btn img {
@@ -488,10 +492,47 @@ header {
 }
 
 .label {
-    font-size: 12px;
+    position: relative;
+    color: #000;
     font-family: 'Jost', sans-serif;
+    font-size: 12px;
     font-weight: 500;
-    white-space: nowrap;
+}
+
+.label::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background-color: #604B42;
+    transition: width 0.3s;
+}
+
+.icon-btn:hover .label::after {
+    width: 100%;
+}
+
+.icon-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.count-badge {
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    background-color: #604B42;
+    color: white;
+    font-size: 10px;
+    min-width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: bold;
 }
 
 /* Моб.адаптация ХИДЕРА*/
@@ -576,6 +617,7 @@ header {
 }
 
 @media (max-width: 768px) {
+
     .header-top,
     .nav-menu,
     .user-actions {
@@ -782,11 +824,12 @@ header {
     margin: 5px 0;
     color: #000;
 }
+
 .footer-col a {
-  text-decoration: none;
-  color: #000000;
-  font-family: 'Jost', sans-serif;
-  font-weight: 400;
+    text-decoration: none;
+    color: #000000;
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
 }
 
 /*Соц сети*/
@@ -1015,10 +1058,12 @@ header {
         width: 80px;
         height: 80px;
     }
+
     .widget-container {
         bottom: 25px;
         right: 25px;
     }
+
     .contact-card {
         bottom: 85px;
         width: 200px;

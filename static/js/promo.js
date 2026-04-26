@@ -1,62 +1,87 @@
 document.addEventListener("DOMContentLoaded", () => {
     const promoContainer = document.getElementById("promo-products-container");
-
-    if (!promoContainer) {
-        console.warn("Контейнер promo-products-container не найден на этой странице.");
-        return;
-    }
+    if (!promoContainer) return;
 
     fetch("/products?is_promo=true")
         .then(res => res.json())
-        .then(data => renderHomeCards(data, promoContainer));
+        .then(data => renderPromoCards(data, promoContainer));
 });
 
-function renderHomeCards(products, target) {
+function getFavorites() {
+    return JSON.parse(localStorage.getItem("favorites") || "[]");
+}
+
+function renderPromoCards(products, target) {
     target.innerHTML = "";
 
-    if (products.length === 0) {
-        target.innerHTML = `<div class="empty-state" style="grid-column: 1/-1; text-align:center; padding: 40px; font-family: 'Jost', sans-serif;">
-                            <p>Товары не найдены</p></div>`;
+    if (!products.length) {
+        target.innerHTML = `
+            <div class="empty-state" style="grid-column:1/-1;text-align:center;padding:40px;">
+                <p>Товары не найдены</p>
+            </div>
+        `;
         return;
     }
 
+    const favorites = getFavorites();
+
     products.forEach(product => {
-        const card = document.createElement("div");
-        card.className = "carousel-item";
+        const isFav = favorites.includes(String(product.id));
+
+        const image =
+            Array.isArray(product.images) && product.images.length
+                ? product.images[0]
+                : product.images || "../static/images/placeholder.jpg";
+
+        const price = Number(product.price).toLocaleString();
+        const oldPrice = product.old_price
+            ? Number(product.old_price).toLocaleString()
+            : null;
 
         const discount = product.discount_percent;
-        const badgeHTML = discount ? `<div class="discount-badge">-${discount}%</div>` : "";
 
-        const price = product.price ? Number(product.price).toLocaleString() : "0";
-        const oldPrice = product.old_price ? Number(product.old_price).toLocaleString() : null;
-
-        let priceHTML = "";
-        if (oldPrice) {
-            priceHTML = `
+        const priceHTML = oldPrice
+            ? `
                 <div class="price-wrapper">
                     <span class="old-price">${oldPrice} ₸</span>
                     <span class="price current-promo">${price} ₸</span>
-                </div>`;
-        } else {
-            priceHTML = `<span class="price">${price} ₸</span>`;
-        }
+                </div>
+              `
+            : `<span class="price">${price} ₸</span>`;
+
+        const card = document.createElement("div");
+        card.className = "carousel-item";
 
         card.innerHTML = `
-            <div class="item-top">
-                ${badgeHTML}
-                <img src="${product.images || product.images || '../static/images/placeholder.jpg'}" alt="${product.name}">
-            </div>
-            <button class="favorite-btn">
+            <a href="/products/${product.id}" class="main-card-link">
+
+                <div class="item-top">
+                    ${discount ? `<div class="discount-badge">-${discount}%</div>` : ""}
+                    <img src="${image}" alt="${product.name}">
+                </div>
+
+                <div class="item-bottom">
+                    <h2 class="product-title">${product.name}</h2>
+
+                    <div class="price-cart">
+                        ${priceHTML}
+
+                        <button class="cart-btn"
+                            onclick="event.preventDefault(); addToCart(${product.id})">
+                            <img src="../static/icons/icon-cards/basket.svg">
+                        </button>
+                    </div>
+                </div>
+
+            </a>
+
+            <button class="favorite-btn ${isFav ? "active" : ""}"
+                data-id="${product.id}"
+                onclick="event.preventDefault(); toggleFavorite(${product.id}, this)">
                 <img src="../static/icons/icon-cards/favorite.svg" class="heart-empty">
                 <img src="../static/icons/icon-cards/fav-full.svg" class="heart-full">
             </button>
-            <div class="item-bottom">
-                <h2 class="product-title">${product.name}</h2> 
-                <div class="price-cart">
-                    ${priceHTML}
-                    <button class="cart-btn"><img src="../static/icons/icon-cards/basket.svg"></button>
-                </div>
-            </div>`;
+        `;
 
         target.appendChild(card);
     });

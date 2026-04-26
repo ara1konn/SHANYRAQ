@@ -61,7 +61,7 @@
                     </div>
                     <div class="mobile-search-bar" id="mobile-search">
                         <div class="container">
-                            <input type="text" placeholder="Поиск мебели...">
+                            <input type="text" id="mobile-search-input" placeholder="Поиск мебели...">
                             <button type="submit">Найти</button>
                         </div>
                     </div>
@@ -243,18 +243,26 @@
                 </ul>
                 <!-- Иконки пользователя -->
                 <div class="user-actions">
-                    <button class="icon-btn favorites">
-                        <img src="../static/icons/heart.svg" alt="иконка избранное">
+                    <a href="/favorites" class="icon-btn favorites">
+                        <div class="icon-wrapper">
+                            <img src="../static/icons/heart.svg" alt="иконка избранное">
+                            <span id="fav-count" class="count-badge">0</span>
+                        </div>
                         <span class="label">Избранное</span>
-                    </button>
-                    <button class="icon-btn cart">
-                        <img src="../static/icons/shop.svg" alt="иконка корзины">
+                    </a>
+
+                    <a href="/cart" class="icon-btn cart">
+                        <div class="icon-wrapper">
+                            <img src="../static/icons/shop.svg" alt="иконка корзины">
+                            <span id="cart-count" class="count-badge">0</span>
+                        </div>
                         <span class="label">Корзина</span>
-                    </button>
-                    <button class="icon-btn profile">
+                    </a>
+
+                    <a href="/login" class="icon-btn profile">
                         <img src="../static/icons/voiti.svg" alt="иконка аккаунта">
                         <span class="label">Войти</span>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -519,6 +527,7 @@
         </a>
     </nav>
     <script src="../static/js/script.js"></script>
+    <script src="../static/js/ui.js"></script>
 </body>
 
 </html>

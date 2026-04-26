@@ -243,18 +243,26 @@
                 </ul>
                 <!-- Иконки пользователя -->
                 <div class="user-actions">
-                    <button class="icon-btn favorites">
-                        <img src="../static/icons/heart.svg" alt="иконка избранное">
+                    <a href="/favorites" class="icon-btn favorites">
+                        <div class="icon-wrapper">
+                            <img src="../static/icons/heart.svg" alt="иконка избранное">
+                            <span id="fav-count" class="count-badge">0</span>
+                        </div>
                         <span class="label">Избранное</span>
-                    </button>
-                    <button class="icon-btn cart">
-                        <img src="../static/icons/shop.svg" alt="иконка корзины">
+                    </a>
+
+                    <a href="/cart" class="icon-btn cart">
+                        <div class="icon-wrapper">
+                            <img src="../static/icons/shop.svg" alt="иконка корзины">
+                            <span id="cart-count" class="count-badge">0</span>
+                        </div>
                         <span class="label">Корзина</span>
-                    </button>
-                    <button class="icon-btn profile">
+                    </a>
+
+                    <a href="/login" class="icon-btn profile">
                         <img src="../static/icons/voiti.svg" alt="иконка аккаунта">
                         <span class="label">Войти</span>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -428,14 +436,17 @@
                 color: #000000 !important;
                 text-decoration: none !important;
             }
+
             .carousel-item:hover h2 {
                 color: #604B42 !important;
             }
+
             .carousel-item img {
                 color: #000000;
                 font-size: 14px;
             }
         </style>
+
         <section class="carousel-container">
             <!-- Вверхняя часть: название и стрелки карусели -->
             <div class="carousel-header">
@@ -449,27 +460,28 @@
             <div class="carousel-track-container">
                 <div class="carousel-track">
                     {% for product in hit_products %}
-                    <a href="/products/{{ product.id }}" class="carousel-item">
+                    <div class="carousel-item" id="product-{{ product.id }}">
                         <div class="item-top">
-                            <button class="favorite-btn"
-                                onclick="event.preventDefault(); toggleFavorite({{ product.id }});">
-                                <img class="heart-empty" src="../static/icons/icon-cards/favorite.svg"
-                                    alt="избранное пустой">
-                                <img class="heart-full" src="../static/icons/icon-cards/fav-full.svg"
-                                    alt="избранное полный">
-                            </button>
-                            <img src="/static/images/{{ product.images[0] }}" alt="{{ product.name }}">
+                            <button class="favorite-btn" data-id="{{ product.id }}"
+                                onclick="event.stopPropagation(); toggleFavorite('{{ product.id }}');">
+                                <img class="heart-empty" src="../static/icons/icon-cards/favorite.svg" alt="пустое">
+                                <img class="heart-full" src="../static/icons/icon-cards/fav-full.svg" alt="полное">
+                                </button>
+                                <img src="/static/images/{{ product.images[0] }}" alt="{{ product.name }}">
                         </div>
                         <div class="item-bottom">
-                            <h2>{{ product.name }}</h2>
+                            <a href="/products/{{ product.id }}" class="product-title-link">
+                                <h2>{{ product.name }}</h2>
+                            </a>
                             <div class="price-cart">
                                 <span class="price">{{ product.price }}₸</span>
-                                <button class="cart-btn" onclick="event.preventDefault(); addToCart({{ product.id }});">
+                                <button class="cart-btn"
+                                    onclick="event.stopPropagation(); addToCart({{ product.id }});">
                                     <img src="../static/icons/icon-cards/basket.svg" alt="корзина">
                                 </button>
                             </div>
                         </div>
-                    </a>
+                    </div>
                     {% endfor %}
                 </div>
             </div>
@@ -615,7 +627,7 @@
             <a href="/promotions" class="menu-link" data-i18n="promotions">АКЦИИ</a>
             <a href="/about" class="menu-link" data-i18n="about">О НАС</a>
             <a href="/contact" class="menu-link" data-i18n="contacts">КОНТАКТЫ</a>
-            <a href="#" class="menu-link">
+            <a href="/favorites" class="menu-link">
                 <img src="../static/icons/heart.svg" width="20">
                 <span data-i18n="mobfavs"> Избранное</span>
             </a>
@@ -671,6 +683,7 @@
         </a>
     </nav>
     <script src="../static/js/script.js"></script>
+    <script src="../static/js/ui.js"></script>
 </body>
 
 </html>

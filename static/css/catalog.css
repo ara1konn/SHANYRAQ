@@ -600,7 +600,7 @@
     transform: scale(1.05);
 }
 
-/* Кнопка "Избранное" */
+/* Кнопка избранное */
 .favorite-btn {
     position: absolute;
     top: 15px;
@@ -619,25 +619,34 @@
 
     cursor: pointer;
     overflow: hidden;
+    z-index: 999;
 }
 
+
+/* Иконки */
 .favorite-btn img {
-    position: absolute;
     width: 20px;
     height: 20px;
 }
 
-
-.heart-full {
-    opacity: 0;
+.favorite-btn .heart-full {
+    display: none;
 }
 
-.favorite-btn:hover .heart-full {
-    opacity: 1;
+.favorite-btn .heart-empty {
+    display: block;
 }
 
-.favorite-btn:hover .heart-empty {
-    opacity: 0;
+.favorite-btn.active .heart-empty {
+    display: none !important;
+}
+
+.favorite-btn.active .heart-full {
+    display: block !important;
+}
+
+.favorite-btn:hover {
+    transform: scale(1.05);
 }
 
 /* Нижняя часть */

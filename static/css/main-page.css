@@ -634,7 +634,7 @@
     object-position: center;
 }
 
-/* Кнопка "Избранное" */
+/* Кнопка избранное */
 .favorite-btn {
     position: absolute;
     top: 15px;
@@ -643,41 +643,55 @@
     width: 40px;
     height: 40px;
 
+    background: #fff;
+    border: none;
+    border-radius: 5px;
+
     display: flex;
     align-items: center;
     justify-content: center;
 
-    background: #FFFFFF;
-    border: none;
-    border-radius: 5px;
     cursor: pointer;
-
-    transition: 0.3s;
+    overflow: hidden;
 }
 
-.favorite-btn:hover {
-    transform: scale(1.1);
-}
-
+/* Иконки */
 .favorite-btn img {
-    position: absolute;
     width: 20px;
     height: 20px;
-    transition: 0.3s;
 }
 
-.heart-full {
-    opacity: 0;
+.favorite-btn .heart-full {
+    display: none;
 }
 
-.favorite-btn:hover .heart-full {
-    opacity: 1;
+.favorite-btn .heart-empty {
+    display: block;
 }
 
-.favorite-btn:hover .heart-empty {
-    opacity: 0;
+.favorite-btn.active .heart-empty {
+    display: none;
 }
 
+.favorite-btn.active .heart-full {
+    display: block;
+}
+.favorite-btn:hover {
+    transform: scale(1.05);
+}
+.product-title-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.product-title-link h2 {
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.product-title-link h2:hover {
+    color: #604B42;
+}
 /* Низ карточки */
 .item-bottom {
     padding: 10px;
