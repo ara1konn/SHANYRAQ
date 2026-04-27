@@ -622,7 +622,6 @@
     z-index: 999;
 }
 
-
 /* Иконки */
 .favorite-btn img {
     width: 20px;
@@ -704,11 +703,11 @@
     transition: 0.3s;
 }
 
-.cart-btn:hover {
+.cart-btn.active {
     background: #604B42 !important;
 }
 
-.cart-btn:hover img {
+.cart-btn.active img {
     filter: brightness(0) invert(1);
 }
 

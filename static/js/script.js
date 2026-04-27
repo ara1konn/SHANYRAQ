@@ -40,15 +40,20 @@ function toggleFavorite(productId, btn = null) {
     document.querySelectorAll(`.favorite-btn[data-id="${id}"]`)
         .forEach(el => el.classList.toggle("active", !isFav));
 
-    updateBadges();
+    if (btn) {
+        const container = btn.closest(".actions-section");
+
+        if (container) {
+            container.classList.toggle("active", !isFav);
+        }
+    }
 
     const card = document.getElementById(`fav-${id}`);
-    if (card && isFav) {
+    if (card && isFav && card.closest("#favorites-grid")) {
         card.remove();
         checkEmptyFavorites();
     }
-
-    // синхронизация между вкладками
+     updateBadges();
     localStorage.setItem("favorites_updated", Date.now());
 }
 
@@ -72,10 +77,18 @@ function updateBadges() {
 
 document.addEventListener("DOMContentLoaded", () => {
     const favorites = getFavorites();
-
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    /* Избранное */
     document.querySelectorAll(".favorite-btn").forEach(btn => {
         const id = btn.dataset.id;
         if (favorites.includes(String(id))) {
+            btn.classList.add("active");
+        }
+    });
+    /* Коризна */
+    document.querySelectorAll(".cart-btn").forEach(btn => {
+        const id = btn.dataset.id;
+        if (cart.includes(String(id))) {
             btn.classList.add("active");
         }
     });
@@ -109,12 +122,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
-    const res = await fetch("/products");
-    const products = await res.json();
-
-    const favProducts = products.filter(p =>
-        favorites.includes(String(p.id))
-    );
+    const res = await fetch(`/products?ids=${favorites.join(",")}`);
+    const favProducts = await res.json();
 
     if (!favProducts.length) {
         if (empty) empty.style.display = "block";
@@ -163,7 +172,7 @@ function renderFavorites(products, grid) {
                             ${Number(product.price).toLocaleString()} ₸
                         </span>
 
-                        <button class="cart-btn"
+                        <button class="cart-btn" data-id="${product.id}"
                             onclick="event.preventDefault(); addToCart(${product.id})">
                             <img src="../static/icons/icon-cards/basket.svg">
                         </button>
@@ -235,7 +244,6 @@ function renderPromoCards(products, target) {
 
         card.innerHTML = `
             <a href="/products/${product.id}" class="main-card-link">
-
                 <div class="item-top">
                     ${discount ? `<div class="discount-badge">-${discount}%</div>` : ""}
                     <img src="${image}" alt="${product.name}">
@@ -248,12 +256,11 @@ function renderPromoCards(products, target) {
                         ${priceHTML}
 
                         <button class="cart-btn"
-                            onclick="event.preventDefault(); addToCart(${product.id})">
+                            onclick="addToCart('${product.id}')">
                             <img src="../static/icons/icon-cards/basket.svg">
                         </button>
                     </div>
                 </div>
-
             </a>
 
             <button class="favorite-btn ${isFav ? "active" : ""}"
@@ -266,4 +273,51 @@ function renderPromoCards(products, target) {
 
         target.appendChild(card);
     });
+}
+
+
+
+
+
+
+function changeQuantity(productId, delta) {
+    fetch(`/cart/update/${productId}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ delta: delta })
+    })
+        .then(res => res.json())
+        .then(data => {
+            location.reload();
+        });
+}
+
+
+function deleteItem(productId) {
+    fetch(`/cart/delete/${productId}`, {
+        method: "POST"
+    })
+        .then(res => res.json())
+        .then(data => {
+            location.reload();
+        });
+}
+
+
+function applyPromo() {
+    const code = document.getElementById("promo-input").value;
+
+    fetch("/cart/apply-promo", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ code: code })
+    })
+        .then(res => res.json())
+        .then(data => {
+            location.reload();
+        });
 }

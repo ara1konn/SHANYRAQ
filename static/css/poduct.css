@@ -165,8 +165,9 @@
     transition: background 0.3s ease;
 }
 
-.btn-add-to-cart:hover {
-    background-color: #4A3C36;
+.btn-add-to-cart.active {
+    background: #3b2f2a;
+    color: #fff;
 }
 
 .btn-wishlist {
@@ -183,42 +184,20 @@
     transition: all 0.3s ease;
 }
 
-.btn-wishlist:hover {
-    border-color: #000;
-    background-color: #f9f9f9;
+.favorite-btn.active {
+    background: #604B42;
+    border-color: #604B42;
 }
+
+.favorite-btn.active img {
+    filter: brightness(0) invert(1);
+}
+
 
 .qty-stepper input::-webkit-outer-spin-button,
 .qty-stepper input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-}
-
-/* Главная коричневая кнопка */
-.btn-add-to-cart {
-    background-color: #604B42;
-    color: #ffffff;
-    border: none;
-    padding: 15px 40px;
-    border-radius: 10px;
-    font-family: 'Jost', sans-serif;
-    font-weight: 500;
-    cursor: pointer;
-    flex-grow: 1;
-    transition: background 0.3s;
-}
-
-/* Кнопка избранного */
-.btn-wishlist {
-    background: none;
-    border: 1px solid #E5E5E5;
-    border-radius: 10px;
-    padding: 12px;
-    cursor: pointer;
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 /* Главное большое фото */

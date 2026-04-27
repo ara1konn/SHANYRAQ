@@ -68,31 +68,35 @@ def get_products(
     color: Optional[str] = None,
     sort: Optional[str] = None,
     is_promo: Optional[bool] = None,
+    ids: Optional[str] = None,
     db: Session = Depends(get_db)
 ):
     query = db.query(Product)
 
+    if ids:
+        ids_list = [int(i) for i in ids.split(",") if i.isdigit()]
+        query = query.filter(Product.id.in_(ids_list))
+        return query.all()
 
     if is_promo:
         query = query.filter(Product.is_promo == True)
     else:
         query = query.filter(Product.is_promo == False)
-    
+
     if min_price: query = query.filter(Product.price >= min_price)
     if max_price: query = query.filter(Product.price <= max_price)
     if type: query = query.filter(Product.type.in_(type))
     if color: query = query.filter(Product.color == color)
     if category and category != "all": query = query.filter(Product.category == category)
     if sub_category: query = query.filter(Product.sub_category == sub_category)
-    
-    # Сортировка
+
     if sort == "price-low":
         query = query.order_by(asc(Product.price))
     elif sort == "price-high":
         query = query.order_by(desc(Product.price))
     else:
         query = query.order_by(asc(Product.id))
-        
+
     return query.all()
 
 @app.get("/promotions")
@@ -122,3 +126,7 @@ async def get_catalog(request: Request):
 @app.get("/favorites", response_class=HTMLResponse)
 async def get_catalog(request: Request):
     return templates.TemplateResponse("favorites.html", {"request": request})
+
+@app.get("/cart", response_class=HTMLResponse)
+async def get_catalog(request: Request):
+    return templates.TemplateResponse("cart.html", {"request": request})

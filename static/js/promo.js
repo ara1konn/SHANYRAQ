@@ -51,6 +51,7 @@ function renderPromoCards(products, target) {
 
         const card = document.createElement("div");
         card.className = "carousel-item";
+        card.id = `fav-${product.id}`;
 
         card.innerHTML = `
             <a href="/products/${product.id}" class="main-card-link">
@@ -77,7 +78,8 @@ function renderPromoCards(products, target) {
 
             <button class="favorite-btn ${isFav ? "active" : ""}"
                 data-id="${product.id}"
-                onclick="event.preventDefault(); toggleFavorite(${product.id}, this)">
+                onclick="event.preventDefault(); event.stopPropagation(); toggleFavorite(${product.id}, this)">
+                
                 <img src="../static/icons/icon-cards/favorite.svg" class="heart-empty">
                 <img src="../static/icons/icon-cards/fav-full.svg" class="heart-full">
             </button>

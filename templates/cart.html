@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHANYRAQ - Каталог мебели</title>
+    <title>SHANYRAQ - Корзина</title>
     <link rel="icon" href="/static/images/logo.png">
     <link rel="stylesheet" href="../static/css/style.css">
-    <link rel="stylesheet" href="../static/css/catalog.css">
+    <link rel="stylesheet" href="../static/css/cart.css">
 </head>
 
 <body>
@@ -267,134 +267,135 @@
             </div>
         </div>
     </header>
-
-    <!-- Главное содержимое сайта -->
-    <main>
-        <!-- Главный баннер снизу шапки -->
-        <section class="catalog-hero">
-            <div class="hero-container">
-                <div class="hero-image-side">
-                    <img src="../static/images/slider1.jpg" alt="Баннер каталога">
-                </div>
-                <div class="hero-text-side">
-                    <div class="text-content">
-                        <h1>Catalog</h1>
-                        <p>lalalallaallalalallalal</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Хлебные крошки -->
-        <nav class="breadcrumbs">
-            <div class="bread-container">
+    <main class="cart-main">
+        <div class="container-narrow">
+            <h1 class="page-title">Корзина</h1>
+            <nav class="breadcrumbs">
                 <ul class="breadcrumbs__list">
-                    <li class="breadcrumbs__item">
-                        <a href="/" class="breadcrumbs__link">Главная</a>
-                    </li>
-                    <li class="breadcrumbs__arrow">
-                        <img src="../static/icons/bc-arrow.svg" alt="›">
-                    </li>
-                    <li class="breadcrumbs__item">
-                        <span class="breadcrumbs__current">Каталог</span>
-                    </li>
+                    <li class="breadcrumbs__item"><a href="index.html" class="breadcrumbs__link">Главная</a></li>
+                    <li class="breadcrumbs__arrow">›</li>
+                    <li class="breadcrumbs__item"><span class="breadcrumbs__current">Корзина</span></li>
                 </ul>
-            </div>
-        </nav>
-        <!-- Навигация горизонтальных кнопок каталога -->
-        <section class="category-navigation">
-            <div class="category-nav-container">
-                <div class="category-tabs">
-                    <button class="tab-btn active" data-category="all">Все товары</button>
-                    <button class="tab-btn" data-category="livingroom">Гостиная</button>
-                    <button class="tab-btn" data-category="diningroom">Столовая</button>
-                    <button class="tab-btn" data-category="bedroom">Спальня</button>
-                    <button class="tab-btn" data-category="office">Кабинет</button>
-                    <button class="tab-btn" data-category="accessories">Аксессуары</button>
-                </div>
-                <div id="sub-categories" class="sub-categories-container"></div>
-                <!-- Мобильные кнопки фильтрации -->
-                <div class="mobile-actions">
-                    <button id="open-filters" class="mobile-btn">
-                        <img src="../static/icons/mob-icons/mob-filter.svg" alt="Фильтры">Фильтры
+            </nav>
+        </div>
+
+        <div class="container-wide">
+            <div class="cart-content">
+
+                <!-- ЛЕВАЯ ЧАСТЬ -->
+                <div class="cart-left">
+                    <section class="cart-items">
+
+                        <div class="table-header">
+                            <span>Наименование товара</span>
+                            <span>Количество</span>
+                            <span>Цена</span>
+                        </div>
+
+                        {% if items %}
+                        <!-- Если в корзине есть товары -->
+                        <div class="cart-products-list">
+                            {% for item in items %}
+                            <div class="cart-product-item" data-product-id="{{ item.id }}">
+
+                                <div class="product-info">
+                                    <div class="product-image">
+                                        <img src="{{ item.image_url }}" alt="{{ item.name }}">
+                                    </div>
+
+                                    <div class="product-details">
+                                        <h3>{{ item.name }}</h3>
+                                        <p>
+                                            <span class="color-dot {{ item.color_name }}"></span>
+                                            {{ item.color_name }}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="product-quantity">
+                                    <div class="quantity-controls">
+                                        <button type="button" class="qty-btn minus"
+                                            onclick="changeQuantity('{{ item.id }}', -1)">-</button>
+
+                                        <input type="text" value="{{ item.quantity }}" readonly>
+
+                                        <button type="button" class="qty-btn plus"
+                                            onclick="changeQuantity('{{ item.id }}', 1)">+</button>
+                                    </div>
+                                </div>
+
+                                <div class="product-price-wrapper">
+                                    <span class="product-price">{{ item.total_price }}₸</span>
+
+                                    <button class="remove-item" onclick="deleteItem('{{ item.id }}')">
+                                        <img src="/static/icons/delete.svg" alt="удалить">
+                                    </button>
+                                </div>
+
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                        {% else %}
+                        <!-- Если корзина пуста, выходит это -->
+                        <div class="empty-state">
+                            <img src="/static/icons/shop.svg" alt="Корзина">
+                            <p>Ваша корзина пуста</p>
+                        </div>
+                        {% endif %}
+
+                    </section>
+
+                    <button class="btn-secondary" onclick="location.reload()">
+                        Обновить корзину
                     </button>
-                    <button id="mobile-sort" class="mobile-btn icon-only">
-                        <img src="../static/icons/mob-icons/mob-sort.svg" alt="Сортировка">
-                    </button>
                 </div>
-                <!-- Сортировка на правом краю -->
-                <div class="sort-bar">
-                    <div class="sort-wrapper">
-                        <span class="sort-label">Сортировать по:</span>
-                        <select id="sort-select" class="sort-dropdown">
-                            <option value="popular">Популярности</option>
-                            <option value="price-low">По возрастанию цены</option>
-                            <option value="price-high">По убыванию цены</option>
-                        </select>
-                    </div>
-                </div>
-        </section>
-        <!-- Фильтрация, сортировка и карточка товаров -->
-        <section class="catalog-section">
-            <div class="catalog-container">
-                <!-- Боковая панель с лева для фильтров -->
-                <aside class="filters-sidebar" id="filters-sidebar">
-                    <div class="sidebar-header">
-                        <h3>Фильтры</h3>
-                        <button id="close-filters" class="close-btn">&times;</button>
+
+                <!-- Правая часть -->
+                <aside class="cart-summary">
+                    <h3>Сумма корзины</h3>
+
+                    <hr style="border: 0; border-top: 1px solid #E0E0E0; margin-bottom: 30px;">
+
+                    <div class="promo-code">
+                        <label>Введите промокод</label>
+
+                        <div class="input-group">
+                            <input type="text" id="promo-input" placeholder="Ввести">
+                            <button class="apply-btn" onclick="applyPromo()">
+                                Подтвердить
+                            </button>
+                        </div>
                     </div>
 
-                    <!-- Оборачиваем всё в форму для FastAPI -->
-                    <form id="filter-form">
-                        <div class="filter-group">
-                            <h3 class="filter-title">Цена</h3>
-                            <div class="price-input">
-                                <input type="number" name="min_price" placeholder="От">
-                                <span class="price-separator">—</span>
-                                <input type="number" name="max_price" placeholder="До">
-                            </div>
+                    <div class="summary-details">
+                        <div class="summary-line">
+                            <span>Общая сумма</span>
+                            <span>{{ summary.subtotal if summary else 0 }}₸</span>
                         </div>
 
-                        <div class="filter-group">
-                            <h3 class="filter-title">Цвета</h3>
-                            <div class="color-options">
-                                <button type="button" class="color-circle black" data-color="Черный"></button>
-                                <button type="button" class="color-circle brown" data-color="Коричневый"></button>
-                                <button type="button" class="color-circle white" data-color="Белый"></button>
-                                <button type="button" class="color-circle grey" data-color="Серый"></button>
-                                <button type="button" class="color-circle beige" data-color="Бежевый"></button>
-                            </div>
+                        <div class="summary-line">
+                            <span>Скидка</span>
+                            <span>{{ summary.discount if summary else 0 }}₸</span>
                         </div>
 
-                        <div class="filter-group">
-                            <h3 class="filter-title">Тип мебели</h3>
-                            <div class="checkbox-list">
-                                <label class="checkbox-item">
-                                    <input type="checkbox" name="type" value="case">
-                                    <span class="custom-checkbox"></span>Корпусная
-                                </label>
-                                <label class="checkbox-item">
-                                    <input type="checkbox" name="type" value="soft">
-                                    <span class="custom-checkbox"></span>Мягкая
-                                </label>
-                                <label class="checkbox-item">
-                                    <input type="checkbox" name="type" value="decor">
-                                    <span class="custom-checkbox"></span>Декоративная
-                                </label>
-                                <label class="checkbox-item">
-                                    <input type="checkbox" name="type" value="trans">
-                                    <span class="custom-checkbox"></span>Трансформируемая
-                                </label>
-                            </div>
+                        <div class="summary-line">
+                            <span>Доставка</span>
+                            <span>{{ summary.shipping if summary else 0 }}₸</span>
                         </div>
-                        <button type="submit" class="filter-btn">Применить</button>
-                    </form>
+
+                        <div class="summary-total">
+                            <span>Итого</span>
+                            <span>{{ summary.total if summary else 0 }}₸</span>
+                        </div>
+                    </div>
+
+                    <button class="btn-primary">Оплатить сейчас</button>
                 </aside>
-                <!-- Сетка товаров -->
-                <div class="products-display" id="products-container"></div>
-            </div>
-        </section>
-    </main>
 
+            </div>
+        </div>
+    </main>
     <!-- Подвал: вверхняя часть  -->
     <footer class="footer">
         <div class="footer-top">
@@ -518,7 +519,6 @@
         </a>
     </nav>
     <script src="../static/js/script.js"></script>
-    <script src="../static/js/catalog.js"></script>
     <script src="../static/js/ui.js"></script>
 </body>
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
@@ -387,7 +387,8 @@
 
                         <div class="actions-section">
                             <button class="btn-add-to-cart" data-id="{{ product.id }}">Добавить в корзину</button>
-                            <button class="btn-wishlist">
+                            <button class="btn-wishlist favorite-btn" data-id="{{ product.id }}"
+                                onclick="event.stopPropagation(); toggleFavorite('{{ product.id }}', this);">
                                 <img src="{{ url_for('static', path='icons/heart.svg') }}" alt="favorite">
                             </button>
                         </div>
@@ -471,7 +472,7 @@
             <a href="/promotions" class="menu-link" data-i18n="promotions">АКЦИИ</a>
             <a href="/about" class="menu-link" data-i18n="about">О НАС</a>
             <a href="/contact" class="menu-link" data-i18n="contacts">КОНТАКТЫ</a>
-            <a href="#" class="menu-link">
+            <a href="/favorites" class="menu-link">
                 <img src="../static/icons/heart.svg" width="20">
                 <span data-i18n="mobfavs"> Избранное</span>
             </a>
@@ -517,7 +518,7 @@
             <img src="../static/icons/home.svg" alt="раздел главная">
             <span data-i18n="main">Главная</span>
         </a>
-        <a href="#" class="nav-item">
+        <a href="/cart" class="nav-item">
             <img src="../static/icons/shop.svg" alt="раздел корзина">
             <span data-i18n="cart">Корзина</span>
         </a>

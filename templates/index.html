@@ -466,8 +466,8 @@
                                 onclick="event.stopPropagation(); toggleFavorite('{{ product.id }}');">
                                 <img class="heart-empty" src="../static/icons/icon-cards/favorite.svg" alt="пустое">
                                 <img class="heart-full" src="../static/icons/icon-cards/fav-full.svg" alt="полное">
-                                </button>
-                                <img src="/static/images/{{ product.images[0] }}" alt="{{ product.name }}">
+                            </button>
+                            <img src="/static/images/{{ product.images[0] }}" alt="{{ product.name }}">
                         </div>
                         <div class="item-bottom">
                             <a href="/products/{{ product.id }}" class="product-title-link">
@@ -476,7 +476,7 @@
                             <div class="price-cart">
                                 <span class="price">{{ product.price }}₸</span>
                                 <button class="cart-btn"
-                                    onclick="event.stopPropagation(); addToCart({{ product.id }});">
+                                    onclick="event.stopPropagation(); addToCart('{{ product.id }}');">
                                     <img src="../static/icons/icon-cards/basket.svg" alt="корзина">
                                 </button>
                             </div>
@@ -673,7 +673,7 @@
             <img src="../static/icons/home.svg" alt="раздел главная">
             <span data-i18n="main">Главная</span>
         </a>
-        <a href="#" class="nav-item">
+        <a href="/cart" class="nav-item">
             <img src="../static/icons/shop.svg" alt="раздел корзина">
             <span data-i18n="cart">Корзина</span>
         </a>
