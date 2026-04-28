@@ -585,7 +585,6 @@
     filter: brightness(0) invert(1);
 }
 
-/*Карточки товаров*/
 /* Карточки товаров */
 .carousel-track {
     display: flex;
@@ -727,6 +726,7 @@
     font-family: 'Jost';
     font-size: 18px;
 }
+
 .main-card-link,
 .product-link,
 .product-title {

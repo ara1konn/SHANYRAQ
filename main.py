@@ -83,8 +83,12 @@ def get_products(
     else:
         query = query.filter(Product.is_promo == False)
 
-    if min_price: query = query.filter(Product.price >= min_price)
-    if max_price: query = query.filter(Product.price <= max_price)
+    if min_price is not None:
+        query = query.filter(Product.price >= min_price)
+
+    if max_price is not None:
+        query = query.filter(Product.price <= max_price)
+        
     if type: query = query.filter(Product.type.in_(type))
     if color: query = query.filter(Product.color == color)
     if category and category != "all": query = query.filter(Product.category == category)

@@ -387,8 +387,7 @@
 
                         <div class="actions-section">
                             <button class="btn-add-to-cart" data-id="{{ product.id }}">Добавить в корзину</button>
-                            <button class="btn-wishlist favorite-btn" data-id="{{ product.id }}"
-                                onclick="event.stopPropagation(); toggleFavorite('{{ product.id }}', this);">
+                            <button class="btn-wishlist favorite-btn" data-id="{{ product.id }}">
                                 <img src="{{ url_for('static', path='icons/heart.svg') }}" alt="favorite">
                             </button>
                         </div>

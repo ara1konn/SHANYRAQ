@@ -67,8 +67,7 @@ function renderPromoCards(products, target) {
                     <div class="price-cart">
                         ${priceHTML}
 
-                        <button class="cart-btn"
-                            onclick="event.preventDefault(); addToCart(${product.id})">
+                        <button class="cart-btn" data-id="${product.id}">
                             <img src="../static/icons/icon-cards/basket.svg">
                         </button>
                     </div>
@@ -76,10 +75,7 @@ function renderPromoCards(products, target) {
 
             </a>
 
-            <button class="favorite-btn ${isFav ? "active" : ""}"
-                data-id="${product.id}"
-                onclick="event.preventDefault(); event.stopPropagation(); toggleFavorite(${product.id}, this)">
-                
+            <button class="favorite-btn ${isFav ? "active" : ""}" data-id="${product.id}">
                 <img src="../static/icons/icon-cards/favorite.svg" class="heart-empty">
                 <img src="../static/icons/icon-cards/fav-full.svg" class="heart-full">
             </button>

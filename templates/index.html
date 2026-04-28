@@ -462,8 +462,7 @@
                     {% for product in hit_products %}
                     <div class="carousel-item" id="product-{{ product.id }}">
                         <div class="item-top">
-                            <button class="favorite-btn" data-id="{{ product.id }}"
-                                onclick="event.stopPropagation(); toggleFavorite('{{ product.id }}');">
+                            <button class="favorite-btn" data-id="{{ product.id }}">
                                 <img class="heart-empty" src="../static/icons/icon-cards/favorite.svg" alt="пустое">
                                 <img class="heart-full" src="../static/icons/icon-cards/fav-full.svg" alt="полное">
                             </button>

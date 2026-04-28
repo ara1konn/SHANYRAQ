@@ -145,8 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         </a>
 
-        <button class="favorite-btn ${isFav ? 'active' : ''}" data-id="${product.id}"
-        onclick="event.preventDefault(); toggleFavorite(${product.id}, this)" >
+        <button class="favorite-btn ${isFav ? 'active' : ''}" data-id="${product.id}">
             <img src="../static/icons/icon-cards/favorite.svg" class="heart-empty">
             <img src="../static/icons/icon-cards/fav-full.svg" class="heart-full">
         </button>
@@ -188,6 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     loadFilteredProducts();
+    
     // Функция для автоматического применения фильтров из URL
     function checkUrlParameters() {
         const urlParams = new URLSearchParams(window.location.search);
