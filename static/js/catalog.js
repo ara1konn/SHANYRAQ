@@ -50,32 +50,29 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!container) return;
 
     // Функция загрузки (собирает ВСЁ: категорию, подкатегорию, цену, цвет, сорт)
-    function loadFilteredProducts() {
+    async function loadFilteredProducts() {
         const formData = new FormData(filterForm);
         const params = new URLSearchParams();
 
         if (currentCategory !== "all") params.append("category", currentCategory);
-
         if (currentSubCategory) params.append("sub_category", currentSubCategory);
-
-        if (sortSelect && sortSelect.value) params.append("sort", sortSelect.value);
+        if (sortSelect?.value) params.append("sort", sortSelect.value);
 
         const minPrice = formData.get("min_price");
         const maxPrice = formData.get("max_price");
+
         if (minPrice) params.append("min_price", minPrice);
         if (maxPrice) params.append("max_price", maxPrice);
 
-        const types = formData.getAll("type");
-        types.forEach(t => params.append("type", t));
+        formData.getAll("type").forEach(t => params.append("type", t));
 
         if (window.selectedColor) params.append("color", window.selectedColor);
 
-        console.log("Запрос:", params.toString());
+        const res = await fetch(`/products?${params.toString()}`);
+        const data = await res.json();
 
-        fetch(`/products?${params.toString()}`)
-            .then(res => res.json())
-            .then(data => renderProducts(data))
-            .catch(err => console.error("Ошибка:", err));
+        renderProducts(data);
+        await syncCartButtons();
     }
 
     //  Функция отрисовки кнопок подкатегорий
@@ -138,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="price-cart">
                 <span class="price">${Number(product.price).toLocaleString()} ₸</span>
 
-                <button class="cart-btn" onclick="event.preventDefault(); addToCart(${product.id})">
+                <button class="cart-btn" data-id="${product.id}">
                     <img src="../static/icons/icon-cards/basket.svg">
                 </button>
                 </div>
@@ -186,8 +183,6 @@ document.addEventListener("DOMContentLoaded", () => {
         loadFilteredProducts();
     });
 
-    loadFilteredProducts();
-    
     // Функция для автоматического применения фильтров из URL
     function checkUrlParameters() {
         const urlParams = new URLSearchParams(window.location.search);
@@ -215,3 +210,30 @@ document.addEventListener("DOMContentLoaded", () => {
     checkUrlParameters();
 
 });
+
+async function syncCartButtons() {
+    try {
+        const res = await fetch("/api/cart/items", {
+            credentials: "include"
+        });
+
+        if (!res.ok) return;
+
+        const items = await res.json();
+
+        const cartIds = new Set(items.map(i => String(i.product.id)));
+
+        document.querySelectorAll(".cart-btn").forEach(btn => {
+            const id = String(btn.dataset.id);
+
+            if (cartIds.has(id)) {
+                btn.classList.add("in-cart");
+            } else {
+                btn.classList.remove("in-cart");
+            }
+        });
+
+    } catch (e) {
+        console.error("cart sync error", e);
+    }
+}

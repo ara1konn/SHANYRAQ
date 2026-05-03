@@ -1,5 +1,44 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 from typing import Optional, List
+
+
+class CartItemBase(BaseModel):
+    product_id: int
+    quantity: int = 1
+
+class CartItemCreate(CartItemBase):
+    pass
+
+class CartItemOut(CartItemBase):
+    id: int
+    name: str
+    price: int
+
+    class Config:
+        from_attributes = True
+
+class UserCreate(BaseModel):
+    username: str
+    email: EmailStr
+    password: str
+
+class UserLogin(BaseModel):
+    username_or_email: str
+    password: str
+
+class UserOut(BaseModel):
+    id: int
+    username: str
+    email: str
+    avatar_url: Optional[str] = None
+
+    class Config:
+        from_attributes = True
+
+class UserMeResponse(BaseModel):
+    authenticated: bool
+    username: Optional[str] = None
+    email: Optional[str] = None
 
 class ProductBase(BaseModel):
     id: int

@@ -1,0 +1,169 @@
+/* Главный контейнер */
+.auth-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    background-color: #f9f9f9;
+}
+
+.auth-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 160px);
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+/* Стили самой карточки */
+.auth-card {
+    padding: 40px 50px;
+    width: 100%;
+    max-width: 650px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Логотип внутри карточки */
+.auth-logo {
+    margin-bottom: 20px;
+}
+
+.auth-logo img {
+    height: 100px;
+    width: auto;
+    margin-bottom: 10px;
+}
+
+.auth-logo h1 {
+    font-size: 24px;
+    letter-spacing: 4px;
+    font-weight: 400;
+    margin: 0;
+    color: #333;
+}
+
+/* Табы (Вход / Регистрация) */
+.auth-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.auth-tab {
+    font-size: 20px;
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    color: #BDBDBD;
+    transition: color 0.3s ease;
+    font-weight: 500;
+    margin: 0;
+}
+
+.auth-tab.active {
+    color: #333;
+    border-bottom: 2px solid #333;
+}
+
+/* Стили полей ввода */
+.input-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    font-family: 'Jost', sans-serif;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #6D5443;
+}
+
+/* Кнопка войти */
+.btn-auth {
+    width: 100%;
+    padding: 15px;
+    background-color: #6D5443;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Jost', sans-serif;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s;
+}
+
+.btn-auth:hover {
+    background-color: #5a4537;
+}
+
+/* Ссылка "Забыли пароль?" */
+.auth-footer {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.auth-footer a {
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: 'Jost', sans-serif;
+    font-weight: 600;
+    transition: opacity 0.3s;
+}
+
+.auth-footer a:hover {
+    opacity: 0.7;
+}
+
+/* Скрываем регистрацию по умолчанию */
+#register-form {
+    display: none;
+}
+
+/* Анимация плавного появления */
+.auth-form {
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Стили для неактивного таба */
+.auth-tab {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.auth-tab:hover {
+    color: #6D5443; /* Твой фирменный коричневый */
+}
+

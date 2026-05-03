@@ -9,6 +9,39 @@ product_gifts = Table(
     Column("gift_product_id", Integer, ForeignKey("products.id"), primary_key=True)
 )
 
+class FavoriteItem(Base):
+    __tablename__ = "favorites"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"))
+    product_id = Column(Integer, ForeignKey("products.id", ondelete="CASCADE"))
+
+    user = relationship("User", back_populates="favorites")
+    product = relationship("Product")
+
+class CartItem(Base):
+    __tablename__ = "cart_items"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    product_id = Column(Integer, ForeignKey("products.id", ondelete="CASCADE"), nullable=False)
+    quantity = Column(Integer, default=1)
+
+    product = relationship("Product")
+    user = relationship("User", back_populates="cart")
+
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, unique=True, index=True, nullable=False)
+    email = Column(String, unique=True, index=True, nullable=False)
+    hashed_password = Column(String, nullable=False)
+    avatar_url = Column(String, nullable=True, default="/static/icons/user.svg")
+
+    favorites = relationship("FavoriteItem", back_populates="user")
+    cart = relationship("CartItem", back_populates="user", cascade="all, delete-orphan")
+    
 class Product(Base):
     __tablename__ = "products"
 

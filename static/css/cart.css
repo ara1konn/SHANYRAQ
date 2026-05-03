@@ -1,4 +1,4 @@
-/* --- ТВОИ БАЗОВЫЕ СТИЛИ --- */
+/* Главный контейнер */
 .container-narrow {
     max-width: 1200px;
     margin: 0 auto;
@@ -21,6 +21,42 @@
     font-weight: 500;
     margin-top: 40px;
     margin-bottom: 10px;
+}
+
+@media (max-width: 1024px) {
+    .page-title {
+        font-size: 30px;
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .container-narrow,
+    .container-wide {
+        padding: 0 15px;
+    }
+
+    .page-title {
+        font-size: 26px;
+        margin-top: 25px;
+        margin-bottom: 8px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .container-narrow,
+    .container-wide {
+        padding: 0 10px;
+    }
+
+    .page-title {
+        font-size: 22px;
+        margin-top: 20px;
+        line-height: 1.2;
+    }
 }
 
 .breadcrumbs__list {
@@ -50,7 +86,53 @@
     color: #454545;
 }
 
-/* --- СЕТКА --- */
+@media (max-width: 1024px) {
+    .breadcrumbs__item {
+        font-size: 11px;
+    }
+
+    .breadcrumbs__arrow {
+        margin: 0 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    .breadcrumbs__list {
+        margin-bottom: 15px;
+        flex-wrap: wrap;
+        row-gap: 5px;
+    }
+
+    .breadcrumbs__item {
+        line-height: 1.4;
+    }
+}
+
+@media (max-width: 480px) {
+    .breadcrumbs__list {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 5px;
+
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .breadcrumbs__list::-webkit-scrollbar {
+        display: none;
+    }
+
+    .breadcrumbs__item {
+        white-space: nowrap;
+        font-size: 11px;
+    }
+
+    .breadcrumbs__arrow {
+        margin: 0 6px;
+    }
+}
+
+/* Сетка с контейнером для добавления товаров */
 .cart-content {
     display: grid;
     grid-template-columns: 1.8fr 1fr;
@@ -76,7 +158,7 @@
     font-family: 'Jost', sans-serif;
 }
 
-/* --- СТИЛИ ТОВАРА --- */
+/* Стили как будет отображаться товар при добавлении */
 .cart-product-item {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
@@ -92,25 +174,26 @@
 }
 
 .product-image {
-    width: 80px;
-    height: 80px;
-    background: #eee;
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
     border-radius: 8px;
+    overflow: hidden;
+    background: #f9f9f9;
 }
 
-.product-details h3 {
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.product-info h3 {
     font-size: 20px;
     font-weight: 400;
     margin: 0;
     font-family: 'Jost';
-}
-
-.color-dot {
-    width: 12px;
-    height: 12px;
-    background: #000;
-    border-radius: 50%;
-    display: inline-block;
 }
 
 /* Счетчик */
@@ -134,7 +217,7 @@
     width: 30px;
     border: none;
     text-align: center;
-    font-family: 'Jost';
+    font-family: 'Jost', sans-serif;
 }
 
 /* Цена и удаление */
@@ -144,8 +227,8 @@
     align-items: center;
 }
 
-.product-price {
-    font-family: 'Jost';
+.product-price span {
+    font-family: 'Jost', sans-serif;
     font-weight: 500;
     font-size: 18px;
 }
@@ -157,6 +240,7 @@
     color: #333;
     font-size: 18px;
 }
+
 
 .summary-line {
     display: flex;
@@ -191,6 +275,14 @@
     cursor: pointer;
 }
 
+.btn-secondary a {
+    color: white !important;
+    text-decoration: none !important;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
 .btn-secondary {
     display: inline-block;
     background-color: #604B42;
@@ -202,6 +294,7 @@
     font-family: 'Jost';
     font-weight: bold;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .cart-summary h3 {
@@ -213,37 +306,6 @@
     text-transform: uppercase;
 }
 
-.promo-code label {
-    display: block;
-    font-size: 14px;
-    font-family: 'Jost', sans-serif;
-    margin-bottom: 10px;
-}
-
-.input-group {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 30px;
-}
-
-.input-group input {
-    flex: 1;
-    padding: 12px 15px;
-    border: 1px solid #333;
-    border-radius: 8px;
-}
-
-.apply-btn {
-    width: 100px;
-    border: 1px solid #000;
-    background: transparent;
-    border-radius: 8px;
-    font-size: 14px;
-    font-family: 'Jost', sans-serif;
-    letter-spacing: 1px;
-    font-weight: 500;
-    cursor: pointer;
-}
 
 /* Состояние когда корзина пуста */
 .empty-state {
@@ -267,22 +329,173 @@
     opacity: 0.1;
 }
 
-.color-dot .black {
-    background-color: #000;
+@media (max-width: 1024px) {
+    .cart-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .cart-items,
+    .cart-summary {
+        padding: 30px;
+    }
 }
 
-.color-dot .brown {
-    background-color: #6f4d38;
+@media (max-width: 768px) {
+    .table-header {
+        display: none;
+    }
+
+    .cart-product-item {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        position: relative;
+        padding: 25px 0;
+    }
+
+    .product-info {
+        align-items: flex-start;
+    }
+
+    .product-image {
+        width: 100px;
+        height: 100px;
+    }
+
+    .product-price-wrapper {
+        justify-content: space-between;
+        margin-top: 10px;
+        padding-left: 120px;
+    }
+
+    .remove-item {
+        position: absolute;
+        top: 20px;
+        right: 0;
+    }
 }
 
-.color-dot .white {
-    background-color: #FFF;
+@media (max-width: 480px) {
+
+    .cart-items,
+    .cart-summary {
+        padding: 20px;
+        border-radius: 20px;
+        border-width: 2px;
+    }
+
+    .product-info {
+        gap: 15px;
+    }
+
+    .product-image {
+        width: 80px;
+        height: 80px;
+    }
+
+    .product-details h3 {
+        font-size: 18px;
+    }
+
+    .product-price-wrapper {
+        padding-left: 0;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .summary-total {
+        font-size: 20px;
+    }
+
+    .input-group {
+        flex-direction: column;
+    }
+
+    .apply-btn {
+        width: 100%;
+        height: 45px;
+    }
+
+    .btn-primary {
+        padding: 15px;
+        font-size: 15px;
+    }
 }
 
-.color-dot .grey {
-    background-color: #d1d1d1;
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
 }
 
-.color-dot .beige {
-    background-color: #e8d0b9;
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transform: translateY(20px);
+    transition: 0.3s;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-icon {
+    width: 60px;
+    height: 60px;
+    background: #F0F2F3;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.modal-icon h2,
+p {
+    font-size: 14px;
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+}
+
+.modal-icon img {
+    width: 30px;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.modal-buttons button {
+    flex: 1;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+}
+
+.btn-close {
+    background: #F0F2F3;
+    color: #272343;
+}
+
+.btn-delete {
+    background: #604B42;
+    color: white;
 }

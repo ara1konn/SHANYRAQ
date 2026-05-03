@@ -165,8 +165,8 @@
     transition: background 0.3s ease;
 }
 
-.btn-add-to-cart.active {
-    background: #3b2f2a;
+.btn-add-to-cart.in-cart {
+    background: #604B42;
     color: #fff;
 }
 

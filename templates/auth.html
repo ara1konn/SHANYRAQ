@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}SHANYRAQ - Авторизация{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="../static/css/auth.css">
+{% endblock %}
+{% block content %}
+
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <!-- Логотип Shanyraq -->
+        <div class="auth-logo">
+            <img src="/static/images/Лого и бренд.svg" alt="Shanyraq">
+        </div>
+
+        <div class="auth-content">
+            <div class="auth-tabs">
+                <h2 class="auth-tab active" id="tab-login">Вход</h2>
+                <h2 class="auth-tab" id="tab-register">Зарегистрироваться</h2>
+            </div>
+
+            <!-- Форма входа -->
+            <form id="login-form">
+                <div class="input-group">
+                    <label>Имя пользователя или Email</label>
+                    <input type="text" placeholder="jfjvosjf@.com" name="username_or_email" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Пароль</label>
+                    <input type="password" name="password" required>
+                </div>
+
+                <button type="submit" class="btn-auth">Войти</button>
+
+                <div class="auth-footer">
+                    <a href="#"
+                        onclick="showToast('Функция уақытша қолжетімсіз. Функция временно недоступно.', 'info'); return false;">
+                        Забыли свой пароль?
+                    </a>
+                </div>
+            </form>
+            <!-- Форма регистрации (скрыта по умолчанию) -->
+            <form id="register-form" style="display: none;">
+                <div class="input-group">
+                    <label>Имя пользователя</label>
+                    <input type="text" placeholder="Ваше имя" name="username" required>
+                </div>
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="email@example.com" name="email" required>
+                </div>
+                <div class="input-group">
+                    <label>Пароль</label>
+                    <input type="password" name="password" required>
+                </div>
+                <button type="submit" class="btn-auth">Зарегистрироваться</button>
+            </form>
+            <form id="forgot-password-form" style="display: none;">
+                <div class="auth-logo">
+                    <p style="font-family: 'Jost', sans-serif; color: #666; margin-bottom: 20px;">
+                        Введите ваш Email, и мы отправим инструкции по восстановлению пароля.
+                    </p>
+                </div>
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="email@example.com" name="recovery_email" required>
+                </div>
+                <button type="submit" class="btn-auth">Отправить</button>
+
+                <div class="auth-footer" style="text-align: center; margin-top: 20px;">
+                    <a href="#" id="back-to-login">Вернуться назад</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% block scripts %}
+<script src="../static/js/auth.js"></script>{% endblock %}
+{% endblock %}
