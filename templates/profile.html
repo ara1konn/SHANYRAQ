@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}SHANYRAQ - Ваш профиль{% endblock %}
+{% block styles %}
+{% endblock %}
+{% block content %}
+<section class="profile-page">
+    <div class="container">
+        <h1 class="main-title">Мой личный кабинет</h1>
+
+        <div class="profile-card">
+            <!-- Левая часть -->
+            <div class="profile-left">
+                <div class="avatar-container" onclick="document.getElementById('avatar-input').click()">
+                    <div class="avatar-overlay"><span>Изменить</span></div>
+                    <img src="/static/icons/user.svg" alt="Аватар" id="profile-img-display">
+                    <input type="file" id="avatar-input" hidden accept="image/*">
+                </div>
+                <h2 id="display-username" class="user-name">Имя пользователя</h2>
+                <p id="display-email" class="user-email">email@example.com</p>
+            </div>
+
+            <div class="profile-divider"></div>
+
+            <!-- Правая часть -->
+            <div class="profile-right">
+                <nav class="profile-nav">
+                    <a href="/favorites" class="nav-item-prof">
+                        <img src="/static/icons/heart.svg" class="menu-icon" alt="">
+                        <span>Мой список желаний</span>
+                    </a>
+                    <a href="/cart" class="nav-item-prof">
+                        <img src="/static/icons/shop.svg" class="menu-icon" alt="">
+                        <span>Моя корзина</span>
+                    </a>
+                    <a href="/orders" class="nav-item-prof">
+                        <img src="/static/icons/history.svg" class="menu-icon" alt="">
+                        <span>История заказов</span>
+                    </a>
+                </nav>
+
+                <!-- Кнопка выйти как на твоем макете -->
+                <button id="logout-btn" onclick="logout()" class="logout-button-rect">Выйти</button>
+            </div>
+        </div>
+    </div>
+</section>
+{% block scripts %}
+<script src="../static/js/profile.js"></script>{% endblock %}
+{% endblock %}
