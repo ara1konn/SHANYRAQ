@@ -306,7 +306,6 @@
     text-transform: uppercase;
 }
 
-
 /* Состояние когда корзина пуста */
 .empty-state {
     display: flex;
@@ -315,6 +314,14 @@
     justify-content: center;
     text-align: center;
     padding: 60px 0;
+}
+
+/* Стиль текста когда пользователь не авторизован */
+.empty-state h2, h4 {
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: #c4c4c4;
 }
 
 .empty-state p {
@@ -498,4 +505,57 @@ p {
 .btn-delete {
     background: #604B42;
     color: white;
+}
+
+@media (max-width: 1024px) {
+    .modal-content {
+        max-width: 380px;
+        padding: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        max-width: 350px;
+        padding: 20px;
+    }
+
+    .modal-icon {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 15px;
+    }
+
+    .modal-icon img {
+        width: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        width: 95%;
+        padding: 20px 15px;
+        border-radius: 12px; 
+    }
+
+    .modal-buttons {
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 20px;
+    }
+
+    .modal-buttons button {
+        width: 100%;
+        padding: 14px;
+        font-size: 16px;
+    }
+
+    .modal-icon h2 {
+        font-size: 18px;
+    }
+
+    p {
+        font-size: 14px;
+        line-height: 1.4;
+    }
 }

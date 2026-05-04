@@ -15,8 +15,8 @@
 
         <div class="auth-content">
             <div class="auth-tabs">
-                <h2 class="auth-tab active" id="tab-login">Вход</h2>
-                <h2 class="auth-tab" id="tab-register">Зарегистрироваться</h2>
+                <button type="button" class="auth-tab active" id="tab-login">Вход</button>
+                <button type="button" class="auth-tab" id="tab-register">Зарегистрироваться</button>
             </div>
 
             <!-- Форма входа -->
@@ -40,7 +40,7 @@
                     </a>
                 </div>
             </form>
-            <!-- Форма регистрации (скрыта по умолчанию) -->
+            <!-- Форма регистрации, скрываем по умолчанию -->
             <form id="register-form" style="display: none;">
                 <div class="input-group">
                     <label>Имя пользователя</label>
@@ -56,22 +56,7 @@
                 </div>
                 <button type="submit" class="btn-auth">Зарегистрироваться</button>
             </form>
-            <form id="forgot-password-form" style="display: none;">
-                <div class="auth-logo">
-                    <p style="font-family: 'Jost', sans-serif; color: #666; margin-bottom: 20px;">
-                        Введите ваш Email, и мы отправим инструкции по восстановлению пароля.
-                    </p>
-                </div>
-                <div class="input-group">
-                    <label>Email</label>
-                    <input type="email" placeholder="email@example.com" name="recovery_email" required>
-                </div>
-                <button type="submit" class="btn-auth">Отправить</button>
-
-                <div class="auth-footer" style="text-align: center; margin-top: 20px;">
-                    <a href="#" id="back-to-login">Вернуться назад</a>
-                </div>
-            </form>
+        
         </div>
     </div>
 </div>

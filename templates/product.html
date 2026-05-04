@@ -50,6 +50,7 @@
 <!-- Главное содержимое странички: фото товара и характеристика -->
 <section class="main-grid">
     <div class="product-grid">
+        <!-- Блок с картинками с "разных" сторон -->
         <div class="gallery-container">
             <div class="main-image">
                 <img src="{{ product.images[0] }}" alt="{{ product.name }}">
@@ -85,6 +86,7 @@
             </div>
         </div>
 
+        <!-- Блок с наиманованием, ценой и ценой с акцией -->
         <div class="info-container">
             <h1 class="product-title">{{ product.name }}</h1>
 
@@ -96,6 +98,7 @@
                 {% endif %}
             </div>
 
+            <!-- Указание материала, размера и цвета -->
             <div class="spec-item">
                 <span class="spec-label">Материал:</span>
                 <span class="spec-value">{{ product.material or "Не указан" }}</span>
@@ -111,6 +114,7 @@
                 <span class="spec-value">{{ product.color }}</span>
             </div>
 
+            <!-- Блок с количеством (счетчик) и добавлением в корзину, в избранное -->
             <div class="purchase-block">
                 <div class="qty-section">
                     <span class="spec-label">Количество:</span>

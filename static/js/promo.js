@@ -11,6 +11,7 @@ function getFavorites() {
     return JSON.parse(localStorage.getItem("favorites") || "[]");
 }
 
+//Рендер карточек акции
 function renderPromoCards(products, target) {
     target.innerHTML = "";
 

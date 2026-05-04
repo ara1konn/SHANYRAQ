@@ -1,9 +1,10 @@
+// Функция для проверки авторизации
 async function checkAuth() {
     const profileLabel = document.getElementById('profile-label');
     const profileLink = document.getElementById('user-profile-link');
 
     try {
-        // Запрашиваем данные о пользователе у вашего API
+        // Запрашиваем данные о пользователе
         const response = await fetch('/api/users/me');
         const data = await response.json();
 

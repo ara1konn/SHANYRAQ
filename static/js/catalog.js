@@ -7,6 +7,57 @@ document.addEventListener("DOMContentLoaded", () => {
     const sortSelect = document.getElementById("sort-select");
     const subContainer = document.getElementById("sub-categories");
 
+    // Логика для мобилки. Открытие фильтрации сбоку. При нажатии на применить само закрывается
+    const openFilters = document.getElementById("open-filters");
+    const closeFilters = document.getElementById("close-filters");
+    const sidebar = document.getElementById("filters-sidebar");
+
+    if (openFilters && sidebar) {
+        openFilters.addEventListener("click", () => {
+            sidebar.classList.add("active");
+        });
+    }
+
+    if (closeFilters && sidebar) {
+        closeFilters.addEventListener("click", () => {
+            sidebar.classList.remove("active");
+        });
+    }
+    filterForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        await loadFilteredProducts();
+
+        const sidebar = document.getElementById("filters-sidebar");
+        if (sidebar) {
+            sidebar.classList.remove("active");
+        }
+    });
+    // Логика для сортировки. При нажатии сразу сортируются
+    const mobileSortBtn = document.getElementById("mobile-sort");
+    const mobileSortMenu = document.getElementById("mobile-sort-menu");
+    const closeSort = document.getElementById("close-sort");
+
+    if (mobileSortBtn && mobileSortMenu) {
+        mobileSortBtn.addEventListener("click", () => {
+            mobileSortMenu.classList.add("active");
+        });
+    }
+
+    if (closeSort) {
+        closeSort.addEventListener("click", () => {
+            mobileSortMenu.classList.remove("active");
+        });
+    }
+
+    document.querySelectorAll("#mobile-sort-menu button").forEach(btn => {
+        btn.addEventListener("click", () => {
+            sortSelect.value = btn.dataset.sort;
+            loadFilteredProducts();
+            mobileSortMenu.classList.remove("active");
+        });
+    });
+
     let currentCategory = "all";
     let currentSubCategory = null;
     window.selectedColor = null;
@@ -66,13 +117,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         formData.getAll("type").forEach(t => params.append("type", t));
 
-        if (window.selectedColor) params.append("color", window.selectedColor);
+        if (selectedColor) params.append("color", selectedColor);
 
         const res = await fetch(`/products?${params.toString()}`);
         const data = await res.json();
 
         renderProducts(data);
-        await syncCartButtons();
     }
 
     //  Функция отрисовки кнопок подкатегорий
@@ -102,7 +152,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Отрисовка карточек
-    function renderProducts(products) {
+    async function renderProducts(products) {
+        const cartIds = await getCartSet();
         container.innerHTML = "";
         if (products.length === 0) {
             container.innerHTML = `<div class="empty-state" style="grid-column: 1/-1; text-align:center; padding: 40px; font-family: 'Jost', sans-serif;">
@@ -164,16 +215,26 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    //Логика для цветов
+    let selectedColor = null;
     colorButtons.forEach(btn => {
         btn.addEventListener("click", () => {
-            if (btn.classList.contains("active")) {
+
+            const color = btn.dataset.color;
+
+            if (selectedColor === color) {
+                selectedColor = null;
                 btn.classList.remove("active");
-                window.selectedColor = null;
             } else {
+                selectedColor = color;
+
+                // убираем active у всех
                 colorButtons.forEach(b => b.classList.remove("active"));
+
+                // ставим active текущему
                 btn.classList.add("active");
-                window.selectedColor = btn.dataset.color;
             }
+
             loadFilteredProducts();
         });
     });
@@ -211,29 +272,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-async function syncCartButtons() {
-    try {
-        const res = await fetch("/api/cart/items", {
-            credentials: "include"
-        });
+async function getCartSet() {
+    const res = await fetch("/api/cart/items", { credentials: "include" });
+    if (!res.ok) return new Set();
 
-        if (!res.ok) return;
-
-        const items = await res.json();
-
-        const cartIds = new Set(items.map(i => String(i.product.id)));
-
-        document.querySelectorAll(".cart-btn").forEach(btn => {
-            const id = String(btn.dataset.id);
-
-            if (cartIds.has(id)) {
-                btn.classList.add("in-cart");
-            } else {
-                btn.classList.remove("in-cart");
-            }
-        });
-
-    } catch (e) {
-        console.error("cart sync error", e);
-    }
+    const items = await res.json();
+    return new Set(items.map(i => String(i.product.id)));
 }

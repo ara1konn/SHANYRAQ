@@ -1,18 +1,18 @@
-//Моб.адаптивность - бургер. Находим по айди элементы
+//Моб.адаптивность - бургер
 const burger = document.getElementById('burger');
 const mobileMenu = document.getElementById('mobileMenu');
 const closeMenu = document.getElementById('closeMenu');
 
-//При клике на бургер открывается "выезжающее" моб.меню (добавляет псевдокласс)
+//При клике на бургер открывается "выезжающее" моб.меню
 burger.addEventListener('click', () => {
     mobileMenu.classList.add('active');
 });
-//При клике на крестик моб "выезжающее" меню закрывается (удаляет псевдокласс)
+//При клике на крестик моб "выезжающее" меню закрывается
 closeMenu.addEventListener('click', () => {
     mobileMenu.classList.remove('active');
 });
 
-//Выбор языка. ЖДем полной загрузки ДОМ
+//Выбор языка
 document.addEventListener("DOMContentLoaded", () => {
     const currentLangEls = document.querySelectorAll("#current-lang, #mobile-current-lang");
     const langDropdowns = document.querySelectorAll(".lang-dropdown, #mobileLangDropdown");
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
             contacts: "Контакты",
             favorites: "Избранное",
             mobfavs: "Избранное",
-            login: "Мой аккаунт",
+            login: "Войти",
             moblogin: "Мой аккаунт",
             main: "Главная",
             livingroom: "Гостиная",
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
             contacts: "БАЙЛАНЫС",
             favorites: "Таңдаулылар",
             mobfavs: "Таңдаулылар",
-            login: "Менің аккаунтым",
+            login: "Кіру",
             moblogin: "Менің аккаунтым",
             main: "Басты бет",
             livingroom: "Қонақ бөлме",
@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
             langDropdowns.forEach(d => d.style.display = "none");
         }
 
-        // Клик по самому языку (li)
+        // Клик по самому языку
         if (e.target.dataset.lang) {
             const selectedLang = e.target.dataset.lang;
             setLanguage(selectedLang);
@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //Вставляем виджет в конец
     document.body.insertAdjacentHTML('beforeend', widgetHTML);
 
-    //Находим элементы по айди на странице
+    //Находим элементы по айди
     const btn = document.getElementById('mainWidgetBtn');
     const card = document.getElementById('contactCard');
 

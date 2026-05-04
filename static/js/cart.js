@@ -1,4 +1,4 @@
-// 1. Загрузка корзины (Строго серверная)
+// Загрузка корзины (Строго серверная)
 async function loadCart() {
     const section = document.querySelector(".cart-items");
     if (!section) return;
@@ -6,37 +6,33 @@ async function loadCart() {
     const response = await fetch("/api/cart/items", { credentials: "include" });
 
     if (response.ok) {
-        // ТОЛЬКО ЕСЛИ 200 OK — показываем товары
+        // если все хорошо, показываем товары
         const serverItems = await response.json();
         renderCart(serverItems);
         calculateTotal(serverItems);
     } else if (response.status === 401) {
-        // ТОЛЬКО ЕСЛИ 401 — просим войти
+        // если нет, просим войти
         renderUnauthorizedState(section);
     } else {
-        // Ошибка сервера (500 и т.д.)
+        // Ошибка сервера
         console.error("Ошибка API");
     }
 }
 
-// Вынесем заглушку в отдельную функцию для чистоты
+// Заглушка для не авторизованных пользователей
 function renderUnauthorizedState(section) {
     const container = document.querySelector(".cart-products-list");
     if (!container) return;
 
     container.innerHTML = `
         <div class="empty-state">
-            <div class="modal-icon">
-                <img src="/static/icons/lock.svg" alt="Lock">
-            </div>
-            <h2>Авторизация</h2>
-            <p>Пожалуйста, войдите в аккаунт</p>
-            <a href="/login" class="btn-delete">Войти</a>
+            <h2>Нужна авторизация</h2>
+            <4>Пожалуйста, войдите в аккаунт</h4>
         </div>
     `;
 }
 
-// 2. Добавление в корзину (С проверкой авторизации)
+// Добавление в корзину (С проверкой авторизации)
 async function addToCart(productId, quantity = 1) {
     const me = await fetch("/api/users/me", { credentials: "include" });
     const user = await me.json();
@@ -63,9 +59,7 @@ async function addToCart(productId, quantity = 1) {
     updateCartBadge();
 }
 
-
-
-// 3. Изменение количества (Только сервер)
+// Изменение количества (Только сервер)
 async function changeQuantity(productId, delta) {
     try {
         const res = await fetch("/api/cart/add", {
@@ -86,7 +80,6 @@ async function changeQuantity(productId, delta) {
         if (res.ok) {
             const data = await res.json();
 
-            // ❗ не верь старому UI — только сервер
             await loadCart();
             updateCartBadge();
         }
@@ -103,7 +96,7 @@ document.addEventListener("click", async (e) => {
 
     const productId = cartBtn.dataset.id;
 
-    // ✅ правильная проверка
+    // проверка
     const me = await fetch("/api/users/me", {
         credentials: "include"
     });
@@ -135,10 +128,11 @@ document.addEventListener("click", async (e) => {
         updateCartBadge();
     }
 });
-// 4. Удаление (Только сервер)
+
+// Удаление (Только сервер)
 let productToDelete = null;
 
-
+// Функция рендера карточек (как они будут отображаться на страничке корзины)
 function renderCart(serverItems) {
     const container = document.querySelector(".cart-products-list");
     const section = document.querySelector(".cart-items");
@@ -194,7 +188,7 @@ function renderCart(serverItems) {
     }).join('');
 }
 
-// 2. Управление модалкой
+// Управление модалкой (показываем и закрываем)
 function openDeleteModal(productId) {
     productToDelete = String(productId);
     const modal = document.getElementById('delete-modal');
@@ -207,7 +201,7 @@ function closeModal() {
     productToDelete = null;
 }
 
-// 3. Инициализация при загрузке
+// Инициализация при загрузке
 document.addEventListener('DOMContentLoaded', () => {
     // Кнопка подтверждения (Удалить)
     const confirmBtn = document.getElementById('confirm-delete');
@@ -232,11 +226,11 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    // Кнопка отмены (Отмена) - используем твой класс .btn-close
+    // Кнопка отмены
     const cancelBtn = document.getElementById('cancel-delete');
     if (cancelBtn) cancelBtn.onclick = closeModal;
 
-    // Закрытие по клику на оверлей (фон)
+    // Закрытие по клику на оверлей
     const modalOverlay = document.getElementById('delete-modal');
     if (modalOverlay) {
         modalOverlay.onclick = (e) => {
@@ -249,23 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector(".cart-products-list")) loadCart();
 });
 
-
-async function updateCartBadge() {
-    const badge = document.getElementById("cart-count");
-    if (!badge) return;
-    const res = await fetch("/api/cart/items", { credentials: "include" });
-    if (res.status === 401) {
-        badge.style.display = "none";
-        return;
-    }
-    if (res.ok) {
-        const items = await res.json();
-        const total = items.reduce((sum, i) => sum + i.quantity, 0);
-        badge.textContent = total;
-        badge.style.display = total > 0 ? "flex" : "none";
-    }
-}
-
+//Функция для считывания цены
 function calculateTotal(items) {
     const total = items.reduce((sum, i) => sum + (i.product.price * i.quantity), 0);
     const el = document.getElementById("total-price");

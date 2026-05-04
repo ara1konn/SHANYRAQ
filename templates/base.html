@@ -375,6 +375,7 @@
         </a>
         <a href="/favorites" class="nav-item">
             <img src="/static/icons/heart.svg" alt="раздел избранное">
+            <span class="badge" id="fav-count">0</span>
             <span data-i18n="favorites">Избранное</span>
         </a>
         <a href="/" class="nav-item">
@@ -383,15 +384,17 @@
         </a>
         <a href="/cart" class="nav-item">
             <img src="/static/icons/shop.svg" alt="раздел корзина">
+            <span class="badge" id="cart-count">0</span>
             <span data-i18n="cart">Корзина</span>
         </a>
-        <a href="/login" class="nav-item">
-            <img src="/static/icons/voiti.svg" alt="раздел войти">
-            <span data-i18n="login">Войти</span>
+        <a href="/login" class="nav-item" id="bottom-auth">
+            <img id="bottom-auth-icon" src="/static/icons/voiti.svg">
+            <span id="bottom-auth-text">Войти</span>
         </a>
     </nav>
     <script src="/static/js/ui.js"></script>
     <script src="/static/js/auth_state.js"></script>
+    <script src="/static/js/auth-ui.js"></script>
 
     <script src="/static/js/favorites.js"></script>
     <script src="/static/js/cart.js"></script>
