@@ -17,16 +17,16 @@
             <div class="slide-content">
                 <h2 class="title-slider">Скидки до 30%</h2>
                 <p>На мебель для гостиной</p>
-                <a href="promotions.html" class="btn">Смотреть каталог</a>
+                <a href="promotions.html" class="btn">Смотреть акции</a>
             </div>
         </div>
         <!-- Слайды которые появляются после активного слайдера -->
         <div class="slide">
-            <img src="../static/images/banner2.jpg" alt="слайдер 2">
+            <img src="../static/images/модульный диван степ.png" alt="слайдер 2">
             <div class="slide-content">
                 <h2 class="title-slider">Новая коллекция</h2>
                 <p>Современные решения для дома</p>
-                <a href="#" class="btn">Подробнее</a>
+                <a href="catalog.html" class="btn">Подробнее</a>
             </div>
         </div>
         <div class="slide">
@@ -34,7 +34,7 @@
             <div class="slide-content">
                 <h2 class="title-slider">Уют начинается здесь</h2>
                 <p>Выберите свою мебель</p>
-                <a href="#" class="btn">Перейти</a>
+                <a href="catalog.html" class="btn">Перейти</a>
             </div>
         </div>
     </div>
@@ -140,7 +140,7 @@
     <!-- Сетка категорий -->
     <div class="categories-grid">
         <a href="/catalog?category=livingroom&sub=sofa" class="category-item item1">
-            <img src="../static/images/slider1.jpg" alt="Диваны">
+            <img src="../static/images/модульный диван степ.png" alt="Диваны">
             <span>ДИВАНЫ</span>
         </a>
         <a href="/catalog?category=bedroom&sub=bed" class="category-item item2">
@@ -148,7 +148,7 @@
             <span>КРОВАТИ</span>
         </a>
         <a href="/catalog?category=livingroom&sub=armchair" class="category-item item3">
-            <img src="../static/images/slider1.jpg" alt="Кресла">
+            <img src="../static/images/kerege.jpg" alt="Кресла">
             <span>КРЕСЛА</span>
         </a>
         <a href="/catalog?category=diningroom&sub=diningtable" class="category-item item4">
@@ -156,7 +156,7 @@
             <span>СТОЛЫ</span>
         </a>
         <a href="/catalog?category=diningroom&sub=chair" class="category-item item5">
-            <img src="../static/images/slider1.jpg" alt="Стулья">
+            <img src="../static/images/стул  саукеле.png" alt="Стулья">
             <span>СТУЛЬЯ</span>
         </a>
         <a href="/catalog?category=accessories" class="category-item item6">
@@ -212,7 +212,7 @@
                     </a>
                     <div class="price-cart">
                         <span class="price">{{ product.price }}₸</span>
-                        <button class="cart-btn" onclick="event.stopPropagation(); addToCart('{{ product.id }}');">
+                        <button class="cart-btn" data-id="${product.id}">
                             <img src="../static/icons/icon-cards/basket.svg" alt="корзина">
                         </button>
                     </div>

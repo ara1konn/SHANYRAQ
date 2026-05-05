@@ -367,6 +367,7 @@
     font-size: 26px;
     color: #000;
     letter-spacing: 2px;
+    text-align: center;
 }
 /* карточка товара */
 .carousel-item {

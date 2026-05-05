@@ -27,7 +27,7 @@ function renderUnauthorizedState(section) {
     container.innerHTML = `
         <div class="empty-state">
             <h2>Нужна авторизация</h2>
-            <4>Пожалуйста, войдите в аккаунт</h4>
+            <h4>Пожалуйста, войдите в аккаунт</h4>
         </div>
     `;
 }

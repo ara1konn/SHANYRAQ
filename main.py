@@ -15,6 +15,8 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session, joinedload
 from sqlalchemy import asc, desc
+from sqlalchemy import or_, func
+from sqlalchemy import case
 from jose import jwt
 
 
@@ -114,8 +116,66 @@ async def read_index(request: Request, db: Session = Depends(get_db)):
     
     return templates.TemplateResponse("index.html", {
         "request": request, 
-        "hit_products": hits 
+        "hit_products": hits
     })
+
+SYNONYMS = {
+    "шкаф": ["гардероб", "шкаф купе"],
+    "диван": ["софа", "угловой диван"],
+    "кровать": ["кровать"],
+    "кресло": ["софа", "угловой диван"],
+    "полка": ["книжняя полка", "стеллаж"],
+    "лампа": ["торшер", "угловой диван"],
+    "зеркало": ["зеркала"],
+    "ковер": ["ковры"],
+    "стол": ["обеденный стол", "журнальный стол", "письменнный стол", "буфеты", "барные столы", "туалетный стол"],
+    "стул": ["барный стул", "табурет", "письменнный стол", "буфеты"]
+}
+
+def expand_query(query: str):
+    words = [query]
+
+    for key, values in SYNONYMS.items():
+        if query == key or key in query:
+            words.extend(values)
+
+    return words
+
+@app.get("/api/products/search")
+def search_products(query: str, db: Session = Depends(get_db)):
+
+    query = query.strip().lower()
+
+    if not query:
+        return []
+
+    search_terms = expand_query(query)
+
+    filters = []
+
+    for term in search_terms:
+        filters.append(func.lower(models.Product.name).like(f"%{term}%"))
+        filters.append(func.lower(models.Product.description).like(f"%{term}%"))
+
+    products = db.query(models.Product).filter(
+        or_(*filters)
+    ).order_by(
+        case(
+            (models.Product.name.ilike(f"%{query}%"), 1),
+            else_=2
+        )
+    ).limit(20).all()
+
+    return [
+        {
+            "id": p.id,
+            "name": p.name,
+            "images": p.images,
+            "price": p.price
+        }
+        for p in products
+    ]
+
 
 @app.get("/products/regular")
 def get_regular_products(
@@ -209,7 +269,8 @@ async def get_product_page(request: Request, product_id: int, db: Session = Depe
     return templates.TemplateResponse("product.html", {
         "request": request, 
         "product": product,
-        "category_name": product.name
+        "category_name": product.name,
+        
     })
 
 @app.get("/promotions")

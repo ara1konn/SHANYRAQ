@@ -45,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
             searchPlaceholder: "Іздеу..."
         }
     };
-
     let lang = localStorage.getItem("lang") || "ru";
     setLanguage(lang);
     //Определяем текущий и противоположный язык
@@ -79,7 +78,6 @@ document.addEventListener("DOMContentLoaded", () => {
             input.placeholder = translations[selectedLang].searchPlaceholder;
         });
     }
-
     // Логика кликов для всех селекторов языка
     document.addEventListener("click", (e) => {
         // Клик по селектору (открыть/закрыть)
@@ -100,6 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
 
 //Опредление города
 document.addEventListener("DOMContentLoaded", () => {
@@ -294,4 +293,133 @@ document.addEventListener("DOMContentLoaded", () => {
         moveCarousel();
     });
 
+});
+
+//Логика поиска для Пк
+document.addEventListener("DOMContentLoaded", () => {
+    const input = document.getElementById("search-input");
+    const suggestions = document.getElementById("search-suggestions");
+
+    if (!input || !suggestions) return;
+
+    let timeout = null;
+
+    input.addEventListener("input", () => {
+        const query = input.value.trim();
+
+        clearTimeout(timeout);
+
+        if (query.length < 2) {
+            suggestions.innerHTML = "";
+            return;
+        }
+
+        timeout = setTimeout(() => {
+            fetch(`/api/products/search?query=${encodeURIComponent(query)}`)
+                .then(res => res.json())
+                .then(data => {
+                    renderSuggestions(data);
+                })
+                .catch(err => console.error(err));
+        }, 300);
+    });
+
+    function renderSuggestions(products) {
+        suggestions.innerHTML = "";
+
+        if (!products || !products.length) {
+            suggestions.innerHTML = "<div class='no-results'>Ничего не найдено</div>";
+            return;
+        }
+
+        products.slice(0, 5).forEach(p => {
+            const item = document.createElement("div");
+            item.classList.add("suggestion-item");
+
+            item.innerHTML = `
+                <img src="${p.images}" width="40">
+                <span>${p.name}</span>
+            `;
+
+            item.addEventListener("click", () => {
+                window.location.href = `/products/${p.id}`;
+            });
+
+            suggestions.appendChild(item);
+        });
+    }
+});
+
+//Логика для мобильного поиска
+document.addEventListener("DOMContentLoaded", () => {
+    const trigger = document.getElementById("search-trigger");
+    const box = document.getElementById("mobile-search");
+    const input = document.getElementById("mobile-search-input");
+    const suggestions = document.getElementById("mobile-search-suggestions");
+
+    let timeout;
+
+    // При клике что бы открывался и закрывался
+    trigger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        box.classList.toggle("active");
+
+        if (box.classList.contains("active")) {
+            input.focus();
+        }
+    });
+
+    // Чтобы закрывался вне клика иконки
+    document.addEventListener("click", (e) => {
+        if (!box.contains(e.target) && e.target !== trigger) {
+            box.classList.remove("active");
+            suggestions.innerHTML = "";
+            input.value = "";
+        }
+    });
+
+    // Живой поиск
+    input.addEventListener("input", () => {
+        const query = input.value.trim();
+
+        clearTimeout(timeout);
+
+        if (query.length < 2) {
+            suggestions.innerHTML = "";
+            return;
+        }
+
+        timeout = setTimeout(() => {
+            fetch(`/api/products/search?query=${encodeURIComponent(query)}`)
+                .then(res => res.json())
+                .then(data => render(data))
+                .catch(err => console.error(err));
+        }, 300);
+    });
+
+    // Рендер подсказок при поиске
+    function render(products) {
+        suggestions.innerHTML = "";
+
+        if (!products || products.length === 0) {
+            suggestions.innerHTML = `<div class="no-results">Ничего не найдено</div>`;
+            return;
+        }
+
+        products.slice(0, 6).forEach(p => {
+            const item = document.createElement("div");
+            item.className = "mobile-suggestion-item";
+
+            item.innerHTML = `
+                <img src="${p.image}" alt="">
+                <span>${p.name}</span>
+            `;
+
+            item.addEventListener("click", () => {
+                window.location.href = `/products/${p.id}`;
+            });
+
+            suggestions.appendChild(item);
+        });
+    }
 });

@@ -23,20 +23,24 @@
                 </div>
                 <!-- Поиск на шапке сайта -->
                 <div class="search-wrapper">
-                    <input type="text" class="search-input" placeholder="Поиск.">
-                    <img src="/static/icons/poisk.svg" class="search-icon" alt="иконка поиска">
+                    <input type="text" id="search-input" class="search-input" placeholder="Поиск...">
+                    <div id="search-suggestions" class="search-suggestions"></div>
                 </div>
                 <!-- Правая вверхняя шапка сайта -->
                 <div class="top-right">
                     <!-- Выбор языка: есть выпадающий список для смены -->
-                    <div class="language-selector">
+                    <!-- <div class="language-selector">
                         <img src="/static/icons/language.svg" alt="" class="lang-icon">
+
                         <span id="current-lang">RUS</span>
+
                         <img src="/static/icons/arrow.svg" alt="arrow" class="arrow-icon">
+
                         <ul class="lang-dropdown">
+                            <li data-lang="ru">RUS</li>
                             <li data-lang="kz">KAZ</li>
                         </ul>
-                    </div>
+                    </div> -->
                     <!-- Определение города пользователя: выпадающий список с кнопкой для смены -->
                     <div class="location">
                         <img src="/static/icons/location.svg" alt="">
@@ -56,13 +60,12 @@
                         <img src="/static/icons/mob-icons/burger.svg" alt="меню">
                     </div>
                     <!-- Моб.версия поиска в шапки -->
-                    <div class="mobile-search">
-                        <img src="/static/icons/poisk.svg" alt="поиск" id="search-trigger">
-                    </div>
-                    <div class="mobile-search-bar" id="mobile-search">
-                        <div class="container">
-                            <input type="text" id="mobile-search-input" placeholder="Поиск мебели.">
-                            <button type="submit">Найти</button>
+                    <div class="mobile-search-wrapper">
+                        <img src="/static/icons/poisk.svg" id="search-trigger">
+
+                        <div class="mobile-search-dropdown" id="mobile-search">
+                            <input type="text" id="mobile-search-input" placeholder="Поиск...">
+                            <div id="mobile-search-suggestions" class="mobile-suggestions"></div>
                         </div>
                     </div>
                 </div>
@@ -265,6 +268,7 @@
             </div>
         </div>
     </header>
+
     <main>
         {% block content %}{% endblock %}
     </main>
@@ -345,7 +349,7 @@
             </a>
         </nav>
         <div class="menu-footer-options">
-            <!-- Выбор языка -->
+            <!-- Выбор языка
             <div class="mobile-option">
                 <div class="option-header" id="mobileLangToggle">
                     <img src="/static/icons/language.svg" width="16">
@@ -355,7 +359,7 @@
                 <ul class="mobile-dropdown" id="mobileLangDropdown">
                     <li data-lang="kz">KAZ</li>
                 </ul>
-            </div>
+            </div> -->
             <!-- Выбор города -->
             <div class="mobile-option">
                 <div class="option-header" id="mobileCityToggle">

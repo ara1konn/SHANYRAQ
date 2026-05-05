@@ -71,7 +71,7 @@
 </section>
 <!-- Секция подарки к заказу -->
 <section id="bundles-section" class="gift-section">
-    <h2 class="gift-title">Подарки к заказу</h2>
+    <h2 class="gift-title">Подарки к заказу (Скоро будет достуно)</h2>
 
     <div class="bundle-container"> {% for product in promo_products %}
         <div class="bundle">
@@ -92,7 +92,7 @@
                     </a>
                     <div class="price-cart">
                         <span class="price">{{ product.price }}₸</span>
-                        <button class="cart-btn">
+                        <button class="cart-btn" data-id="{{ product.id }}">
                             <img src="/static/icons/icon-cards/basket.svg" alt="корзина">
                         </button>
                     </div>
