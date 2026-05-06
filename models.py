@@ -1,5 +1,6 @@
-from sqlalchemy import Column, Integer, String, Text, Boolean, ARRAY, Table, ForeignKey
+from sqlalchemy import Column, Integer, String, Text, Boolean, ARRAY, Table, ForeignKey, DateTime
 from database import Base
+from datetime import datetime
 from sqlalchemy.orm import relationship
 
 product_gifts = Table(
@@ -41,6 +42,36 @@ class User(Base):
 
     favorites = relationship("FavoriteItem", back_populates="user")
     cart = relationship("CartItem", back_populates="user", cascade="all, delete-orphan")
+
+class Order(Base):
+    __tablename__ = "orders"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+
+    name = Column(String)
+    phone = Column(String)
+    address = Column(String)
+
+    status = Column(String, default="В обработке")  # 🟢
+    created_at = Column(DateTime, default=datetime.utcnow)  # 📅
+
+    items = relationship("OrderItem", back_populates="order")
+
+
+class OrderItem(Base):
+    __tablename__ = "order_items"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+    order_id = Column(Integer, ForeignKey("orders.id"))
+    product_id = Column(Integer, ForeignKey("products.id"))
+
+    quantity = Column(Integer)
+    price = Column(Integer)
+
+    order = relationship("Order", back_populates="items")
+    product = relationship("Product")
     
 class Product(Base):
     __tablename__ = "products"

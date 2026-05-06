@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}SHANYRAQ - История заказов{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="../static/css/orders.css">
+{% endblock %}
+{% block content %}
+<div class="container">
+    <h2>История моих заказов</h2>
+
+    <div id="orders-list"></div>
+</div>
+
+{% block scripts %}
+<script src="/static/js/orders.js"></script>{% endblock %}
+
+{% endblock %}

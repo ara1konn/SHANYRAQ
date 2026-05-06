@@ -443,7 +443,7 @@
     backdrop-filter: blur(4px);
 }
 
-.modal-content {
+.delete-content {
     background: white;
     padding: 30px;
     border-radius: 16px;
@@ -455,7 +455,17 @@
     transition: 0.3s;
 }
 
-.modal-overlay.active {
+.delete-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.5);
+    z-index: 10000;
+}
+
+.delete-modal.active {
     display: flex;
 }
 

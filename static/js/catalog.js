@@ -60,7 +60,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let currentCategory = "all";
     let currentSubCategory = null;
-    window.selectedColor = null;
 
     const subCategoryData = {
         "livingroom": [
@@ -239,10 +238,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    filterForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        loadFilteredProducts();
-    });
 
     // Функция для автоматического применения фильтров из URL
     function checkUrlParameters() {

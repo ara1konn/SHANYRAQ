@@ -571,3 +571,125 @@ async def logout():
     response.delete_cookie(key="access_token", path="/")
     return response
 
+# Страница заказов
+@app.get("/orders", response_class=HTMLResponse)
+async def get_orders_page(request: Request):
+    return templates.TemplateResponse("orders.html", {"request": request})
+
+# Создание заказа
+@app.post("/api/orders/create")
+def create_order(
+    data: dict,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    order = models.Order(
+        user_id=current_user.id,
+        name=data["name"],
+        phone=data["phone"],
+        address=data["address"]
+    )
+
+    db.add(order)
+    db.commit()
+    db.refresh(order)
+
+    # берём корзину пользователя из БД
+    cart_items = db.query(CartItem).filter(
+        CartItem.user_id == current_user.id
+    ).all()
+
+    # сохраняем товары
+    for item in cart_items:
+        order_item = models.OrderItem(
+            order_id=order.id,
+            product_id=item.product_id,
+            quantity=item.quantity,
+            price=item.product.price
+        )
+        db.add(order_item)
+
+    # очищаем корзину
+    db.query(CartItem).filter(
+        CartItem.user_id == current_user.id
+    ).delete()
+
+    db.commit()
+
+    return {"message": "Order created"}
+
+# Получение своих заказов
+@app.get("/api/orders/my")
+def get_my_orders(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    orders = db.query(models.Order).filter(
+        models.Order.user_id == current_user.id
+    ).order_by(models.Order.id.desc()).all()
+
+    result = []
+
+    for order in orders:
+        items = db.query(models.OrderItem).filter(
+            models.OrderItem.order_id == order.id
+        ).all()
+
+        total = 0
+        items_list = []
+
+        for item in items:
+            product = db.query(models.Product).filter(
+                models.Product.id == item.product_id
+            ).first()
+
+            total += item.price * item.quantity
+
+            items_list.append({
+                "product_id": item.product_id,
+                "quantity": item.quantity,
+                "price": item.price,
+                "product": {
+                    "name": product.name,
+                    "images": product.images
+                }
+            })
+
+        result.append({
+            "id": order.id,
+            "address": order.address,
+            "phone": order.phone,
+            "status": order.status,
+            "created_at": order.created_at,
+            "total": total,
+            "items": items_list
+        })
+
+    return result
+
+# Удаление заказа
+@app.delete("/api/orders/{order_id}")
+def delete_order(
+    order_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    # ищем заказ
+    order = db.query(models.Order).filter(
+        models.Order.id == order_id,
+        models.Order.user_id == current_user.id 
+    ).first()
+
+    if not order:
+        return {"status": "not_found"}
+
+    # сначала удаляем товары заказа
+    db.query(models.OrderItem).filter(
+        models.OrderItem.order_id == order_id
+    ).delete()
+
+    # потом сам заказ
+    db.delete(order)
+    db.commit()
+
+    return {"status": "deleted"}

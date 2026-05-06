@@ -3,6 +3,7 @@
 {% block title %}SHANYRAQ - Корзина{% endblock %}
 {% block styles %}
 <link rel="stylesheet" href="../static/css/cart.css">
+<link rel="stylesheet" href="../static/css/orders.css">
 {% endblock %}
 {% block content %}
 <section class="cart-main">
@@ -60,15 +61,17 @@
                     </div>
                 </div>
 
-                <button class="btn-primary">Оплатить сейчас</button>
+                <button class="btn-primary" onclick="openCheckout()">
+                    Оформить заказ
+                </button>
             </aside>
 
         </div>
     </div>
-    
+
     <!-- Модалка которая выходит при удалении товара из корзины -->
-    <div id="delete-modal" class="modal-overlay">
-        <div class="modal-content">
+    <div id="delete-modal" class="delete-modal">
+        <div class="delete-content">
             <div class="modal-icon">
                 <img src="/static/icons/delete.svg" alt="Удалить">
             </div>
@@ -81,4 +84,32 @@
         </div>
     </div>
 </section>
+<div id="checkoutModal" class="checkout-modal">
+    <div class="checkout-card">
+
+        <span class="close" onclick="closeCheckout()">×</span>
+
+        <div class="checkout-header">
+            <h2>Оформление заказа</h2>
+            <p>Заполните данные для доставки</p>
+        </div>
+
+        <div class="checkout-body">
+            <input type="text" id="name" placeholder="Ваше имя">
+            <input type="tel" id="phone" placeholder="Телефон">
+            <input type="text" id="address" placeholder="Адрес доставки">
+        </div>
+
+        <div class="checkout-footer">
+            <button class="checkout-btn" onclick="submitOrder()">
+                💳 Оплатить заказ
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<div id="toast" class="toast"></div>
+{% block scripts %}
+<script src="/static/js/orders.js"></script>{% endblock %}
 {% endblock %}
