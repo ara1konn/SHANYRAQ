@@ -317,7 +317,7 @@ async def get_optional_user(request: Request, db: Session = Depends(get_db)):
     except:
         return None
 
-# Получить ID всех избранных товаров (для фронтенда)
+#Получить ID всех избранных товаров (для фронтенда)
 @app.get("/api/favorites")
 async def get_user_favorites(
     db: Session = Depends(get_db),
@@ -333,14 +333,14 @@ async def get_user_favorites(
     # Если не авторизован — возвращаем пустой список
     return []
 
-# 2. Добавить или удалить (Toggle)
+# Добавить или удалить (Toggle)
 @app.post("/api/favorites/{product_id}")
 async def toggle_favorite_server(
     product_id: int, 
     db: Session = Depends(get_db),
     current_user: models.User = Depends(get_current_user)
 ):
-    # Проверяем, есть ли уже в избранном
+    #Проверяем, есть ли уже в избранном
     existing = db.query(models.FavoriteItem).filter(
         models.FavoriteItem.user_id == current_user.id,
         models.FavoriteItem.product_id == product_id
@@ -356,7 +356,7 @@ async def toggle_favorite_server(
     db.commit()
     return {"status": "added"}
 
-# 3. Слияние (Merge) при логине
+#Слияние (Merge) при логине
 @app.post("/api/favorites/merge")
 async def merge_favorites(
     data: dict, 
@@ -406,7 +406,7 @@ async def get_cart_page(request: Request, db: Session = Depends(get_db)):
     "request": request
 })
 
-# Эндпоинт: добавить/обновить/удалить товар в корзине.
+#Эндпоинт: добавить/обновить/удалить товар в корзине.
 @app.post("/api/cart/add")
 async def api_add_to_cart(
     item: CartItemCreate,
@@ -494,7 +494,7 @@ async def remove_from_cart(
     return {"status": "removed"}
 
 
-# Получить список ID товаров в корзине
+#Получить список ID товаров в корзине
 @app.get("/api/cart/ids")
 async def get_cart_ids(
     db: Session = Depends(get_db),
@@ -507,7 +507,7 @@ async def get_cart_ids(
     return [i[0] for i in items]
 
 
-# Регистрация нового пользователя
+#Регистрация нового пользователя
 @app.post("/api/auth/register", response_model=schemas.UserOut)
 def register(user_data: schemas.UserCreate, db: Session = Depends(get_db)):
     existing_user = db.query(models.User).filter(
@@ -532,7 +532,7 @@ def register(user_data: schemas.UserCreate, db: Session = Depends(get_db)):
     return new_user
 
 
-# Аутентификация пользователя
+#Аутентификация пользователя
 @app.post("/api/auth/login")
 async def login(data: schemas.UserLogin, db: Session = Depends(get_db)):
     user = db.query(models.User).filter(
@@ -563,7 +563,7 @@ async def login(data: schemas.UserLogin, db: Session = Depends(get_db)):
     return response
 
 
-# Выход пользователя
+#Выход пользователя
 @app.post("/api/auth/logout")
 async def logout():
     response = JSONResponse(content={"message": "Вы успешно вышли"})
@@ -571,12 +571,12 @@ async def logout():
     response.delete_cookie(key="access_token", path="/")
     return response
 
-# Страница заказов
+#Страница заказов
 @app.get("/orders", response_class=HTMLResponse)
 async def get_orders_page(request: Request):
     return templates.TemplateResponse("orders.html", {"request": request})
 
-# Создание заказа
+#Создание заказа
 @app.post("/api/orders/create")
 def create_order(
     data: dict,
@@ -594,12 +594,12 @@ def create_order(
     db.commit()
     db.refresh(order)
 
-    # берём корзину пользователя из БД
+    #берём корзину пользователя из БД
     cart_items = db.query(CartItem).filter(
         CartItem.user_id == current_user.id
     ).all()
 
-    # сохраняем товары
+    #сохраняем товары
     for item in cart_items:
         order_item = models.OrderItem(
             order_id=order.id,
@@ -609,7 +609,7 @@ def create_order(
         )
         db.add(order_item)
 
-    # очищаем корзину
+    #очищаем корзину
     db.query(CartItem).filter(
         CartItem.user_id == current_user.id
     ).delete()
@@ -618,7 +618,7 @@ def create_order(
 
     return {"message": "Order created"}
 
-# Получение своих заказов
+#Получение своих заказов
 @app.get("/api/orders/my")
 def get_my_orders(
     db: Session = Depends(get_db),
@@ -667,14 +667,14 @@ def get_my_orders(
 
     return result
 
-# Удаление заказа
+#Удаление заказа
 @app.delete("/api/orders/{order_id}")
 def delete_order(
     order_id: int,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
-    # ищем заказ
+    #ищем заказ
     order = db.query(models.Order).filter(
         models.Order.id == order_id,
         models.Order.user_id == current_user.id 
@@ -683,12 +683,12 @@ def delete_order(
     if not order:
         return {"status": "not_found"}
 
-    # сначала удаляем товары заказа
+    #сначала удаляем товары заказа
     db.query(models.OrderItem).filter(
         models.OrderItem.order_id == order_id
     ).delete()
 
-    # потом сам заказ
+    #потом сам заказ
     db.delete(order)
     db.commit()
 

@@ -54,7 +54,7 @@ if (registerForm) {
 
         // Простая проверка паролей на стороне пользователя
         if (payload.password && payload.password.length < 6) {
-            showToast("Қате: Құпия сөз кемінде 6 таңбадан тұруы керек. Ошибка: Пароль должен состоят мин. из 6 цифр", "error");
+            showToast("Ошибка: Пароль должен состоят мин. из 6 цифр", "error");
             return;
         }
 
@@ -66,7 +66,7 @@ if (registerForm) {
             });
 
             if (response.ok) {
-                showToast("Керемет! Тіркелу сәтті аяқталды. Отлично! Регистрация прошла успешно", "success");
+                showToast("Отлично! Регистрация прошла успешно", "success");
 
                 setTimeout(() => {
                     const loginTab = document.getElementById('tab-login');
@@ -77,10 +77,10 @@ if (registerForm) {
             } else {
                 const error = await response.json();
                 // Если ошибка, показываем красное уведомление
-                showToast("Қате: " + (error.detail || "Тіркелу кезінде қате кетті. Ошибка при регистрации"), "error");
+                showToast("Ошибка: " + (error.detail || "Ошибка при регистрации"), "error");
             }
         } catch (err) {
-            showToast("Желі қатесі. Ошибка сервера.", "error");
+            showToast("Ошибка сервера.", "error");
         }
     });
 }
@@ -177,17 +177,17 @@ if (loginForm) {
                     await updateFavoritesBadge();
                 }
 
-                showToast("Қош келдіңіз! Добро пожаловать!", "success");
+                showToast("Добро пожаловать!", "success");
 
                 setTimeout(() => {
                     window.location.href = "/profile";
                 }, 1000);
             } else {
                 const error = await response.json();
-                showToast("Қате: " + (error.detail || "Вход не удался"), "error");
+                showToast("Ошибка: " + (error.detail || "Вход не удался"), "error");
             }
         } catch (err) {
-            showToast("Сервермен байланыс жоқ", "error");
+            showToast("Не удалось связаться с сервером", "error");
         }
     });
 }
