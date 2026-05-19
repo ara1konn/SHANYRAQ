@@ -150,7 +150,7 @@
     align-items: center;
 }
 
-.btn-add-to-cart {
+.cart-btn {
     background-color: #604B42;
     color: #ffffff;
     border: none;
@@ -165,9 +165,10 @@
     transition: background 0.3s ease;
 }
 
-.btn-add-to-cart.in-cart {
-    background: #604B42;
-    color: #fff;
+.cart-btn.in-cart {
+    background: #fff6e3;
+    color: #604B42;
+    font-weight: 600;
 }
 
 .btn-wishlist {

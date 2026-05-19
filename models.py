@@ -3,13 +3,6 @@ from database import Base
 from datetime import datetime
 from sqlalchemy.orm import relationship
 
-product_gifts = Table(
-    "product_gifts",
-    Base.metadata,
-    Column("main_product_id", Integer, ForeignKey("products.id"), primary_key=True),
-    Column("gift_product_id", Integer, ForeignKey("products.id"), primary_key=True)
-)
-
 class FavoriteItem(Base):
     __tablename__ = "favorites"
 
@@ -53,8 +46,8 @@ class Order(Base):
     phone = Column(String)
     address = Column(String)
 
-    status = Column(String, default="В обработке")  # 🟢
-    created_at = Column(DateTime, default=datetime.utcnow)  # 📅
+    status = Column(String, default="В обработке")
+    created_at = Column(DateTime, default=datetime.utcnow)
 
     items = relationship("OrderItem", back_populates="order")
 
@@ -95,13 +88,26 @@ class Product(Base):
     is_promo = Column(Boolean, default=False)
     is_hit = Column(Boolean, default=False)
 
-    is_gift_promo = Column(Boolean, default=False)
-    is_gift = Column(Boolean, default=False)
+    translations = relationship(
+    "ProductTranslation",
+    back_populates="product",
+    cascade="all, delete-orphan"
+)
 
-    gifts = relationship(
-        "Product",
-        secondary="product_gifts",
-        primaryjoin="Product.id == product_gifts.c.main_product_id",
-        secondaryjoin="Product.id == product_gifts.c.gift_product_id",
-        backref="is_gift_for"
+class ProductTranslation(Base):
+    __tablename__ = "product_translations"
+
+    id = Column(Integer, primary_key=True)
+
+    product_id = Column(
+        Integer,
+        ForeignKey("products.id", ondelete="CASCADE"),
+        nullable=False
     )
+
+    lang = Column(String(5), nullable=False)
+
+    name = Column(String(255))
+    description = Column(Text)
+
+    product = relationship("Product", back_populates="translations")

@@ -1,3 +1,8 @@
+
+* {
+    box-sizing: border-box;
+}
+
 /* Заголовок страницы */
 .page-title {
     font-family: 'Jost', sans-serif;
@@ -35,7 +40,7 @@
 .breadcrumbs__link {
     color: #000000;
     text-decoration: none;
-    transition: color 0.2 ease;
+    transition: color 0.2s ease;
 }
 
 .breadcrumbs__link:hover {
@@ -51,17 +56,17 @@
 
 .breadcrumbs__current {
     color: #454545;
-    font-weight: 400px;
+    font-weight: 400;
 }
 
-/* Линиялар жогарыда и астыдагы, ортасында карточки товаров турады */
+/* Линия */
 .divider {
     border: 0;
     border-top: 3px solid #EEEEEE;
     margin: 0;
 }
 
-/* Заголовок пен иконка туратын контейнер */
+/* Пустое состояние избранного */
 #wishlist-content {
     padding: 100px 0;
     text-align: center;
@@ -89,7 +94,7 @@
     text-align: center;
 }
 
-/* Блок с кнопкой */
+/* Кнопка */
 .actions-footer {
     display: flex;
     justify-content: center;
@@ -115,18 +120,213 @@
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
+/* Карточки товаров */
+
+.products-display {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 15px;
+    align-items: stretch;
+}
+
+/* Карточка */
+.carousel-item {
+    width: 100%;
+    min-width: 0;
+
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.carousel-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Верх карточки */
+.item-top {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.item-top img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Кнопка избранного */
+.favorite-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+
+    width: 40px;
+    height: 40px;
+
+    background: #fff;
+    border: none;
+    border-radius: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    overflow: hidden;
+
+    transition: 0.3s;
+}
+
+.favorite-btn:hover {
+    transform: scale(1.05);
+}
+
+.favorite-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+.favorite-btn .heart-full {
+    display: none;
+}
+
+.favorite-btn .heart-empty {
+    display: block;
+}
+
+.favorite-btn.active .heart-empty {
+    display: none;
+}
+
+.favorite-btn.active .heart-full {
+    display: block;
+}
+
+/* Ссылки */
+.product-title-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.product-title-link h2 {
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.product-title-link h2:hover {
+    color: #604B42;
+}
+
+.main-card-link,
+.product-link,
+.product-title {
+    text-decoration: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: #2c2c2c !important;
+    display: block;
+    text-align: start;
+}
+
+/* Низ карточки */
+.item-bottom {
+    padding: 10px;
+    flex-grow: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Название */
+.item-bottom h2 {
+    font-size: 18px;
+    font-family: 'Jost';
+    font-weight: 500;
+
+    margin: 0 0 8px 0;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Цена */
+.price-cart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price {
+    font-weight: bold;
+    font-family: 'Jost';
+    font-size: 18px;
+}
+
+/* Кнопка корзины */
+.cart-btn {
+    background: #F0F2F3;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 6px 10px;
+    margin: 0 2px;
+    transition: 0.3s;
+}
+
+.cart-btn img {
+    width: 18px;
+    height: 18px;
+    transition: 0.3s;
+}
+
+.cart-btn:hover,
+.cart-btn.in-cart {
+    background: #604B42;
+}
+
+.cart-btn:hover img,
+.cart-btn.in-cart img {
+    filter: brightness(0) invert(1);
+}
+
 @media (max-width: 1024px) {
+
     .page-title {
         font-size: 32px;
         margin-top: 30px;
     }
-    
+
     #wishlist-content {
         padding: 80px 0;
+    }
+
+    .products-display {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 15px;
     }
 }
 
 @media (max-width: 768px) {
+
     .page-title {
         font-size: 28px;
     }
@@ -147,9 +347,32 @@
         padding: 12px 40px;
         font-size: 15px;
     }
+
+    .products-display {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .item-top {
+        height: 180px;
+    }
+
+    .item-bottom h2 {
+        font-size: 16px;
+    }
+
+    .price {
+        font-size: 16px;
+    }
+
+    .favorite-btn {
+        width: 35px;
+        height: 35px;
+    }
 }
 
 @media (max-width: 480px) {
+
     .page-title {
         font-size: 24px;
         margin-top: 20px;
@@ -157,9 +380,13 @@
     }
 
     .breadcrumbs {
-        justify-content: center;
         text-align: center;
         margin-bottom: 15px;
+    }
+
+    .breadcrumbs__list {
+        justify-content: center;
+        flex-wrap: wrap;
     }
 
     .divider {
@@ -189,188 +416,42 @@
         text-align: center;
         padding: 14px 20px;
     }
-}
 
-/* Карточки товаров */
-.products-display {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 15px;
-} 
+    .products-display {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
 
-/* Карточка */
-.carousel-item {
-    width: 220px;
-    flex-shrink: 0;
-    margin-right: 20px;
-    margin-bottom: 10px;
+    .carousel-item {
+        border-radius: 6px;
+    }
 
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    .item-top {
+        height: 150px;
+    }
 
-    display: flex;
-    flex-direction: column;
-    font-family: 'Jost';
-    position: relative;
+    .item-bottom {
+        padding: 8px;
+    }
 
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+    .item-bottom h2 {
+        font-size: 14px;
+    }
 
-.carousel-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-}
+    .price {
+        font-size: 14px;
+    }
 
-/* Верх (картинка) */
-.item-top {
-    position: relative;
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
+    .favorite-btn {
+        width: 30px;
+        height: 30px;
+        top: 10px;
+        right: 10px;
+    }
 
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-}
-
-.item-top img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
-
-/* Кнопка избранное */
-.favorite-btn {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-
-    width: 40px;
-    height: 40px;
-
-    background: #fff;
-    border: none;
-    border-radius: 5px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    cursor: pointer;
-    overflow: hidden;
-}
-
-/* Иконки */
-.favorite-btn img {
-    width: 20px;
-    height: 20px;
-}
-
-.favorite-btn .heart-full {
-    display: none;
-}
-
-.favorite-btn .heart-empty {
-    display: block;
-}
-
-.favorite-btn.active .heart-empty {
-    display: none;
-}
-
-.favorite-btn.active .heart-full {
-    display: block;
-}
-.favorite-btn:hover {
-    transform: scale(1.05);
-}
-.product-title-link {
-    text-decoration: none;
-    color: inherit;
-}
-
-.product-title-link h2 {
-    cursor: pointer;
-    transition: color 0.3s;
-}
-
-.product-title-link h2:hover {
-    color: #604B42;
-}
-/* Низ карточки */
-.item-bottom {
-    padding: 10px;
-    flex-grow: 1;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-/* Название */
-.item-bottom h2 {
-    font-size: 18px;
-    font-family: 'Jost';
-    font-weight: 500;
-
-    margin: 0 0 8px 0;
-
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-/* Цена и корзина */
-.price-cart {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.price {
-    font-weight: bold;
-    font-family: 'Jost';
-    font-size: 18px;
-}
-
-.main-card-link,
-.product-link,
-.product-title {
-    text-decoration: none !important;
-    border: none !important;
-    box-shadow: none !important;
-    color: #2c2c2c !important;
-    display: block;
-    text-align: start;
-}
-
-/* Кнопка избранное */
-.cart-btn {
-    background: #F0F2F3;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    padding: 6px 10px;
-    margin: 0 2px;
-    transition: 0.3s;
-}
-
-.cart-btn img {
-    width: 18px;
-    height: 18px;
-    transition: 0.3s;
-}
-
-.cart-btn:hover, 
-.cart-btn.in-cart {
-    background: #604B42;
-}
-
-.cart-btn:hover img,
-.cart-btn.in-cart img {
-    filter: brightness(0) invert(1);
-}
-.cart-btn:hover img {
-    filter: brightness(0) invert(1);
+    .cart-btn {
+        width: 30px;
+        height: 30px;
+        padding: 5px;
+    }
 }

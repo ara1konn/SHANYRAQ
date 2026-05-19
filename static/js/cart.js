@@ -89,23 +89,27 @@ async function changeQuantity(productId, delta) {
 }
 
 document.addEventListener("click", async (e) => {
+
     const cartBtn = e.target.closest(".cart-btn");
     if (!cartBtn) return;
 
     e.preventDefault();
+    e.stopPropagation();
 
-    const productId = cartBtn.dataset.id;
+    const productId = Number(cartBtn.dataset.id);
 
-    // проверка
-    const me = await fetch("/api/users/me", {
-        credentials: "include"
-    });
+    const isInCart = cartBtn.classList.contains("in-cart");
 
-    const user = await me.json();
+    if (isInCart) {
 
-    if (!user.authenticated) {
-        alert("Войдите в аккаунт");
-        window.location.href = "/login";
+        await fetch(`/api/cart/remove/${productId}`, {
+            method: "DELETE",
+            credentials: "include"
+        });
+
+        cartBtn.classList.remove("in-cart");
+        updateCartBadge();
+
         return;
     }
 
@@ -113,21 +117,18 @@ document.addEventListener("click", async (e) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            product_id: Number(productId),
+            product_id: productId,
             quantity: 1
         }),
         credentials: "include"
     });
 
-    if (res.status === 401) {
-        window.location.href = "/login";
-        return;
-    }
-
     if (res.ok) {
+        cartBtn.classList.add("in-cart");
         updateCartBadge();
     }
 });
+
 
 // Удаление (Только сервер)
 let productToDelete = null;

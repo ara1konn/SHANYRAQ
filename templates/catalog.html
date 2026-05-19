@@ -11,12 +11,12 @@
 <section class="catalog-hero">
     <div class="hero-container">
         <div class="hero-image-side">
-            <img src="../static/images/slider1.jpg" alt="Баннер каталога">
+            <img src="../static/images/каталог-баннер.jpg" alt="Баннер каталога">
         </div>
         <div class="hero-text-side">
             <div class="text-content">
-                <h1>Catalog</h1>
-                <p>lalalallaallalalallalal</p>
+                <h1 data-i18n="catalog.banner1">Каталог мебели</h1>
+                <p data-i18n="catalog.banner2">Создано для тепла, уюта и вашего вдохновения.</p>
             </div>
         </div>
     </div>
@@ -26,13 +26,13 @@
     <div class="bread-container">
         <ul class="breadcrumbs__list">
             <li class="breadcrumbs__item">
-                <a href="/" class="breadcrumbs__link">Главная</a>
+                <a href="/" class="breadcrumbs__link" data-i18n="catalog.bread1">Главная</a>
             </li>
             <li class="breadcrumbs__arrow">
                 <img src="../static/icons/bc-arrow.svg" alt="›">
             </li>
             <li class="breadcrumbs__item">
-                <span class="breadcrumbs__current">Каталог</span>
+                <span class="breadcrumbs__current" data-i18n="catalog.bread2">Каталог</span>
             </li>
         </ul>
     </div>
@@ -41,12 +41,24 @@
 <section class="category-navigation">
     <div class="category-nav-container">
         <div class="category-tabs">
-            <button class="tab-btn active" data-category="all">Все товары</button>
-            <button class="tab-btn" data-category="livingroom">Гостиная</button>
-            <button class="tab-btn" data-category="diningroom">Столовая</button>
-            <button class="tab-btn" data-category="bedroom">Спальня</button>
-            <button class="tab-btn" data-category="office">Кабинет</button>
-            <button class="tab-btn" data-category="accessories">Аксессуары</button>
+            <button class="tab-btn active" data-category="all">
+                <span data-i18n="catalog.sub1">Все товары</span>
+            </button>
+            <button class="tab-btn" data-category="livingroom">
+                <span data-i18n="catalog.sub2">Гостиная</span>
+            </button>
+            <button class="tab-btn" data-category="diningroom">
+                <span data-i18n="catalog.sub3">Столовая</span>
+            </button>
+            <button class="tab-btn" data-category="bedroom">
+                <span data-i18n="catalog.sub4">Спальня</span>
+            </button>
+            <button class="tab-btn" data-category="office">
+                <span data-i18n="catalog.sub5">Кабинет</span>
+            </button>
+            <button class="tab-btn" data-category="accessories">
+                <span data-i18n="catalog.sub6">Аксессуары</span>
+            </button>
         </div>
         <div id="sub-categories" class="sub-categories-container"></div>
         <!-- Мобильные кнопки фильтрации -->
@@ -60,21 +72,21 @@
         </div>
         <div id="mobile-sort-menu" class="mobile-sort-menu">
             <div class="sort-header">
-                <span>Сортировка</span>
+                <span data-i18n="catalog.sort">Сортировка</span>
                 <button id="close-sort" type="button">&times;</button>
             </div>
-            <button data-sort="popular">По популярности</button>
-            <button data-sort="price-low">По возрастанию цены</button>
-            <button data-sort="price-high">По убыванию цены</button>
+            <button data-sort="popular" data-i18n="catalog.sort1">По популярности</button>
+            <button data-sort="price-low" data-i18n="catalog.sort2">По возрастанию цены</button>
+            <button data-sort="price-high" data-i18n="catalog.sort3">По убыванию цены</button>
         </div>
         <!-- Сортировка на правом краю -->
         <div class="sort-bar">
             <div class="sort-wrapper">
-                <span class="sort-label">Сортировать по:</span>
+                <span class="sort-label" data-i18n="catalog.sort">Сортировать по:</span>
                 <select id="sort-select" class="sort-dropdown">
-                    <option value="popular">Популярности</option>
-                    <option value="price-low">По возрастанию цены</option>
-                    <option value="price-high">По убыванию цены</option>
+                    <option value="popular" data-i18n="catalog.sort1">Популярности</option>
+                    <option value="price-low" data-i18n="catalog.sort2">По возрастанию цены</option>
+                    <option value="price-high" data-i18n="catalog.sort3">По убыванию цены</option>
                 </select>
             </div>
         </div>
@@ -85,14 +97,14 @@
         <!-- Боковая панель с лева для фильтров -->
         <aside class="filters-sidebar" id="filters-sidebar">
             <div class="sidebar-header">
-                <h3>Фильтры</h3>
+                <h3 data-i18n="catalog.filt">Фильтры</h3>
                 <button id="close-filters" class="close-btn">&times;</button>
             </div>
 
-            <!-- Оборачиваем всё в форму для FastAPI -->
+            <!-- Оборачиваем всё в форму -->
             <form id="filter-form">
                 <div class="filter-group">
-                    <h3 class="filter-title">Цена</h3>
+                    <h3 class="filter-title" data-i18n="catalog.filt1">Цена</h3>
                     <div class="price-input">
                         <input type="number" name="min_price" placeholder="От">
                         <span class="price-separator">—</span>
@@ -101,7 +113,7 @@
                 </div>
                 <!-- Фильтрация: цвета(кружочки) -->
                 <div class="filter-group">
-                    <h3 class="filter-title">Цвета</h3>
+                    <h3 class="filter-title" data-i18n="catalog.filt2">Цвета</h3>
                     <div class="color-options">
                         <button type="button" class="color-circle black" data-color="Черный"></button>
                         <button type="button" class="color-circle brown" data-color="Коричневый"></button>
@@ -112,27 +124,31 @@
                 </div>
                 <!-- Фильтрация: Для применения тип мебели. При нажатии на применить фильтр применяется -->
                 <div class="filter-group">
-                    <h3 class="filter-title">Тип мебели</h3>
+                    <h3 class="filter-title" data-i18n="catalog.filt3">Тип мебели</h3>
                     <div class="checkbox-list">
                         <label class="checkbox-item">
                             <input type="checkbox" name="type" value="case">
-                            <span class="custom-checkbox"></span>Корпусная
+                            <span class="custom-checkbox"></span>
+                            <span data-i18n="catalog.filt3-1">Корпусная</span>
                         </label>
                         <label class="checkbox-item">
                             <input type="checkbox" name="type" value="soft">
-                            <span class="custom-checkbox"></span>Мягкая
+                            <span class="custom-checkbox"></span>
+                            <span data-i18n="catalog.filt3-2">Мягкая</span>
                         </label>
                         <label class="checkbox-item">
                             <input type="checkbox" name="type" value="decor">
-                            <span class="custom-checkbox"></span>Декоративная
+                            <span class="custom-checkbox"></span>
+                            <span data-i18n="catalog.filt3-3">Декоративная</span>
                         </label>
                         <label class="checkbox-item">
                             <input type="checkbox" name="type" value="trans">
-                            <span class="custom-checkbox"></span>Трансформируемая
+                            <span class="custom-checkbox"></span>
+                            <span data-i18n="catalog.filt3-4">Трансформируемая</span>
                         </label>
                     </div>
                 </div>
-                <button type="submit" class="filter-btn">Применить</button>
+                <button type="submit" class="filter-btn" data-i18n="catalog.filt4">Применить</button>
             </form>
         </aside>
         <!-- Сетка товаров -->

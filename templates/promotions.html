@@ -47,83 +47,70 @@
 
             <div class="offer-card card-2">
                 <div class="offer-overlay">
-                    <h3 class="offer-text">Скидка на определнные мебели</h3>
+                    <h3 class="offer-text">Скидка на определенные мебели</h3>
                     <a href="/promotions#discounts-section"><button class="offer-btn">Хочу скидки</button></a>
                 </div>
             </div>
 
             <div class="offer-card card-3">
                 <div class="offer-overlay">
-                    <h3 class="offer-text">Подарок к заказу на определнные мебели</h3>
-                    <a href="/promotions#bundles-section"><button class="offer-btn">Посмотреть
-                            модели</button></a>
+                    <h3 class="offer-text">Успейте приобрести хиты продаж!</h3>
+                    <a href="/#hit-container"><button class="offer-btn">Посмотреть модели</button></a>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- Карточки товаров со скидками -->
+
+<!-- Секция уютные скидки -->
 <section id="discounts-section" class="sales-section">
     <div class="container">
         <h2 class="sales-title">Уютные скидки</h2>
-        <div id="promo-products-container" class="products-display"></div>
-    </div>
-</section>
-<!-- Секция подарки к заказу
-<section id="bundles-section" class="gift-section">
-    <h2 class="gift-title">Подарки к заказу (Скоро будет достуно)</h2>
-
-    <div class="bundle-container"> {% for product in promo_products %}
-        <div class="bundle">
-            <div class="carousel-item">
-                <div class="item-top">
-                    <button class="favorite-btn">
-                        <img class="heart-empty" src="/static/icons/icon-cards/favorite.svg" alt="избранное">
-                        <img class="heart-full" src="/static/icons/icon-cards/fav-full.svg" alt="избранное полный">
-                    </button>
-                    <a href="/products/{{ product.id }}">
-                        <img src="/static/{{ product.images[0] if product.images else 'default.jpg' }}"
+        <div class="products-display">
+            {% for product in promo_products %}
+            <div class="carousel-item" id="promo-{{ product.id }}">
+                <a href="/products/{{ product.id }}" class="main-card-link">
+                    <div class="item-top">
+                        {% if product.discount_percent %}
+                        <div class="discount-badge">
+                            -{{ product.discount_percent }}%
+                        </div>
+                        {% endif %}
+                        <img src="{{ product.images[0] if product.images else '/static/images/placeholder.jpg' }}"
                             alt="{{ product.name }}">
-                    </a>
-                </div>
-                <div class="item-bottom">
-                    <a href="/products/{{ product.id }}" style="text-decoration: none; color: inherit;">
-                        <h2>{{ product.name }}</h2>
-                    </a>
-                    <div class="price-cart">
-                        <span class="price">{{ product.price }}₸</span>
-                        <button class="cart-btn" data-id="{{ product.id }}">
-                            <img src="/static/icons/icon-cards/basket.svg" alt="корзина">
-                        </button>
                     </div>
-                </div>
-            </div>
-
-            {% for gift in product.gifts %}
-            <div class="bundle-plus">➕</div>
-
-            <div class="carousel-item gift-card">
-                <div class="item-top">
-                    <div class="gift-badge">+ В ПОДАРОК</div>
-                    <a href="/products/{{ gift.id }}">
-                        <img src="/static/{{ gift.images[0] if gift.images else 'default.jpg' }}" alt="{{ gift.name }}">
-                    </a>
-                </div>
-                <div class="item-bottom">
-                    <a href="/products/{{ gift.id }}" style="text-decoration: none; color: inherit;">
-                        <h2>{{ gift.name }}</h2>
-                    </a>
-                    <div class="price-cart">
-                        <div class="price-wrapper">
-                            <span class="price">0₸</span>
+                    <div class="item-bottom">
+                        <h2 class="product-title">{{ product.name }}</h2>
+                        <div class="price-cart">
+                            {% if product.old_price %}
+                            <div class="price-wrapper">
+                                <span class="old-price">
+                                    {{ product.old_price | int | string }} ₸
+                                </span>
+                                <span class="price current-promo">
+                                    {{ product.price | int | string }} ₸
+                                </span>
+                            </div>
+                            {% else %}
+                            <span class="price">
+                                {{ product.price | int | string }} ₸
+                            </span>
+                            {% endif %}
+                            <button class="cart-btn {% if product.id in cart_ids %}in-cart{% endif %}"
+                                data-id="{{ product.id }}">
+                                <img src="../static/icons/icon-cards/basket.svg">
+                            </button>
                         </div>
                     </div>
-                </div>
-            </div> -->
+                </a>
+                <button class="favorite-btn {% if product.id in favorites %}active{% endif %}"
+                    data-id="{{ product.id }}">
+                    <img src="../static/icons/icon-cards/favorite.svg" class="heart-empty">
+                    <img src="../static/icons/icon-cards/fav-full.svg" class="heart-full">
+                </button>
+            </div>
             {% endfor %}
-
         </div>
-        {% endfor %}
     </div>
 </section>
 {% block scripts %}

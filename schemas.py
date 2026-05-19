@@ -56,11 +56,6 @@ class ProductBase(BaseModel):
     discount_percent: Optional[int] 
     is_promo: bool
     is_hit: bool
-    is_gift_promo: bool = False
-    is_gift: bool = False
 
     class Config:
         from_attributes = True
-
-class ProductResponse(ProductBase):
-    gifts: List[ProductBase] = []

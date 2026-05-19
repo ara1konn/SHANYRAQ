@@ -104,9 +104,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const formData = new FormData(filterForm);
         const params = new URLSearchParams();
 
-        if (currentCategory !== "all") params.append("category", currentCategory);
-        if (currentSubCategory) params.append("sub_category", currentSubCategory);
-        if (sortSelect?.value) params.append("sort", sortSelect.value);
+        params.append("is_promo", "false");
+
+        if (currentCategory !== "all")
+            params.append("category", currentCategory);
+        if (currentSubCategory)
+            params.append("sub_category", currentSubCategory);
+        if (sortSelect?.value)
+            params.append("sort", sortSelect.value);
 
         const minPrice = formData.get("min_price");
         const maxPrice = formData.get("max_price");
@@ -166,37 +171,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
             const isFav = favorites.includes(String(product.id));
+            const isInCart = cartIds.has(String(product.id));
             const image =
                 Array.isArray(product.images) && product.images.length > 0
                     ? product.images[0]
-                    : product.images || '/static/images/default.jpg';
+                    : product.images || '/static/images/banner1.jpg';
 
             card.innerHTML = `
-            <a href="/products/${product.id}" class="main-card-link">
-            <div class="item-top">
-            <img src="${image}" alt="${product.name}"> ${product.status ? `
-                <div class="status-badge available">${product.status}</div>
-                ` : ''}
-            </div>
-
-            <div class="item-bottom">
-                <h2 class="product-title">${product.name}</h2>
-
-            <div class="price-cart">
-                <span class="price">${Number(product.price).toLocaleString()} ₸</span>
-
-                <button class="cart-btn" data-id="${product.id}">
-                    <img src="../static/icons/icon-cards/basket.svg">
+                <a href="/products/${product.id}" class="main-card-link">
+                    <div class="item-top">
+                        <img src="${image}" alt="${product.name}">
+                        ${product.status ? `
+                            <div class="status-badge available">${product.status}</div>
+                        ` : ''}
+                    </div>
+                    
+                    <div class="item-bottom">
+                        <h2 class="product-title">${product.name}</h2>
+                        <div class="price-cart">
+                            <span class="price">
+                                ${Number(product.price).toLocaleString()} ₸
+                            </span>
+                            
+                            <button class="cart-btn ${isInCart ? 'in-cart' : ''}" data-id="${product.id}">
+                                <img src="../static/icons/icon-cards/basket.svg">
+                            </button>
+                        </div>
+                    </div>
+                </a>
+                
+                <button class="favorite-btn ${isFav ? 'active' : ''}" data-id="${product.id}">
+                    <img src="../static/icons/icon-cards/favorite.svg" class="heart-empty">
+                    <img src="../static/icons/icon-cards/fav-full.svg" class="heart-full">
                 </button>
-                </div>
-            </div>
-        </a>
-
-        <button class="favorite-btn ${isFav ? 'active' : ''}" data-id="${product.id}">
-            <img src="../static/icons/icon-cards/favorite.svg" class="heart-empty">
-            <img src="../static/icons/icon-cards/fav-full.svg" class="heart-full">
-        </button>
-    `;
+            `;
             container.appendChild(card);
         });
     }

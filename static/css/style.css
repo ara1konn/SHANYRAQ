@@ -1368,3 +1368,40 @@ header {
 #mobileCityDropdown li:hover {
     background: #ececec;
 }
+
+.mobile-language-selector {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    position: relative;
+    font-family: 'Jost';
+    font-weight: 500;
+}
+
+.mobile-language-selector img {
+    width: 10px;
+    height: 10px;
+}
+
+.mobile-lang-dropdown {
+    display: none;
+    position: absolute;
+    top: 90%;
+    right: 25px;
+
+    background: white;
+    border-radius: 10px;
+    padding: 10px 10px;
+    z-index: 9999;
+
+    font-family: 'Jost';
+    font-weight: 500;
+    list-style: none;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.mobile-lang-dropdown.show {
+    display: block;
+}

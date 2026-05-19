@@ -76,7 +76,6 @@ if (registerForm) {
 
             } else {
                 const error = await response.json();
-                // Если ошибка, показываем красное уведомление
                 showToast("Ошибка: " + (error.detail || "Ошибка при регистрации"), "error");
             }
         } catch (err) {

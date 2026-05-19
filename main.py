@@ -13,6 +13,7 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi import Request
 from sqlalchemy.orm import Session, joinedload
 from sqlalchemy import asc, desc
 from sqlalchemy import or_, func
@@ -112,11 +113,14 @@ app.include_router(user_router)
 
 @app.get("/", response_class=HTMLResponse)
 async def read_index(request: Request, db: Session = Depends(get_db)):
+    lang = request.cookies.get("lang", "ru")
+
     hits = db.query(Product).filter(Product.is_hit == True).all()
-    
+
     return templates.TemplateResponse("index.html", {
-        "request": request, 
-        "hit_products": hits
+        "request": request,
+        "hit_products": hits,
+        "lang": lang
     })
 
 SYNONYMS = {
@@ -126,9 +130,9 @@ SYNONYMS = {
     "кресло": ["софа", "угловой диван"],
     "полка": ["книжняя полка", "стеллаж"],
     "лампа": ["торшер", "угловой диван"],
-    "зеркало": ["зеркала"],
+    "зеркало": ["зеркала", "айна"],
     "ковер": ["ковры"],
-    "стол": ["обеденный стол", "журнальный стол", "письменнный стол", "буфеты", "барные столы", "туалетный стол"],
+    "стол": ["обеденный стол", "журнальный стол", "письменнный стол", "буфеты", "барные столы", "туалетный стол", "үстел"],
     "стул": ["барный стул", "табурет", "письменнный стол", "буфеты"]
 }
 
@@ -140,6 +144,14 @@ def expand_query(query: str):
             words.extend(values)
 
     return words
+
+
+def get_translation(product, lang):
+    tr = next((t for t in product.translations if t.lang == lang), None)
+    return {
+        "name": tr.name if tr else product.name,
+        "description": tr.description if tr else product.description,
+    }
 
 @app.get("/api/products/search")
 def search_products(query: str, db: Session = Depends(get_db)):
@@ -177,64 +189,30 @@ def search_products(query: str, db: Session = Depends(get_db)):
     ]
 
 
-@app.get("/products/regular")
-def get_regular_products(
-    category: Optional[str] = None,
-    sub_category: Optional[str] = None,
-    min_price: Optional[int] = None, 
-    max_price: Optional[int] = None, 
-    type: Optional[List[str]] = Query(None),
-    color: Optional[str] = None,
-    sort: Optional[str] = None,
-    db: Session = Depends(get_db)
-):
-    query = db.query(Product).filter(
-        Product.is_promo == False,
-        Product.is_gift_promo == False
-    )
-
-    if min_price:
-        query = query.filter(Product.price >= min_price)
-    if max_price:
-        query = query.filter(Product.price <= max_price)
-    if type:
-        query = query.filter(Product.type.in_(type))
-    if color:
-        query = query.filter(Product.color == color)
-    if category and category != "all":
-        query = query.filter(Product.category == category)
-    if sub_category:
-        query = query.filter(Product.sub_category == sub_category)
-
-    if sort == "price-low":
-        query = query.order_by(asc(Product.price))
-    elif sort == "price-high":
-        query = query.order_by(desc(Product.price))
-
-    return query.all()
-
+from sqlalchemy.orm import joinedload
 
 @app.get("/products")
 def get_products(
+    request: Request,
     category: Optional[str] = None,
     sub_category: Optional[str] = None,
-    min_price: Optional[int] = None, 
-    max_price: Optional[int] = None, 
+    min_price: Optional[int] = None,
+    max_price: Optional[int] = None,
     type: Optional[List[str]] = Query(None),
     color: Optional[str] = None,
     sort: Optional[str] = None,
     is_promo: Optional[bool] = None,
     ids: Optional[str] = None,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
 ):
-    query = db.query(Product)
+    lang = request.cookies.get("lang", "ru")
+
+    query = db.query(Product).options(joinedload(Product.translations))
 
     if ids:
         ids_list = [int(i) for i in ids.split(",") if i.isdigit()]
         query = query.filter(Product.id.in_(ids_list))
         return query.all()
-    
-    query = query.filter(Product.is_gift_promo == False)
 
     if is_promo is not None:
         query = query.filter(Product.is_promo == is_promo)
@@ -244,11 +222,18 @@ def get_products(
 
     if max_price is not None:
         query = query.filter(Product.price <= max_price)
-        
-    if type: query = query.filter(Product.type.in_(type))
-    if color: query = query.filter(Product.color == color)
-    if category and category != "all": query = query.filter(Product.category == category)
-    if sub_category: query = query.filter(Product.sub_category == sub_category)
+
+    if type:
+        query = query.filter(Product.type.in_(type))
+
+    if color:
+        query = query.filter(Product.color == color)
+
+    if category and category != "all":
+        query = query.filter(Product.category == category)
+
+    if sub_category:
+        query = query.filter(Product.sub_category == sub_category)
 
     if sort == "price-low":
         query = query.order_by(asc(Product.price))
@@ -257,33 +242,64 @@ def get_products(
     else:
         query = query.order_by(asc(Product.id))
 
-    return query.all()
+    products = query.all()
+
+    result = []
+
+    for p in products:
+        tr = next((t for t in p.translations if t.lang == lang), None)
+
+        result.append({
+            "id": p.id,
+            "name": tr.name if tr else p.name,
+            "price": p.price,
+            "images": p.images,
+            "color": p.color,
+        })
+
+    return result
 
 @app.get("/products/{product_id}", response_class=HTMLResponse)
 async def get_product_page(request: Request, product_id: int, db: Session = Depends(get_db)):
-    product = db.query(Product).filter(Product.id == product_id).first()
-    
+    lang = request.cookies.get("lang", "ru")
+
+    product = db.query(Product)\
+        .options(joinedload(Product.translations))\
+        .filter(Product.id == product_id)\
+        .first()
+
     if not product:
         raise HTTPException(status_code=404, detail="Товар не найден")
-    
+
+    tr = next((t for t in product.translations if t.lang == lang), None)
+
+    product_data = {
+        "id": product.id,
+        "name": tr.name if tr else product.name,
+        "description": tr.description if tr else product.description,
+        "price": product.price,
+        "images": product.images,
+        "color": product.color
+    }
+
     return templates.TemplateResponse("product.html", {
-        "request": request, 
-        "product": product,
-        "category_name": product.name,
-        
+        "request": request,
+        "product": product_data,
+        "lang": lang
     })
 
 @app.get("/promotions")
 async def get_promotions(request: Request, db: Session = Depends(get_db)):
-        promo_with_gifts = db.query(Product).filter(
-            Product.is_gift_promo == True,
-            Product.gifts.any()
-        ).all()
-        
-        return templates.TemplateResponse("promotions.html", {
-            "request": request, 
-            "promo_products": promo_with_gifts
-        })
+    promo_products = db.query(Product).filter(
+        Product.is_promo == True
+    ).all()
+    lang = request.cookies.get("lang", "ru")
+    
+    return templates.TemplateResponse("promotions.html", {
+        "request": request, 
+        "promo_products": promo_products,
+        "lang": lang
+    })
 
 @app.get("/about", response_class=HTMLResponse)
 async def get_about(request: Request):
@@ -295,7 +311,11 @@ async def get_contact(request: Request):
 
 @app.get("/catalog", response_class=HTMLResponse)
 async def get_catalog(request: Request):
-    return templates.TemplateResponse("catalog.html", {"request": request})
+    lang = request.cookies.get("lang", "ru")
+    return templates.TemplateResponse("catalog.html", {
+        "request": request,
+        "lang": lang
+})
 
 @app.get("/favorites", response_class=HTMLResponse)
 async def get_favorites(request: Request):
@@ -458,7 +478,7 @@ async def api_add_to_cart(
     }
 
 
-# Получить полный список товаров в корзине текущего пользователя.
+# Получить полный список товаров в корзине текущего пользователя
 from sqlalchemy.orm import joinedload
 @app.get("/api/cart/items")
 async def get_cart_items(
@@ -474,7 +494,7 @@ async def get_cart_items(
         .all()
 
 
-# Удалить конкретный товар из корзины текущего пользователя.
+# Удалить конкретный товар из корзины текущего пользователя
 @app.delete("/api/cart/remove/{product_id}")
 async def remove_from_cart(
     product_id: int, 
@@ -666,30 +686,3 @@ def get_my_orders(
         })
 
     return result
-
-#Удаление заказа
-@app.delete("/api/orders/{order_id}")
-def delete_order(
-    order_id: int,
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
-):
-    #ищем заказ
-    order = db.query(models.Order).filter(
-        models.Order.id == order_id,
-        models.Order.user_id == current_user.id 
-    ).first()
-
-    if not order:
-        return {"status": "not_found"}
-
-    #сначала удаляем товары заказа
-    db.query(models.OrderItem).filter(
-        models.OrderItem.order_id == order_id
-    ).delete()
-
-    #потом сам заказ
-    db.delete(order)
-    db.commit()
-
-    return {"status": "deleted"}

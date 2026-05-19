@@ -56,7 +56,7 @@ async function loadOrders() {
     }
 
     const orders = await response.json();
-    console.log("ORDERS:", orders); // 🔍 ДЛЯ ДЕБАГА
+    console.log("ORDERS:", orders);
 
     if (!orders || orders.length === 0) {
         container.innerHTML = "<p class='order-meta'>У вас пока нет заказов</p>";
@@ -98,31 +98,12 @@ async function loadOrders() {
             <div class="order-total">
                 Итого: <strong>${order.total || 0}₸</strong>
             </div>
-
-            <button class="delete-order-btn" onclick="deleteOrder(${order.id})">
-                Удалить заказ
-            </button>
         </div>
         `;
     }).join("");
 }
 
 loadOrders();
-
-async function deleteOrder(orderId) {
-    if (!confirm("Удалить этот заказ?")) return;
-
-    const res = await fetch(`/api/orders/${orderId}`, {
-        method: "DELETE",
-        credentials: "include"
-    });
-
-    if (res.ok) {
-        loadOrders(); // обновляем список
-    } else {
-        alert("Ошибка удаления");
-    }
-}
 
 function showToast(message, type = "success") {
     const toast = document.getElementById("toast");

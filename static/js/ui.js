@@ -12,93 +12,132 @@ closeMenu.addEventListener('click', () => {
     mobileMenu.classList.remove('active');
 });
 
-//Выбор языка
-// document.addEventListener("DOMContentLoaded", () => {
-//     const currentLangEls = document.querySelectorAll("#current-lang, #mobile-current-lang");
-//     const langDropdowns = document.querySelectorAll(".lang-dropdown, #mobileLangDropdown");
+let currentLang = localStorage.getItem("language") || "ru";
 
-//     const translations = {
-//         ru: {
-//             catalog: "КАТАЛОГ",
-//             promotions: "Акции",
-//             about: "О нас",
-//             contacts: "Контакты",
-//             favorites: "Избранное",
-//             mobfavs: "Избранное",
-//             login: "Войти",
-//             moblogin: "Мой аккаунт",
-//             main: "Главная",
-//             livingroom: "Гостиная",
-//             searchPlaceholder: "Поиск..."
-//         },
-//         kz: {
-//             catalog: "КАТАЛОГ",
-//             promotions: "АКЦИЯЛАР",
-//             about: "Біз туралы",
-//             contacts: "БАЙЛАНЫС",
-//             favorites: "Таңдаулылар",
-//             mobfavs: "Таңдаулылар",
-//             login: "Кіру",
-//             moblogin: "Менің аккаунтым",
-//             main: "Басты бет",
-//             livingroom: "Қонақ бөлме",
-//             searchPlaceholder: "Іздеу..."
-//         }
-//     };
-//     let lang = localStorage.getItem("lang") || "ru";
-//     setLanguage(lang);
-//     //Определяем текущий и противоположный язык
-//     function setLanguage(selectedLang) {
-//         const otherLang = selectedLang === "ru" ? "kz" : "ru";
+async function loadProducts() {
+    const res = await fetch(`/products?lang=${currentLang}`, {
+        credentials: "include",
+        cache: "no-store"
+    });
 
-//         // Обновляем текст RUS/KAZ во всех местах
-//         currentLangEls.forEach(el => el.textContent = selectedLang.toUpperCase());
+    const data = await res.json();
+    renderProducts(data);
+}
 
-//         // Обновляем все списки
-//         langDropdowns.forEach(dropdown => {
-//             const li = dropdown.querySelector("li");
-//             if (li) {
-//                 li.textContent = otherLang.toUpperCase();
-//                 li.dataset.lang = otherLang;
-//             }
-//         });
+//Переключатель языка
+async function loadLanguage(lang) {
 
-//         //Переводим все элементы с атрибутом data-i18n
-//         document.querySelectorAll("[data-i18n]").forEach(el => {
-//             const key = el.dataset.i18n;
-//             if (translations[selectedLang] && translations[selectedLang][key]) {
-//                 // Если внутри есть span, меняем его, если нет - весь текст
-//                 const target = el.querySelector('span') || el;
-//                 target.textContent = translations[selectedLang][key];
-//             }
-//         });
+    const response = await fetch(`/static/locales/${lang}.json`);
+    const translations = await response.json();
 
-//         // Placeholder поиска
-//         document.querySelectorAll(".search-input").forEach(input => {
-//             input.placeholder = translations[selectedLang].searchPlaceholder;
-//         });
-//     }
-//     // Логика кликов для всех селекторов языка
-//     document.addEventListener("click", (e) => {
-//         // Клик по селектору (открыть/закрыть)
-//         const selector = e.target.closest(".language-selector, #mobileLangToggle");
-//         if (selector) {
-//             e.stopPropagation();
-//             langDropdowns.forEach(d => d.style.display = (d.style.display === "block" ? "none" : "block"));
-//         } else {
-//             // Клик вне меню - закрываем всё
-//             langDropdowns.forEach(d => d.style.display = "none");
-//         }
+    function getTranslation(obj, path) {
+        return path.split('.').reduce((acc, part) => {
+            return acc ? acc[part] : null;
+        }, obj);
+    }
 
-//         // Клик по самому языку
-//         if (e.target.dataset.lang) {
-//             const selectedLang = e.target.dataset.lang;
-//             setLanguage(selectedLang);
-//             localStorage.setItem("lang", selectedLang);
-//         }
-//     });
-// });
+    // Текст перевод
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.dataset.i18n;
+        const value = getTranslation(translations, key);
+        if (value) {
+            el.textContent = value;
+        }
+    });
 
+    // Поиск перевод
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+        const key = el.dataset.i18nPlaceholder;
+        const value = getTranslation(translations, key);
+        if (value) {
+            el.placeholder = value;
+        }
+    });
+
+    // сохранить язык
+    localStorage.setItem("language", lang);
+
+    document.cookie = `lang=${lang}; path=/`;
+
+    setTimeout(() => {
+        loadProducts();
+    }, 50);
+
+    // Для Пк
+    const currentLang = document.getElementById("current-lang");
+    if (currentLang) {
+        currentLang.textContent = lang === "ru" ? "RUS" : "KAZ";
+    }
+
+    // Для мобилки
+    const mobileLang = document.getElementById("mobile-current-lang");
+    if (mobileLang) {
+        mobileLang.textContent = lang === "ru" ? "RUS" : "KAZ";
+    }
+    // Обновляем товар после смены языка
+    if (typeof loadProducts === "function") {
+        loadProducts();
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    // загрузка сохранённого языка
+    const savedLang = localStorage.getItem("language") || "ru";
+    loadLanguage(savedLang);
+
+    // Выпад.меню для пк
+    const languageSelector = document.querySelector(".language-selector");
+    const langDropdown = document.querySelector(".lang-dropdown");
+
+    if (languageSelector && langDropdown) {
+
+        languageSelector.addEventListener("click", (e) => {
+            e.stopPropagation();
+            langDropdown.classList.toggle("active");
+        });
+
+        document.addEventListener("click", (e) => {
+            if (!languageSelector.contains(e.target)) {
+                langDropdown.classList.remove("active");
+            }
+        });
+
+        document.querySelectorAll(".lang-dropdown li").forEach(item => {
+            item.addEventListener("click", () => {
+                loadLanguage(item.dataset.lang);
+                langDropdown.classList.remove("active");
+            });
+        });
+    }
+
+    // Выпад.меню для мобилки
+    const mobileToggle = document.getElementById("mobileLangToggle");
+    const mobileDropdown = document.getElementById("mobileLangDropdown");
+
+    if (mobileToggle && mobileDropdown) {
+
+        mobileToggle.addEventListener("click", (e) => {
+            e.stopPropagation();
+            mobileDropdown.classList.toggle("show");
+        });
+
+        document.addEventListener("click", (e) => {
+            if (!mobileToggle.contains(e.target)) {
+                mobileDropdown.classList.remove("show");
+            }
+        });
+
+        document.querySelectorAll("#mobileLangDropdown li").forEach(item => {
+            item.addEventListener("click", () => {
+                loadLanguage(item.dataset.lang);
+                mobileDropdown.classList.remove("show");
+            });
+        });
+
+    }
+
+});
 
 //Опредление города
 document.addEventListener("DOMContentLoaded", () => {
